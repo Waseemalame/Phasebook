@@ -1,0 +1,26 @@
+.profile-icon{
+  border-radius: 999px;
+  /* width: 2000px; */
+  max-width: 30px;
+  /* margin-left: 2px; */
+  margin-right: 2px;
+}
+.sidebar-container{
+  margin-top: 20px;
+}
+.sidebar-container > * {
+  /* margin: 10px; */
+  margin-left: 10px;
+  margin-bottom: 5px;
+  width: 280px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+
+
+}
+.sidebar-container > div > *{
+  width: 30px;
+  margin-right: 10px;
+
+}
