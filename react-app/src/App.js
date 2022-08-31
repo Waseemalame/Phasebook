@@ -9,6 +9,8 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import SideBar from './components/Feed/SideBar';
+import Navigation from './components/Navigation';
+import Posts from './components/Feed/Posts';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,6 +29,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      {/* <Navigation /> */}
       <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
@@ -43,6 +46,7 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <SideBar />
+          <Posts />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
