@@ -3,8 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { getPostsThunk } from '../../../store/post';
-import PostForm from '../../PostForm';
-
+import CreatePostModal from '../../CreatePost';
 import './Posts.css'
 
 const Posts = () => {
@@ -21,7 +20,7 @@ const Posts = () => {
 
   return (
     <div className='main-feed'>
-      <PostForm />
+      <CreatePostModal />
       <span className='feed-posts'>
         {posts.map(post => (
           <div className="single-post">
