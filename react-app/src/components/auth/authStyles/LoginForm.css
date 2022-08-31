@@ -1,0 +1,65 @@
+body{
+  background-color: rgba(196, 201, 208, 0.324);
+}
+.login-form{
+  width: 330px;
+  height: 350px;
+  /* width: max-content; */
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.fb-header-img{
+  width: 200px;
+}
+.fb-header-div{
+  width: 200px;
+  margin: 0 auto;
+
+}
+.login-form > div{
+  width: 364px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 14px 16px; */
+}
+.login-form > div{
+
+}
+.email-div{
+  margin-top: 10px;
+}
+.login-form > div > input{
+  width: 300px;
+  height: 22px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  outline: none;
+  padding: 20px;
+}
+.login-form > div > input:focus{
+  outline: 1px solid rgba(0, 0, 255, 0.437);
+}
+.login-submit{
+  background-color: #1877F2;
+  border: none;
+  width: 300px;
+  height: 38px;
+  margin-top: 10px;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.or-text{
+  margin-top: 10px;
+}
