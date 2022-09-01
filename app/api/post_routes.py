@@ -62,16 +62,7 @@ def update_post(post_id):
     return post.to_dict()
 
 
-@post_routes.route("/<post_id>/comments")
-def post_comments(post_id):
-    comments = Comment.query.filter(Comment.post_id == post_id ).all()
 
-    if not comments:
-        return "Error 404: The comments you're looking for couldn't be found"
-
-    response = [comment.to_dict() for comment in comments]
-    res = { "comments": response }
-    return res
 
 
 @post_routes.route("/<post_id>")
