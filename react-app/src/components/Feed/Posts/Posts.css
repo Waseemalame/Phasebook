@@ -1,7 +1,7 @@
 .main-feed{
-  position: absolute;
+  /* position: absolute;
   top: 20%;
-  left: 20vw;
+  left: 20vw; */
 }
 .single-post{
   background-color: white;
@@ -16,9 +16,48 @@
   border-radius: 10px;
   margin: 0 auto;
   margin-bottom: 40px;
+  padding: 16px;
+  position: relative;
+}
+
+.edit-post-button{
+  /* width: 100%; */
+  position: absolute;
+  right: 16px;
+  cursor: pointer;
+  /* padding-right: 16px; */
+  /* margin-bottom: 100px; */
+
+}
+.edit-post-ellipsis{
+  /* margin-right: 16px; */
+  margin-top: 5px;
+  height: 100%;
+  width: 5px;
+  height: 5px;
+ color: #65676B;
+ /* position: absolute; */
+ right: 16px;
+ /* top: 16px; */
+ padding: 16px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ transition-delay: 80ms;
+}
+.edit-post-ellipsis:hover{
+  background-color: rgba(211, 211, 211, 0.389);
+
+  border-radius: 100%;
+
 }
 .post-user-info{
   display: flex;
+  align-items: center;
+
+}
+.post-user-info:last-of-type{
+  margin-left: auto;
 }
 .post-user-image{
   width: 40px;
