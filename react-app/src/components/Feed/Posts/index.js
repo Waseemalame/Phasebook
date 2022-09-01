@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { getPostsThunk } from '../../../store/post';
+import CreateCommentForm from '../../CreateComment/CreateCommentForm';
 import CreatePostModal from '../../CreatePost';
 import EditPostModal from '../../EditPost';
 import PostOptionsModal from '../../PostOptions';
@@ -32,6 +33,7 @@ const Posts = () => {
             </div>
               <PostOptionsModal post={post} />
             <div className='post-content'>{post.content}</div>
+            <CreateCommentForm post={post} />
           </div>
         ))}
       </span>

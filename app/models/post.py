@@ -11,7 +11,7 @@ class Post(db.Model):
     display_comments = db.Column(db.Boolean, default=True)
 
     user = db.relationship("User", back_populates="posts")
-    # comments = db.relationship("Comment", back_populates="post", cascade="all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="post", cascade="all, delete-orphan")
     # like_list = db.relationship("Like", back_populates="post", cascade="all, delete-orphan")
 
 
@@ -23,7 +23,7 @@ class Post(db.Model):
             # "likes": self.likes,
             # "like_list": [like.to_dict() for like in self.like_list],
             "image_url": self.image_url,
-            # "comments": [comment.to_dict() for comment in self.comments],
+            "comments": [comment.to_dict() for comment in self.comments],
             "display_comments": self.display_comments
         }
 

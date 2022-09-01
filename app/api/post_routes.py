@@ -1,7 +1,7 @@
 from dis import dis
 from flask import Blueprint, request, redirect
-from app.models import db, Post
-from app.forms import PostForm
+from app.models import db, Post, Comment
+from app.forms import PostForm, CommentForm
 from flask_login import current_user
 
 # post_routes = Blueprint("home", __name__, url_prefix="/user") /posts
@@ -90,7 +90,7 @@ def single_post(post_id):
 def add_comment(post_id):
     comment_form = CommentForm()
 
-    content = comment_form.data['content']
+    comment_content = comment_form.data['comment_content']
     user_id = comment_form.data['user_id']
     post_id = comment_form.data['post_id']
 
@@ -98,7 +98,7 @@ def add_comment(post_id):
     if comment_form.validate_on_submit() and current_user.id == user_id:
 
         comment = Comment(
-            content=content,
+            comment_content=comment_content,
             user_id=user_id,
             post_id=post_id
         )
