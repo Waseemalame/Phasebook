@@ -8,10 +8,10 @@ const add = (comment) => ({
   type: ADD_COMMENT,
   comment
 });
-const load = (comments, postId) => ({
+const load = (comments) => ({
   type: LOAD_COMMENTS,
-  comments,
-  postId
+  comments
+
 });
 const update = (comment) => ({
   type: UPDATE_COMMENT,
@@ -24,13 +24,15 @@ const remove = (commentId, postId) => ({
 });
 
 
-export const getComments = (postId) => async (dispatch) => {
+export const getComments = () => async (dispatch) => {
 
-  const response = await fetch(`/api/posts/${postId}/comments`);
+  const response = await fetch(`/api/comments`);
 
   if (response.ok) {
+
     const comments = await response.json();
-    dispatch(load(comments, postId));
+    console.log(comments, 'comments')
+    dispatch(load(comments));
   }
 
 };
