@@ -2,11 +2,13 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
+import { getComments } from '../../../store/comment';
 import { getPostsThunk } from '../../../store/post';
 import CreateCommentForm from '../../CreateComment/CreateCommentForm';
 import CreatePostModal from '../../CreatePost';
 import EditPostModal from '../../EditPost';
 import PostOptionsModal from '../../PostOptions';
+import CommentView from '../CommentView';
 import './Posts.css'
 
 const Posts = () => {
@@ -18,6 +20,7 @@ const Posts = () => {
 
   useEffect(() => {
     dispatch(getPostsThunk())
+    dispatch(getComments())
   }, [dispatch]);
 
 
@@ -28,11 +31,12 @@ const Posts = () => {
         {posts.map(post => (
           <div className="single-post">
             <div className="post-user-info">
-              <div><img className='post-user-image' src={post.user.profile_image_url} alt="" /></div>
-              <span className='user-first-last'>{post.user.first_name} {post.user.last_name}</span>
+              <div><img className='post-user-image' src={post.user?.profile_image_url} alt="" /></div>
+              <span className='user-first-last'>{post.user?.first_name} {post.user?.last_name}</span>
             </div>
               <PostOptionsModal post={post} />
             <div className='post-content'>{post.content}</div>
+            <CommentView post={post} />
             <CreateCommentForm post={post} />
           </div>
         ))}
