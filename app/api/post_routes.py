@@ -54,11 +54,9 @@ def update_post(post_id):
     updated_post['csrf_token'].data = request.cookies['csrf_token']
     content = updated_post.data['content']
     image_url = updated_post.data['image_url']
-    display_comments = updated_post.data['display_comments']
 
     post.content = content
     post.image_url = image_url
-    post.display_comments = display_comments
 
     db.session.commit()
     return post.to_dict()
