@@ -2,6 +2,7 @@
   /* position: absolute;
   top: 20%;
   left: 20vw; */
+  margin-top: 40px;
 }
 .single-post{
   background-color: white;
@@ -66,4 +67,8 @@
 }
 .post-content{
   width: 100%;
+  border-bottom: 1px solid #e4e6e8ec;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  padding-bottom: 10px;
 }
