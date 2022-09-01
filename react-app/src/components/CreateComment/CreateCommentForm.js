@@ -37,16 +37,20 @@ let errors = [];
   }
 
   return (
-    <form className="comment-form" onSubmit={commentSubmit}>
-      <ul>{errorValidators.map(error =><li>{error}</li>)}</ul>
-        <input type="text"
-        className='comment-input'
-           value={commentContent}
-           onChange={updateComment}
-           placeholder='Add a comment'
-           required />
-    <button type="submit">Post</button>
-  </form>
+
+    <div className="create-comment-container">
+      <img className='comment-user-image' src={userSession.profile_image_url} alt="" />
+      <form className="comment-form" onSubmit={commentSubmit}>
+        <ul>{errorValidators.map(error =><li>{error}</li>)}</ul>
+          <input type="text"
+          className='comment-input'
+             value={commentContent}
+             onChange={updateComment}
+             placeholder='Write a comment...'
+             required />
+      {/* <button type="submit">Post</button> */}
+        </form>
+    </div>
   )
 }
 
