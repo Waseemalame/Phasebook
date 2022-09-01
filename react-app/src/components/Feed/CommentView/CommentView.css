@@ -1,0 +1,15 @@
+.one-comment{
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+.full-comment{
+  background-color: #F0F2F5;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 10px;
+  font-size: smaller;
+}
