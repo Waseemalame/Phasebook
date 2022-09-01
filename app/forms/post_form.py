@@ -8,4 +8,3 @@ class PostForm(FlaskForm):
   user_id = IntegerField("User_id", validators=[DataRequired()])
   image_url = StringField("Image_url", validators=[DataRequired()])
   content = StringField("Content", validators=[DataRequired()])
-  display_comments = BooleanField("Display comments")
