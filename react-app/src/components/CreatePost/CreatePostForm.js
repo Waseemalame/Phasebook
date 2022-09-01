@@ -1,6 +1,4 @@
-import React from 'react'
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createPost } from '../../store/post';
 

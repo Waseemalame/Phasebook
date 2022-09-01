@@ -12,6 +12,7 @@ import SideBar from './components/Feed/SideBar';
 import Navigation from './components/Navigation';
 import Posts from './components/Feed/Posts';
 
+import "./index.css"
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -29,8 +30,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
-      {/* <Navigation /> */}
+      {/* <NavBar /> */}
+      <Navigation />
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -45,8 +46,10 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <SideBar />
-          <Posts />
+          <div className='home-display'>
+            <SideBar />
+            <Posts />
+          </div>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

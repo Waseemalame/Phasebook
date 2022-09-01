@@ -1,0 +1,11 @@
+.post-options-menu{
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.edit-post-button{
+
+}
