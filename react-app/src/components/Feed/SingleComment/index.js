@@ -1,22 +1,37 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
+import CommentOptionsModal from '../CommentOptions';
+import CommentEditForm from './CommentEditForm';
 
-const SingleComment = ({ comment, current_user }) => {
+const SingleComment = ({ comment, current_user, post }) => {
   const [showCommentOptions, setShowCommentOptions] = useState(false);
+  const [editClicked, setEditClicked] = useState(false);
+  useEffect(() => {
+    // console.log(editClicked)
+    // console.log(setEditClicked())
+  }, [editClicked]);
 
   return (
     <div>
       <div className="one-comment" onMouseEnter={() => setShowCommentOptions(true)} onMouseLeave={() => setShowCommentOptions(false)}>
       <div><img className='comment-user-image' src={comment?.user.profile_image_url} alt="" /></div>
       <div className="full-comment">
-        <div className="user-first-last">
-          {comment?.user.first_name} {comment?.user.last_name}
+        {!editClicked ? (
+        <div>
+          <div className="user-first-last">
+            {comment?.user.first_name} {comment?.user.last_name}
+          </div>
+            <div className='comment-text'>{comment?.comment_content}</div>
         </div>
-          <div className='comment-text'>{comment?.comment_content}</div>
+        ) : (
+          <CommentEditForm current_user={current_user} post={post} setEditClicked={setEditClicked} comment={comment}/>
+        )
+      }
       </div>
       {current_user.id === comment?.user.id && (
         <div>
         {showCommentOptions === true && (
-          <i className="fa-solid fa-ellipsis edit-comment-ellipsis"></i>
+          <CommentOptionsModal editClicked={editClicked} setEditClicked={setEditClicked} />
         )
         }
       </div>
