@@ -7,7 +7,9 @@ const UploadPicture = () => {
     const history = useHistory(); // so that we can redirect after the image upload is successful
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
-
+    console.log('--------------------------------')
+    console.log('--------------------------------')
+    console.log('--------------------------------')
     useEffect(() => {
       console.log(image)
     }, [image]);
@@ -24,10 +26,17 @@ const UploadPicture = () => {
             method: "POST",
             body: formData,
         });
+        // console.log(await res.json())
+        let errorMessage = await res.json()
+        console.log(errorMessage)
+        console.log('await json')
+        console.log('await json')
+        console.log('await json')
+        console.log('await json')
         if (res.ok) {
             await res.json();
             setImageLoading(false);
-            history.push("/images");
+            // history.push("/images");
         }
         else {
             setImageLoading(false);
@@ -43,13 +52,13 @@ const UploadPicture = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <input
               type="file"
               accept="image/*"
               onChange={updateImage}
             />
-            <button type="submit">Submit</button>
+            <button type="button" onClick={handleSubmit}>Submit</button>
             {(imageLoading)&& <p>Loading...</p>}
         </form>
     )
