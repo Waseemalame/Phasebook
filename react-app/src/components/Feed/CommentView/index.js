@@ -3,29 +3,44 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { getComments } from '../../../store/comment';
+import LastComment from '../LastComment';
+import SingleComment from '../SingleComment';
 import "./CommentView.css"
 const CommentView = ({ post }) => {
+  const current_user = useSelector(state => state.session.user)
   const comments = useSelector(state => Object.values(state.comments))
-  console.log(comments)
   const postsComments = comments.filter(comment => comment.post === post.id)
-  console.log(postsComments[postsComments.length - 1]?.comment_content)
+
+  const [showAllComments, setShowAllComments] = useState(false);
+  const lastComment = postsComments[postsComments.length - 1]
   const dispatch = useDispatch()
 
   return (
     <div>
-      {postsComments.length > 1 && (
-        <p>View {postsComments.length} previous comments</p>
+      {postsComments.length > 1 && showAllComments === false ? (
+        <p className='view-comment-text' onClick={() => setShowAllComments(true)}>View all {postsComments.length} comments</p>
+
+      ) : (
+        <div>
+          {postsComments.length > 1 ? (
+            <p className='collapse-comments' onClick={() => setShowAllComments(false)}>Collapse all comments</p>
+
+          ) : (
+            ''
+          )}
+        </div>
 
       )}
-      <div className="one-comment">
-        <div><img className='comment-user-image' src={postsComments[postsComments.length - 1]?.user.profile_image_url} alt="" /></div>
-        <div className="full-comment">
-          <div className="user-first-last">
-            {postsComments[postsComments.length - 1]?.user.first_name} {postsComments[postsComments.length - 1]?.user.last_name}
-          </div>
-          <div className='comment-text'>{postsComments[postsComments.length - 1]?.comment_content}</div>
-        </div>
+      <div className="all-comments">
+        {showAllComments === true && postsComments.map((comment, index) => (
+                <SingleComment
+                          comment={comment}
+                          current_user={current_user}/>
+        ))}
       </div>
+          <LastComment
+                    lastComment={lastComment}
+                    current_user={current_user} />
 
     </div>
   )
