@@ -62,6 +62,18 @@ export const createComment = (data) => async (dispatch) => {
     return newComment
 
 }
+export const updateComment = (data, commentId) => async dispatch => {
+
+  const response = await fetch(`/api/comments/${commentId}`, {
+    method: 'PUT',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  const comment = await response.json()
+  dispatch(update(comment))
+  return comment
+
+}
 
 export const deleteComment = (commentId, postId) => async dispatch => {
   const response = await fetch(`/api/comments/${commentId}`, {
@@ -90,6 +102,11 @@ const commentsReducer = (state = initialState, action) => {
         ...newComments
       }
     case ADD_COMMENT:
+      return {
+        ...state,
+        [action.comment.id]: action.comment
+      };
+    case UPDATE_COMMENT:
       return {
         ...state,
         [action.comment.id]: action.comment
