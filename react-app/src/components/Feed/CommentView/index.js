@@ -38,9 +38,9 @@ const CommentView = ({ post }) => {
                           current_user={current_user}/>
         ))}
       </div>
-          <LastComment
+          {/* <LastComment
                     lastComment={lastComment}
-                    current_user={current_user} />
+                    current_user={current_user} /> */}
 
     </div>
   )
