@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createPost } from '../../store/post';
+import UploadPicture from '../UploadPicture';
 
 import "./CreatePostForm.css"
 
@@ -35,6 +36,7 @@ const CreatePostForm = () => {
                value={content}
                onChange={(e) => setContent(e.target.value)}
          />
+         <UploadPicture />
         <button type="submit">Post</button>
       </form>
     </div>
