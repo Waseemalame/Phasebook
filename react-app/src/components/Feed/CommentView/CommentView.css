@@ -36,8 +36,16 @@
 .view-comment-text{
   color: #65676B;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 .collapse-comments{
   color: #65676B;
   cursor: pointer;
+  margin-bottom: 10px;
+}
+.view-comment-text:hover{
+  text-decoration: underline;
+}
+.collapse-comments:hover{
+  text-decoration: underline;
 }
