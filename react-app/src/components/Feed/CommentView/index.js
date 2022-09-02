@@ -12,6 +12,8 @@ const CommentView = ({ post }) => {
   const postsComments = comments.filter(comment => comment.post === post.id)
 
   const [showAllComments, setShowAllComments] = useState(false);
+  const [editClicked, setEditClicked] = useState(false);
+
   const lastComment = postsComments[postsComments.length - 1]
   const dispatch = useDispatch()
 
@@ -32,15 +34,24 @@ const CommentView = ({ post }) => {
 
       )}
       <div className="all-comments">
-        {showAllComments === true && postsComments.map((comment, index) => (
+        {showAllComments === true && postsComments.length > 1 && postsComments.map((comment, index) => (
                 <SingleComment
+                          post={post}
                           comment={comment}
-                          current_user={current_user}/>
+                          current_user={current_user}
+                          setEditClicked={setEditClicked}
+                          editClicked={editClicked}/>
         ))}
-      </div>
-          {/* <LastComment
+
+                    <LastComment
+                    post={post}
                     lastComment={lastComment}
-                    current_user={current_user} /> */}
+                    current_user={current_user}
+                    setEditClicked={setEditClicked}
+                    editClicked={editClicked} />
+
+      </div>
+
 
     </div>
   )
