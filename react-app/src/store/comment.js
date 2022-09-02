@@ -26,7 +26,7 @@ const remove = (commentId, postId) => ({
 
 export const getComments = () => async (dispatch) => {
 
-  const response = await fetch(`/api/comments`);
+  const response = await fetch(`/api/comments/`);
 
   if (response.ok) {
 
