@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
+import CommentOptionsModal from '../CommentOptions';
 
-const LastComment = ({ lastComment, current_user }) => {
+const LastComment = ({ lastComment, current_user, setEditClicked, editClicked }) => {
   const [showCommentOptions, setShowCommentOptions] = useState(false);
-
   return (
     <div className="one-comment"
       onMouseEnter={() => setShowCommentOptions(true)}
@@ -23,7 +23,8 @@ const LastComment = ({ lastComment, current_user }) => {
        {showCommentOptions === false ? (
          ''
          ) :
-       <i className="fa-solid fa-ellipsis edit-comment-ellipsis"></i>
+         <CommentOptionsModal editClicked={editClicked} setEditClicked={setEditClicked} />
+
        }
       </div>
       )}
