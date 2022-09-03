@@ -35,3 +35,15 @@ def edit_comment(comment_id):
         return comment.to_dict()
     else:
          return '404: unauthorized user'
+
+@comment_routes.route("/<comment_id>/", methods=["DELETE"])
+def delete_item(comment_id):
+    comment = Comment.query.get(comment_id)
+    if current_user.id == comment.user_id:
+
+        db.session.delete(comment)
+        db.session.commit()
+
+        return "Successfully Deleted"
+    else:
+        return '404: unauthorized user'

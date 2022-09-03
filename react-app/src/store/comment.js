@@ -76,7 +76,7 @@ export const updateComment = (data, commentId) => async dispatch => {
 }
 
 export const deleteComment = (commentId, postId) => async dispatch => {
-  const response = await fetch(`/api/comments/${commentId}`, {
+  const response = await fetch(`/api/comments/${commentId}/`, {
     method: 'delete',
   });
 
