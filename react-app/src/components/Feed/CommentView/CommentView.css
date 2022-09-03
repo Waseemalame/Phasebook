@@ -14,6 +14,8 @@
   font-size: smaller;
   /* max-width: fit-content; */
   max-width: 385px;
+  /* border: 2px solid black; */
+  position: relative;
 }
 .comment-text{
   margin-top: 5px;
@@ -22,13 +24,18 @@
   /* display: flex; */
 }
 .edit-comment-ellipsis{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #65676B;
   margin-left: 5px;
-  padding: 10px;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
 }
 .edit-comment-ellipsis:hover{
-  background-color: rgba(211, 211, 211, 0.389);
+  background-color: rgba(211, 211, 211, 0.212);
+  /* padding: 10px; */
 
   border-radius: 100%;
 

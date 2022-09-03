@@ -10,6 +10,7 @@ const SingleComment = ({ comment, current_user, post }) => {
   return (
     <div>
       <div className="one-comment" onMouseEnter={() => setShowCommentOptions(true)} onMouseLeave={() => setShowCommentOptions(false)}>
+      {/* <div className="one-comment"> */}
       <div><img className='comment-user-image' src={comment?.user.profile_image_url} alt="" /></div>
       <div className="full-comment">
         {!editClicked ? (
@@ -20,7 +21,7 @@ const SingleComment = ({ comment, current_user, post }) => {
             <div className='comment-text'>{comment?.comment_content}</div>
         </div>
         ) : (
-          <CommentEditForm current_user={current_user} post={post} setEditClicked={setEditClicked} comment={comment}/>
+          <CommentEditForm current_user={current_user} post={post} setEditClicked={setEditClicked} editClicked={editClicked} comment={comment}/>
         )
       }
       </div>
