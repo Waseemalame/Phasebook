@@ -1,6 +1,6 @@
 .one-comment{
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 15px;
   margin-top: 10px;
 }
@@ -11,6 +11,7 @@
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   padding: 10px;
+  padding-top: 5px;
   font-size: smaller;
   /* max-width: fit-content; */
   max-width: 385px;
@@ -19,6 +20,7 @@
 }
 .comment-text{
   margin-top: 5px;
+  line-height: 18px;
 }
 .edit-comment-div{
   /* display: flex; */
