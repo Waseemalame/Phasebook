@@ -17,44 +17,52 @@ const CommentView = ({ post }) => {
   const lastComment = postsComments[postsComments.length - 1]
   const dispatch = useDispatch()
 
-  return (
-    <div>
-      {postsComments.length > 1 && showAllComments === false ? (
-        <p className='view-comment-text' onClick={() => setShowAllComments(true)}>View all {postsComments.length} comments</p>
+  if(postsComments.length < 1){
+    return (
+      ''
+    )
+  }
 
-      ) : (
-        <div>
-          {postsComments.length > 1 ? (
-            <p className='collapse-comments' onClick={() => setShowAllComments(false)}>Collapse all comments</p>
-
-          ) : (
-            ''
-          )}
-        </div>
-
-      )}
-      <div className="all-comments">
-        {showAllComments === true && postsComments.length > 1 && postsComments.map((comment, index) => (
-                <SingleComment
-                          post={post}
-                          comment={comment}
-                          current_user={current_user}
-                          setEditClicked={setEditClicked}
-                          editClicked={editClicked}/>
-        ))}
-
-                    <LastComment
-                    post={post}
-                    lastComment={lastComment}
-                    current_user={current_user}
-                    setEditClicked={setEditClicked}
-                    editClicked={editClicked} />
-
+  if(postsComments.length === 1) {
+    return (
+      <div>
+        <SingleComment
+                  post={post}
+                  comment={lastComment}
+                  current_user={current_user}
+                  setEditClicked={setEditClicked}
+                  editClicked={editClicked}/>
       </div>
-
-
+    )
+  } else if(postsComments.length > 1 && showAllComments === false){
+    return (
+      <div>
+      <p className='view-comment-text' onClick={() => setShowAllComments(true)}>View all {postsComments.length} comments</p>
+      <SingleComment
+                  post={post}
+                  comment={lastComment}
+                  current_user={current_user}
+                  setEditClicked={setEditClicked}
+                  editClicked={editClicked}/>
     </div>
-  )
+    )
+  } else if(postsComments.length > 1 && showAllComments === true){
+    return (
+      <div>
+        <p className='collapse-comments' onClick={() => setShowAllComments(false)}>Collapse all comments</p>
+        {postsComments.map(comment => (
+          <div>
+          <SingleComment
+                  post={post}
+                  comment={comment}
+                  current_user={current_user}
+                  setEditClicked={setEditClicked}
+                  editClicked={editClicked}/>
+          </div>
+        ))}
+      </div>
+    )
+  }
 }
 
 export default CommentView
