@@ -5,26 +5,29 @@ import { Modal } from "../../context/Modal";
 import CommentOptions from "./CommentOptions";
 // import EditCommentForm from "../../EditCommentForm";
 
-function CommentOptionsModal({ editClicked, setEditClicked }) {
+function CommentOptionsModal({ editClicked, setEditClicked, comment, post, setModalOpen }) {
   // const dispatch = useDispatch();
 
-  const [showModal, setShowModal] = useState(false);
+  const [showOptionsModal, setShowOptionsModal] = useState(false);
   const user = useSelector(state => state.session.user);
   useEffect(() => {
-    if(editClicked === true && showModal === true){
-      setShowModal(false)
+    if(editClicked === true && showOptionsModal === true){
+      setShowOptionsModal(false)
     }
-  }, [editClicked, showModal]);
+    if(showOptionsModal === true){
+      setModalOpen(true)
+    }
+  }, [editClicked, showOptionsModal]);
   return (
     <>
           {!editClicked && (
-            <i onClick={editClicked === false ? () => setShowModal(true) : null} className="fa-solid fa-ellipsis edit-comment-ellipsis"></i>
+            <i onClick={editClicked === false ? () => setShowOptionsModal(true) : null} className="fa-solid fa-ellipsis edit-comment-ellipsis"></i>
           )}
 
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          {/* <EditCommentForm setShowModal={setShowModal} setEditClicked={setEditClicked} user={user} onClick={() => setShowModal(false)}/> */}
-          <CommentOptions editClicked={editClicked} setShowModal={setShowModal} setEditClicked={setEditClicked} user={user} onClick={() => setShowModal(false)} />
+      {showOptionsModal && (
+        <Modal onClose={() => setShowOptionsModal(false)}>
+          {/* <EditCommentForm setShowOptionsModal={setShowOptionsModal} setEditClicked={setEditClicked} user={user} onClick={() => setShowOptionsModal(false)}/> */}
+          <CommentOptions post={post} comment={comment} editClicked={editClicked} setShowOptionsModal={setShowOptionsModal} setEditClicked={setEditClicked} user={user} onClick={() => setShowOptionsModal(false)} />
         </Modal>
       )}
     </>

@@ -1,16 +1,19 @@
 import React from 'react'
 import { useEffect } from 'react'
+import "./CommentOptions.css"
 
-const CommentOptions = ({setShowModal, editClicked, setEditClicked, user}) => {
+import DeleteCommentModal from '../../DeleteComment';
+
+const CommentOptions = ({setShowOptionsModal, editClicked, setEditClicked, user, post, comment}) => {
   useEffect(() => {
     console.log(editClicked)
   }, [editClicked]);
-  const handleEditClick = () => {
-    // console.log(editClicked)
-    // console.log('wtfwtfwtwfw???')
-  }
+
   return (
-    <div onClick={() => setEditClicked(true)}>Edit</div>
+    <div className='comment-options-container'>
+      <div onClick={() => setEditClicked(true)}>Edit</div>
+      <DeleteCommentModal setShowOptionsModal={setShowOptionsModal} post={post} comment={comment} />
+    </div>
   )
 }
 

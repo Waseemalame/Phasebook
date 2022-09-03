@@ -6,10 +6,12 @@ import CommentEditForm from './CommentEditForm';
 const SingleComment = ({ comment, current_user, post }) => {
   const [showCommentOptions, setShowCommentOptions] = useState(false);
   const [editClicked, setEditClicked] = useState(false);
-
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <div>
-      <div className="one-comment" onMouseEnter={() => setShowCommentOptions(true)} onMouseLeave={() => setShowCommentOptions(false)}>
+      <div className="one-comment"
+                        onMouseEnter={() => setShowCommentOptions(true)}
+                        onMouseLeave={!modalOpen ? () => setShowCommentOptions(false) : () => null}>
       {/* <div className="one-comment"> */}
       <div><img className='comment-user-image' src={comment?.user.profile_image_url} alt="" /></div>
       <div className="full-comment">
@@ -28,7 +30,7 @@ const SingleComment = ({ comment, current_user, post }) => {
       {current_user.id === comment?.user.id && (
         <div>
         {showCommentOptions === true && (
-          <CommentOptionsModal editClicked={editClicked} setEditClicked={setEditClicked} />
+          <CommentOptionsModal setModalOpen={setModalOpen} editClicked={editClicked} setEditClicked={setEditClicked} post={post} comment={comment} />
         )
         }
       </div>
