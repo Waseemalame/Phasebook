@@ -6,10 +6,6 @@ import CommentEditForm from './CommentEditForm';
 const SingleComment = ({ comment, current_user, post }) => {
   const [showCommentOptions, setShowCommentOptions] = useState(false);
   const [editClicked, setEditClicked] = useState(false);
-  useEffect(() => {
-    // console.log(editClicked)
-    // console.log(setEditClicked())
-  }, [editClicked]);
 
   return (
     <div>
