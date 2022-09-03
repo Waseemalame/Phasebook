@@ -1,10 +1,12 @@
 .create-comment-container{
   display: flex;
   align-items: center;
+  margin-top: 10px;
 }
 .comment-form{
   /* width: 100%; */
   width: 100%;
+
 }
 .comment-form > input{
   border: none;
@@ -16,12 +18,11 @@
   background-color: #e4e6e887;
   padding: 8px 12px;
   width: 100%;
-  margin-top: 10px;
 }
 .comment-user-image{
   width: 30px;
   height: 30px;
   border-radius: 100%;
-  margin-right: 11px;
+  margin-right: 5px;
 
 }
