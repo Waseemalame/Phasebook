@@ -18,9 +18,7 @@ function CommentOptionsModal({ editClicked, setEditClicked }) {
   return (
     <>
 
-          <i onClick={() => setShowModal(true)} className="fa-solid fa-ellipsis edit-comment-ellipsis">
-
-          </i>
+          <i onClick={editClicked === false ? () => setShowModal(true) : null} className="fa-solid fa-ellipsis edit-comment-ellipsis"></i>
 
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
