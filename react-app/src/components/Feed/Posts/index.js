@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { getComments } from '../../../store/comment';
+import { getImagesThunk } from '../../../store/image';
 import { getPostsThunk } from '../../../store/post';
 import CreateCommentForm from '../../CreateComment/CreateCommentForm';
 import CreatePostModal from '../../CreatePost';
@@ -16,11 +17,11 @@ const Posts = () => {
   const dispatch = useDispatch()
 
   const posts = useSelector(state => Object.values(state.posts))
-  console.log(posts)
 
   useEffect(() => {
     dispatch(getPostsThunk())
     dispatch(getComments())
+    dispatch(getImagesThunk())
   }, [dispatch]);
 
 
@@ -28,7 +29,7 @@ const Posts = () => {
     <div className='main-feed'>
       <CreatePostModal />
       <span className='feed-posts'>
-        {posts.map(post => (
+        {posts.reverse().map(post => (
           <div className="single-post">
             <div className="post-user-info">
               <div><img className='post-user-image' src={post.user?.profile_image_url} alt="" /></div>
@@ -36,6 +37,10 @@ const Posts = () => {
             </div>
               <PostOptionsModal post={post} />
             <div className='post-content'>{post.content}</div>
+            <div className="post-images">
+              <img className='single-post-image' src={post?.images[0]?.image_url} alt="" />
+            </div>
+            <div className="post-underline"></div>
             <CommentView post={post} />
             <CreateCommentForm post={post} />
           </div>

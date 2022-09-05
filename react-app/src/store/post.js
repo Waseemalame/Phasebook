@@ -67,32 +67,10 @@ export const createPost = (data) => async (dispatch) => {
     return newPost
 
 
-    // const response = await fetch('/api/posts/', {
-    //     method: "POST",
-    //     body: JSON.stringify(post)
-    // });
-    // if (response.ok) {
-    //     const newPost = await response.json();
-    //     dispatch(addPost(newPost))
-    //     return newPost;
-    // }
-
 
 }
 
-//Get All Posts
-export const getPosts = () => async (dispatch) => {
-    const response = await fetch(`/api/posts/`)
-    if (response.ok) {
-        const post = await response.json();
-        dispatch(getAllPosts(post))
-        const all = {};
-        post.posts.forEach((post) => (all[post.id] = post))
-        return {...all}
-    }
 
-    return {};
-}
 
 // //Get Profile Name For Post Detail
 // export const getUsersName = (userId) => async(dispatch) => {
@@ -152,6 +130,7 @@ const postsReducer = (state = initialState, action) => {
         case CREATE_POST: {
             let newState = {...state}
             newState[action.post.id] = action.post;
+
             return newState;
         }
         case UPDATE_POST:

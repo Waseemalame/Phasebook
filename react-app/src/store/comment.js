@@ -31,7 +31,6 @@ export const getComments = () => async (dispatch) => {
   if (response.ok) {
 
     const comments = await response.json();
-    console.log(comments, 'comments')
     dispatch(load(comments));
   }
 

@@ -22,7 +22,7 @@ function CreatePostModal( ) {
       </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CreatePostForm />
+          <CreatePostForm setShowModal={setShowModal}/>
         </Modal>
       )}
     </>
