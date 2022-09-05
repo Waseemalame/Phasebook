@@ -7,11 +7,11 @@ class Post(db.Model):
     content = db.Column(db.String(2200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     likes = db.Column(db.Integer, default=0)
-    image_url = db.Column(db.String, nullable=False)
     display_comments = db.Column(db.Boolean, default=True)
 
     user = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="post", cascade="all, delete-orphan")
+    images = db.relationship("Image", back_populates="post", cascade="all, delete-orphan")
     # like_list = db.relationship("Like", back_populates="post", cascade="all, delete-orphan")
 
 
@@ -22,7 +22,7 @@ class Post(db.Model):
             "user": self.user.to_dict(),
             # "likes": self.likes,
             # "like_list": [like.to_dict() for like in self.like_list],
-            "image_url": self.image_url,
+            "images": [image.to_dict() for image in self.images],
             "comments": [comment.to_dict() for comment in self.comments],
             "display_comments": self.display_comments
         }
@@ -33,5 +33,5 @@ class Post(db.Model):
               content: {self.content}\n
               User: {self.user.to_dict()}\n
               Likes: {self.likes}\n
-              Image URL: {self.image_url} >
+              Images: {self.images} >
             """

@@ -27,13 +27,11 @@ def user_posts():
 
     user_id = new_post.data['user_id']
     content = new_post.data['content']
-    image_url = new_post.data['image_url']
 
     if new_post.validate_on_submit() and current_user.id == user_id:
         post = Post(
             user_id = user_id,
             content = content,
-            image_url = image_url
         )
 
         db.session.add(post)
@@ -57,6 +55,7 @@ def update_post(post_id):
 
     post.content = content
     post.image_url = image_url
+
 
     db.session.commit()
     return post.to_dict()

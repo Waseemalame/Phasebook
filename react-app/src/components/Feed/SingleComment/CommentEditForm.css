@@ -16,21 +16,28 @@
 
 }
 .edit-form-btn{
-  cursor: pointer;
   border: none;
   background-color: transparent;
-  color: red;
   position: absolute;
-  left: 9px;
+  left: 0;
+  top: 65px;
   font-size: smaller;
   /* top: 0; */
   /* right: 0; */
+  color: gray;
   bottom: -20px;
   /* top: 28px; */
-  font-weight: 700;
+  /* font-weight: 700; */
   /* padding-bottom: 100px; */
 
 }
 .edit-form-btn:hover{
+  /* text-decoration: underline; */
+}
+.cancel-comment-edit{
+  color: #1876F2;
+  cursor: pointer;
+}
+.cancel-comment-edit:hover{
   text-decoration: underline;
 }

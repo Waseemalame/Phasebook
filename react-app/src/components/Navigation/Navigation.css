@@ -64,6 +64,7 @@
 .search-bar{
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: rgba(211, 211, 211, 0.246);
   border-radius: 999px;
   height: 40px;
@@ -98,6 +99,7 @@
 
 }
 
+<<<<<<< HEAD
 .user-list-item{
   text-decoration: none;
   list-style: none;
@@ -107,4 +109,19 @@
   color: black;
   text-decoration: none;
   list-style: none;
+=======
+@media screen and (max-width: 1000px) {
+  .search-bar{
+    width: 40px;
+  }
+  .search-input{
+    display: none;
+    /* opacity: 0; */
+
+  }
+  .search-bar > *{
+    padding-left: 0;
+    /* border-radius: 999px; */
+  }
+>>>>>>> 6f695bd0a252a3f30d8cbed46f56e83e7086f0d3
 }

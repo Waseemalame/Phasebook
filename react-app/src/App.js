@@ -9,16 +9,15 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import SideBar from './components/Feed/SideBar';
+import LeftSideBar from './components/LeftSideBar';
 import Navigation from './components/Navigation';
 import Posts from './components/Feed/Posts';
-
 import "./index.css"
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [searchList, setSearchList] = useState(false);
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
@@ -48,10 +47,11 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <div className='home-display'>
+          {/* <div className='home-display'> */}
             <SideBar />
             <Posts />
-          </div>
+            <LeftSideBar />
+          {/* </div> */}
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
