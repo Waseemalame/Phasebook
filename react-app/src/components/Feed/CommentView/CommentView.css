@@ -45,12 +45,12 @@
 .view-comment-text{
   color: #65676B;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .collapse-comments{
   color: #65676B;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .view-comment-text:hover{
   text-decoration: underline;
