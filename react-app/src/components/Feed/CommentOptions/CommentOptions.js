@@ -6,7 +6,6 @@ import DeleteCommentModal from '../../DeleteComment';
 
 const CommentOptions = ({setShowOptionsModal, editClicked, setEditClicked, user, post, comment}) => {
   useEffect(() => {
-    console.log(editClicked)
   }, [editClicked]);
 
   return (
