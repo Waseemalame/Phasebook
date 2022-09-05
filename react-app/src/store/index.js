@@ -2,12 +2,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import commentsReducer from './comment';
 import postsReducer from './post';
+import imagesReducer from './image';
 import session from './session'
 
 const rootReducer = combineReducers({
   session,
   posts: postsReducer,
-  comments: commentsReducer
+  comments: commentsReducer,
+  images: imagesReducer
 });
 
 
