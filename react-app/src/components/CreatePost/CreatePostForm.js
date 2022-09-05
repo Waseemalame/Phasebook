@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createPost } from '../../store/post';
-
+import { createPost, getPostsThunk } from '../../store/post';
+import UploadPicture from "../UploadPicture/UploadPicture"
 import "./CreatePostForm.css"
 
-const CreatePostForm = () => {
+const CreatePostForm = ({ setShowModal }) => {
   const user = useSelector(state => state.session.user);
   const [content, setContent] = useState('');
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
+
   const dispatch = useDispatch()
   useEffect(() => {
   }, []);
@@ -14,12 +17,42 @@ const CreatePostForm = () => {
     e.preventDefault()
     const data = {
       content,
-      user_id: user.id
+      user_id: user.id,
+      image_url: image
     }
 
-    await dispatch(createPost(data))
-    setContent('')
+
+    const new_post = await dispatch(createPost(data))
+
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("post_id", new_post.id)
+
+    const res = await fetch('/api/images', {
+      method: "POST",
+      body: formData,
+  });
+  if (res.ok) {
+    const new_image = await res.json();
+    new_post["image_url"] = new_image.image_url
+    setImageLoading(false);
+    // history.push("/images");
+}
+  else {
+      setImageLoading(false);
+      // a real app would probably use more advanced
+      // error handling
+      console.log("error");
   }
+      setContent('')
+
+      setShowModal(false)
+      dispatch(getPostsThunk())
+  }
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+}
   return (
     <div className='create-post-container'>
       <div className="create-post-header">
@@ -35,6 +68,13 @@ const CreatePostForm = () => {
                value={content}
                onChange={(e) => setContent(e.target.value)}
          />
+                     <input
+              type="file"
+              accept="image/*"
+              onChange={updateImage}
+            />
+            {(imageLoading)&& <p>Loading...</p>}
+         {/* <UploadPicture /> */}
         <button type="submit">Post</button>
       </form>
     </div>
