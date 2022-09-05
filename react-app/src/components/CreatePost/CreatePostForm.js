@@ -12,6 +12,7 @@ const CreatePostForm = ({ setShowModal }) => {
 
   const dispatch = useDispatch()
   useEffect(() => {
+    console.dir(document.querySelector(".upload-image-input"))
   }, []);
   const handleCreatePost = async (e) => {
     e.preventDefault()
@@ -63,19 +64,28 @@ const CreatePostForm = ({ setShowModal }) => {
           <span className='user-first-last'>{user.first_name} {user.last_name}</span>
       </div>
       <form className="create-post-form" onSubmit={handleCreatePost}>
-        <input type="text"
+        <input
+               className='create-post-input'
+               type="text"
                placeholder={`What's on your mind, ${user.first_name}`}
                value={content}
                onChange={(e) => setContent(e.target.value)}
          />
-                     <input
-              type="file"
-              accept="image/*"
-              onChange={updateImage}
-            />
+        <div className='file-input-container' id='f-i-c'>
+         <div className='file-input-text'></div>
+         <input
+
+                className='upload-image-input'
+                // style={{"visibility": "hidden"}}
+                type="file"
+                accept="image/*"
+                placeholder='dsfd'
+                onChange={updateImage}
+                />
             {(imageLoading)&& <p>Loading...</p>}
-         {/* <UploadPicture /> */}
-        <button type="submit">Post</button>
+            </div>
+
+        <button className='create-post-btn' type="submit">Post</button>
       </form>
     </div>
   )

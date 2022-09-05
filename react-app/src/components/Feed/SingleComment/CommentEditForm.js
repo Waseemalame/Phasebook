@@ -7,10 +7,36 @@ import { updateComment } from '../../../store/comment'
 import "./CommentEditForm.css"
 const CommentEditForm = ({ comment, post, current_user, setEditClicked, editClicked }) => {
 const [commentContent, setCommentContent] = useState(comment?.comment_content);
-
+const [isFocused, setIsFocused] = useState(false);
+const textAreaRef = useRef(null)
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    let editCommentField = document.getElementById('edit-comment-textarea');
+    const end = editCommentField.value.length
+    editCommentField.setSelectionRange(end, end)
+    editCommentField.focus()
+    if(document.activeElement === textAreaRef.current){
+      console.log("focused")
+    } else{
+      console.log("not focused!")
+    }
 
+  }, []);
+  const addFocus = () => {
+    if(editClicked){
+
+      let editCommentField = document.getElementById('edit-comment-textarea');
+      const end = editCommentField.value.length
+      editCommentField.setSelectionRange(end, end)
+      editCommentField.focus()
+      setIsFocused(true)
+    }
+    // setIsFocused(false)
+  }
+  const removeFocus = () => {
+    setIsFocused(false)
+  }
   const handleCommentEdit = (e) => {
     e.preventDefault()
     const data = {
@@ -39,13 +65,17 @@ const [commentContent, setCommentContent] = useState(comment?.comment_content);
       cancelEditComment()
     }
   }
+  const checkFocus = () => {
+  }
   return (
     <form className="edit-comment-form" onSubmit={handleCommentEdit}>
     <textarea
           id="edit-comment-textarea"
           className='edit-form-input'
 
-          // ref={ref}
+          ref={textAreaRef}
+          onFocus={addFocus}
+          onBlur={removeFocus}
           type="text"
           value={commentContent}
           onChange={(e) => setCommentContent(e.target.value)}
@@ -55,10 +85,14 @@ const [commentContent, setCommentContent] = useState(comment?.comment_content);
               escCancelEdit(e)
             }
           }
-          autofocus
            />
+    {isFocused ? (
 
-    <button className='edit-form-btn' onClick={cancelEditComment} type="button">Cancel edit</button>
+      <button className='edit-form-btn' type="button">Press Esc to <span className='cancel-comment-edit' onClick={cancelEditComment}>cancel</span>.</button>
+      ) : (
+
+        <button className='edit-form-btn' type="button"><span className='cancel-comment-edit' onClick={cancelEditComment}>Cancel</span></button>
+    )}
   </form>
   )
 }

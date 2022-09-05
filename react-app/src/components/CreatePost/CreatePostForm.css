@@ -33,13 +33,108 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
+  /* position: relative; */
 }
-.create-post-form > input{
+.create-post-input{
   border: none;
   font-size: 24px;
+  outline: none;
+
+}
+.file-input-container{
+  /* background-color: blue; */
+
+  /* padding: 100px; */
+  /* visibility: hidden; */
+  cursor: pointer;
+  position: relative;
+  /* opacity: 0; */
+  height: .1px;
+  width: .1px;
+}
+#f-i-c{
+  /* background-color: red; */
+  /* padding: 40px; */
+  /* height: 300px; */
+  background-color: white;
+  /* outline: none; */
+  border: 2px solid #EAEBED;
+  margin-bottom: 50px;
+  position: relative;
+
+}
+.file-input-text{
+  /* position: absolute;+ */
+  background-color: orange;
+  height: 300px;
+  width: 300px;
+  top: 10px;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  /* position: absolute; */
+  text-align: center;
+  padding-right: 50px;
+
+}
+.file-input-text:hover{
+  /* background-color: blue; */
+}
+#f-i-c > *{
+  border: none;
+  /* background-color: #F7F8FA; */
+  background: #F7F8FA;
+  outline: none;
+  height: 150px;
+  max-width: 96%;
+  cursor: pointer;
+  /* background-color: blue; */
+  top: 0;
+  left: 0;
+  right: 0;
+  /* bottom: 0; */
+  position: absolute;
+  /* padding: 50px; */
+  padding-right: 450px;
+  margin: 10px;
+  object-fit: cover;
+  /* opacity: 0; */
+
+}
+#f-i-c::after{
+  text-decoration: underline;
+  border: 20px solid black;
+  margin-top: 20px;
+  padding: 20px;
+}
+#f-i-c > *:hover{
+  background-color: #EAEBED;
+  /* opacity: 30%; */
+}
+.upload-image-input{
+  font-size: 24px;
+  outline: none;
+  border: none;
+  display: flex;
+  /* margin-left: 30px; */
+  object-fit: contain;
+  overflow-x: hidden;
+  /* margin-right: 30px; */
+  /* padding-right: 30px; */
+}
+
+.upload-image-input, #file-upload-button{
+  opacity: 0;
+  /* background-color: transparent; */
+  /* border: 2px solid black; */
+}
+
+.upload-image-input > * {
+  /* color: blue; */
+  /* border: 20px solid black; */
 }
 .create-post-component{
-  width: 500px;
+  max-width: 500px;
   height: 123px;
   background-color: white;
   border-radius: 5px;
@@ -51,6 +146,18 @@
 .create-post-section{
   display: flex;
   align-items: center;
+}
+.create-post-btn{
+  background-color: #1877F2;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 120px;
+
 }
 .create-post-click{
   background-color: #e4e6e887;
@@ -75,4 +182,5 @@
   /* line-height: 40px; */
   font-size: 17px;
   color: #65676B;
+  outline: none;
 }
