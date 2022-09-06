@@ -63,6 +63,9 @@
 .hide-icon{
   display: none;
 }
+#logo{
+  cursor: pointer;
+}
 .search-bar{
   display: flex;
   align-items: center;
