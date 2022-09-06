@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import UsersList from '../UsersList';
-
 import './Navigation.css'
-const Navigation = ({ searchList, setSearchList}) => {
-  const [searchString, setSearchString] = useState('');
 
+const Navigation = ({ searchList, setSearchList}) => {
+  const current_user = useSelector(state => state.session.user)
+
+  const [searchString, setSearchString] = useState('');
+  const history = useHistory()
 
   const searchUsers = () => {
 
@@ -30,13 +34,19 @@ const Navigation = ({ searchList, setSearchList}) => {
   const renderSearchList = () => {
     setSearchList(true)
   }
+  const redirectHome = () => {
+    history.push('/')
+  }
+  const redirectProfile = () => {
+    history.push(`/users/${current_user.id}`)
+  }
 
   return (
     <div className="nav-container">
       <ul className='nav-list'>
         <li className='search-nav'>
           <div onClick={() => setSearchList(true)}  ref={listRef} className={searchList === false ? 'nav-left' : 'nav-left-clicked'}>
-            <img className={searchList ? 'hide-icon' : ''} src="https://img.icons8.com/color/50/000000/facebook-new.png" alt=""/>
+            <img onClick={redirectHome} id="logo" className={searchList ? 'hide-icon' : ''} src="https://img.icons8.com/color/50/000000/facebook-new.png" alt=""/>
             <div onClick={() => setSearchList(true)} className="search-bar">
               <img src="https://img.icons8.com/fluency-systems-filled/15/000000/search.png" alt=""/>
               <input
@@ -61,7 +71,7 @@ const Navigation = ({ searchList, setSearchList}) => {
         </li>
         <li>
           <div className="nav-right">
-            <img src="https://img.icons8.com/small/20/000000/user-male-circle.png" alt=""/>
+            <img onClick={redirectProfile} className='post-user-image' src={current_user.profile_image_url} alt=""/>
           </div>
         </li>
       </ul>
