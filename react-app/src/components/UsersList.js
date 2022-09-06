@@ -29,24 +29,26 @@ function UsersList({ searchString, setSearchList }) {
 
   }
   return (
-    <>
-      {/* <h1>User List: </h1> */}
-      {/* <ul>{userComponents}</ul> */}
-      {users.map(user => (
-        <div>
-          {console.log(user)}
-          {((user.username).toLowerCase().includes(searchString.toLowerCase()) && searchString !== '') ||
-              ((user.first_name).toLowerCase().includes(searchString.toLowerCase()) && searchString !== '')
-           ? (
-            <li key={user.id} className="user-list-item">
-              <div onClick={() => userSearchRedirect(user.id)}>{user.username}</div>
-            </li>
-          ) : (
-            ''
-          )}
-          </div>
-      ))}
-    </>
+
+      <div>
+        {/* <h1>User List: </h1> */}
+        {/* <ul>{userComponents}</ul> */}
+        {users.map(user => (
+          <div>
+            {console.log(user)}
+            {((user.username).toLowerCase().includes(searchString.toLowerCase()) && searchString !== '') ||
+                ((user.first_name).toLowerCase().includes(searchString.toLowerCase()) && searchString !== '')
+             ? (
+              <li key={user.id} className="user-list-item">
+                <div onClick={() => userSearchRedirect(user.id)}>{user.username}</div>
+              </li>
+            ) : (
+              ''
+            )}
+            </div>
+        ))}
+      </div>
+
   );
 }
 

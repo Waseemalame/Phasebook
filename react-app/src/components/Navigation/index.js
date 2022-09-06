@@ -14,7 +14,7 @@ const Navigation = ({ searchList, setSearchList}) => {
   useEffect(() => {
 
     const closeSearchList = (e) => {
-      console.log(e)
+      if(searchList) return
       if(e.path[2] !== listRef.current){
 
         setSearchList(false)
@@ -34,13 +34,13 @@ const Navigation = ({ searchList, setSearchList}) => {
   return (
     <div className="nav-container">
       <ul className='nav-list'>
-        <li>
-          <div ref={listRef} className={searchList === false ? 'nav-left' : 'nav-left-clicked'}>
+        <li className='search-nav'>
+          <div onClick={() => setSearchList(true)}  ref={listRef} className={searchList === false ? 'nav-left' : 'nav-left-clicked'}>
             <img className={searchList ? 'hide-icon' : ''} src="https://img.icons8.com/color/50/000000/facebook-new.png" alt=""/>
-            <div onClick={renderSearchList} className="search-bar">
+            <div onClick={() => setSearchList(true)} className="search-bar">
               <img src="https://img.icons8.com/fluency-systems-filled/15/000000/search.png" alt=""/>
               <input
-
+                      onClick={() => setSearchList(true)}
                       className='search-input'
                       type="search"
                       value={searchString}
