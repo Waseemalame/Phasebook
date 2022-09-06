@@ -14,6 +14,7 @@ def seed_posts():
     demo5 = Post(
         content="I want to travel can someone help me decide where to go first?", user_id=2)
 
+
     db.session.add(demo1)
     db.session.add(demo2)
     db.session.add(demo3)

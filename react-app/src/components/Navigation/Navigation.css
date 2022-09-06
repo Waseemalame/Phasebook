@@ -5,6 +5,7 @@
   /* background-color: white; */
   /* border: 2px solid black; */
   /* width: 100%; */
+  /* padding: 200px; */
 
 }
 .nav-container > ul > * {
@@ -12,9 +13,11 @@
 }
 .nav-list{
   /* width: 100%; */
+  height: 56px;
   background-color: white;
   display: flex;
   align-items: center;
+  position: relative;
   /* justify-content: space-around; */
   list-style: none;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
@@ -38,6 +41,28 @@
   margin-top: 3px;
   margin-bottom: 3px;
 }
+.nav-left-clicked{
+  /* margin-top: 2px; */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  /* border: 1px solid blue; */
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  position: absolute;
+  left: 35px;
+  top: 0px;
+  width: 250px;
+  height: 400px;
+  z-index: 1000;
+  background-color: white;
+}
+.nav-left-clicked > input{
+  background-color: blue;
+  margin-top: 200px;
+}
+.hide-icon{
+  display: none;
+}
 .search-bar{
   display: flex;
   align-items: center;
@@ -54,7 +79,8 @@
   outline: none;
   border: none;
   background-color: rgba(211, 211, 211, 0.056);
-
+  cursor: pointer;
+  padding: 20px;
 }
 .nav-list > li > .nav-middle{
   background-color: white;
@@ -66,6 +92,7 @@
   justify-content: space-around;
 }
 
+
 .nav-right{
   display: flex;
   width: 100%;
@@ -76,6 +103,17 @@
 
 }
 
+
+.user-list-item{
+  text-decoration: none;
+  list-style: none;
+  color: black;
+}
+.user-list-item > a{
+  color: black;
+  text-decoration: none;
+  list-style: none;
+}
 @media screen and (max-width: 1000px) {
   .search-bar{
     width: 40px;

@@ -15,6 +15,8 @@ import Posts from './components/Feed/Posts';
 import "./index.css"
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const [searchList, setSearchList] = useState(false);
+
   const dispatch = useDispatch();
   useEffect(() => {
     (async() => {
@@ -30,7 +32,7 @@ function App() {
   return (
     <BrowserRouter>
       {/* <NavBar /> */}
-      <Navigation />
+      <Navigation searchList={searchList} setSearchList={setSearchList} />
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
