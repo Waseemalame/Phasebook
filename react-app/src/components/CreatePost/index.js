@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal } from "../context/Modal";
 import CreatePostForm from "./CreatePostForm";
@@ -7,7 +8,16 @@ function CreatePostModal( ) {
   // const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const user = useSelector(state => state.session.user);
+  useEffect(() => {
+    const bodyEl = document.querySelector("body")
+    console.log(showModal)
+    if(showModal){
+      // bodyEl.style = `overflow:hidden`
+    } else {
+      // bodyEl.style = 'overflow:scroll'
 
+    }
+  }, [showModal]);
   return (
     <>
       <div className="create-post-component">
@@ -22,7 +32,7 @@ function CreatePostModal( ) {
       </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CreatePostForm setShowModal={setShowModal}/>
+          <CreatePostForm showModal={showModal} setShowModal={setShowModal}/>
         </Modal>
       )}
     </>
