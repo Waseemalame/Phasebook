@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import LogoutButton from '../auth/LogoutButton';
 import UsersList from '../UsersList';
 import './Navigation.css'
 
@@ -9,6 +10,7 @@ const Navigation = ({ searchList, setSearchList}) => {
   const current_user = useSelector(state => state.session.user)
 
   const [searchString, setSearchString] = useState('');
+  const [profileDropDown, setProfileDropDown] = useState(false);
   const history = useHistory()
 
   const searchUsers = () => {
@@ -30,6 +32,16 @@ const Navigation = ({ searchList, setSearchList}) => {
     return () => document.body.removeEventListener("click", closeSearchList)
 
   }, []);
+
+  useEffect(() => {
+    if(!profileDropDown) return;
+    const closeProfileDropDown = () => {
+      setProfileDropDown(false);
+    }
+    document.addEventListener("click", closeProfileDropDown);
+
+    return () => document.removeEventListener("click", closeProfileDropDown);
+  }, [profileDropDown]);
 
   const renderSearchList = () => {
     setSearchList(true)
@@ -71,8 +83,16 @@ const Navigation = ({ searchList, setSearchList}) => {
         </li>
         <li>
           <div className="nav-right">
-            <img onClick={redirectProfile} className='post-user-image' src={current_user?.profile_image_url} alt=""/>
+            <img onClick={() => setProfileDropDown(true)} className='post-user-image' src={current_user?.profile_image_url} alt=""/>
+            {/* <img onClick={redirectProfile} className='post-user-image' src={current_user?.profile_image_url} alt=""/> */}
           </div>
+          {profileDropDown ? (
+            <div className='profile-dropdown'>
+              <div className='profile-click' onClick={redirectProfile}><strong>Profile</strong></div>
+              <LogoutButton />
+
+            </div>
+          ) : ''}
         </li>
       </ul>
     </div>
