@@ -71,7 +71,7 @@ const Navigation = ({ searchList, setSearchList}) => {
         </li>
         <li>
           <div className="nav-right">
-            <img onClick={redirectProfile} className='post-user-image' src={current_user.profile_image_url} alt=""/>
+            <img onClick={redirectProfile} className='post-user-image' src={current_user?.profile_image_url} alt=""/>
           </div>
         </li>
       </ul>

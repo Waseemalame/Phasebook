@@ -4,16 +4,56 @@ import { createPost, getPostsThunk } from '../../store/post';
 import UploadPicture from "../UploadPicture/UploadPicture"
 import "./CreatePostForm.css"
 
-const CreatePostForm = ({ setShowModal }) => {
+const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
   const user = useSelector(state => state.session.user);
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
+  const [addImg, setAddImg] = useState(false);
 
   const dispatch = useDispatch()
   useEffect(() => {
-    console.dir(document.querySelector(".upload-image-input"))
-  }, []);
+    let textArea;
+    textArea = document.querySelector(".create-post-textarea")
+    const textareaHeight = () => {
+
+      textArea.style.height = (textArea.scrollHeight) + "px";
+      // console.log(textArea.style.height)
+    }
+    textareaHeight()
+
+    if(content.length > 100){
+      textArea.style.fontSize = '16px'
+    } else {
+      textArea.style.fontSize = '24px'
+    }
+
+    let textAreaUpload;
+    textAreaUpload = document.querySelector('.textarea-with-upload')
+    if(content.length > 338 || addImg){
+      textAreaUpload.style.overflowY = 'scroll'
+    } else {
+
+      textAreaUpload.style.overflowY = 'hidden'
+    }
+
+  }, [content, addImg]);
+
+
+  useEffect(() => {
+    let textAreaUpload;
+    textAreaUpload = document.querySelector('.textarea-with-upload')
+    console.log(textAreaUpload.scrollHeight)
+    if(!addImg){
+      return;
+    } else {
+      textAreaUpload.scrollBy({
+        top: 250,
+        behavior: 'smooth'
+      })
+    }
+  }, [addImg]);
+
   const handleCreatePost = async (e) => {
     e.preventDefault()
     const data = {
@@ -54,6 +94,7 @@ const CreatePostForm = ({ setShowModal }) => {
     const file = e.target.files[0];
     setImage(file);
 }
+
   return (
     <div className='create-post-container'>
       <div className="create-post-header">
@@ -64,28 +105,48 @@ const CreatePostForm = ({ setShowModal }) => {
           <span className='user-first-last'>{user.first_name} {user.last_name}</span>
       </div>
       <form className="create-post-form" onSubmit={handleCreatePost}>
-        <input
-               className='create-post-input'
+        <div className="create-form-inner-container">
+        <div className='textarea-with-upload'>
+
+        <textarea
+               className='create-post-textarea'
                type="text"
-               placeholder={`What's on your mind, ${user.first_name}`}
+               placeholder={`What's on your mind, ${user.first_name}?`}
                value={content}
                onChange={(e) => setContent(e.target.value)}
-         />
+               />
+               {addImg && (
         <div className='file-input-container' id='f-i-c'>
-         <div className='file-input-text'></div>
-         <input
+              <label className='upload-image-label' htmlFor="upload-image-input">
+               <div className='add-photo-icon'><img src="https://img.icons8.com/sf-ultralight-filled/24/000000/add-image.png" alt="add"/></div>
+               <div>Add a Photo</div>
+               <div><p className='drag-drop-text'>or drag and drop</p></div>
+              </label>
+              <input
+                     id='upload-image-input'
+                     type="file"
+                     accept="image/*"
+                     placeholder='dsfd'
+                     onChange={updateImage}
+                     autoFocus
+                     />
+                 {(imageLoading)&& <p>Loading...</p>}
+        </div>
+               )}
+               </div>
 
-                className='upload-image-input'
-                // style={{"visibility": "hidden"}}
-                type="file"
-                accept="image/*"
-                placeholder='dsfd'
-                onChange={updateImage}
-                />
-            {(imageLoading)&& <p>Loading...</p>}
-            </div>
 
-        <button className='create-post-btn' type="submit">Post</button>
+
+      </div>
+        <div className="add-post-with-btn">
+           <div className="add-to-post">
+            <div>Add to your post</div>
+            <div onClick={() => setAddImg(true)} className="img-upload-icon"></div>
+           </div>
+           <button className='create-post-btn' type="submit">Post</button>
+        </div>
+
+
       </form>
     </div>
   )
