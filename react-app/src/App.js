@@ -6,7 +6,7 @@ import SignUpForm from './components/auth/SignUpForm/SignUpForm'
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
-import User from './components/User';
+import ProfilePage from './components/ProfilePage';
 import { authenticate } from './store/session';
 import SideBar from './components/Feed/SideBar';
 import LeftSideBar from './components/LeftSideBar';
@@ -44,7 +44,7 @@ function App() {
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+          <ProfilePage />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           {/* <div className='home-display'> */}
