@@ -12,44 +12,6 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
   const [addImg, setAddImg] = useState(false);
 
   const dispatch = useDispatch()
-  useEffect(() => {
-    let textArea;
-    textArea = document.querySelector(".create-post-textarea")
-    const textareaHeight = () => {
-
-      textArea.style.height = (textArea.scrollHeight) + "px";
-      // console.log(textArea.style.height)
-    }
-    textareaHeight()
-
-    if(content.length > 100){
-      textArea.style.fontSize = '16px'
-    } else {
-      textArea.style.fontSize = '24px'
-    }
-
-    let textAreaUpload;
-    textAreaUpload = document.querySelector('.textarea-with-upload')
-
-    if(!addImg){
-      return;
-    } else {
-      textAreaUpload.scrollBy({
-        top: 250,
-        behavior: 'smooth'
-      })
-    }
-
-    if(content.length > 338 || addImg){
-      textAreaUpload.style.overflowY = 'scroll'
-    } else {
-
-      textAreaUpload.style.overflowY = 'hidden'
-    }
-
-  }, [content, addImg]);
-
-
 
   const handleCreatePost = async (e) => {
     e.preventDefault()
@@ -87,6 +49,44 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
       setShowModal(false)
       dispatch(getPostsThunk())
   }
+
+  useEffect(() => {
+    let textArea;
+    textArea = document.querySelector(".create-post-textarea")
+    const textareaHeight = () => {
+
+      textArea.style.height = (textArea.scrollHeight) + "px";
+      // console.log(textArea.style.height)
+    }
+    textareaHeight()
+
+    if(content.length > 100){
+      textArea.style.fontSize = '16px'
+    } else {
+      textArea.style.fontSize = '24px'
+    }
+
+    let textAreaUpload;
+    textAreaUpload = document.querySelector('.textarea-with-upload')
+
+    if(!addImg){
+      return;
+    } else {
+      textAreaUpload.scrollBy({
+        top: 250,
+        behavior: 'smooth'
+      })
+    }
+
+    if(content.length > 338 || addImg){
+      textAreaUpload.style.overflowY = 'scroll'
+    } else {
+
+      textAreaUpload.style.overflowY = 'hidden'
+    }
+
+  }, [content, addImg]);
+
   const updateImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
