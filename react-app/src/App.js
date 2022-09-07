@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm/SignUpForm'
 import NavBar from './components/NavBar';
@@ -13,9 +13,11 @@ import LeftSideBar from './components/LeftSideBar';
 import Navigation from './components/Navigation';
 import Posts from './components/Feed/Posts';
 import "./index.css"
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [searchList, setSearchList] = useState(false);
+  const user = useSelector(state => state.session.user)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,7 +34,7 @@ function App() {
   return (
     <BrowserRouter>
       {/* <NavBar /> */}
-      <Navigation searchList={searchList} setSearchList={setSearchList} />
+      {user && <Navigation searchList={searchList} setSearchList={setSearchList} />}
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />

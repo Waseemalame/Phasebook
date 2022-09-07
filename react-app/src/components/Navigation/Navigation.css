@@ -131,3 +131,34 @@
     /* border-radius: 999px; */
   }
 }
+
+/*  PROFILE DROP DOWN MENU */
+.profile-dropdown{
+  position: absolute;
+  top: 50px;
+  right: 40px;
+  background-color: white;
+  height: 56px;
+  /* height: min-content; */
+  width: 120px;
+  z-index: 1000;
+  /* border: 10px solid yellow; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+  /* border-bottom-left-radius: 20px; */
+  /* border-bottom-right-radius: 20px; */
+}
+.profile-dropdown > *:hover{
+  background-color: rgba(211, 211, 211, 0.436);
+}
+.logout-div{
+  width: 50px;
+  height: 50px;
+}
+.profile-click{
+  cursor: pointer;
+  /* border: 5px solid black; */
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
