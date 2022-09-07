@@ -1,0 +1,72 @@
+.profile-container{
+  max-width: 100vw;
+  /* margin: 0 auto; */
+  display: flex;
+  justify-content: center;
+  height: 90vh;
+
+}
+.profile-top{
+  /* position: relative; */
+  /* margin: 0 auto; */
+  max-height: 500px;
+}
+.profile-image{
+  width: 168px;
+  height: 168px;
+  border-radius: 100%;
+  border: 5px solid white;
+
+}
+.cover-photo-container{
+  width: 940px;
+  height: 348px;
+  background-image: url("https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg");
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+
+.user-profile-header{
+  /* margin: 0 auto; */
+  display: flex;
+  position: relative;
+  /* top: 30px; */
+  /* left: 20px; */
+  /* width: 100%; */
+
+  /* align-items: center; */
+
+  /* top: 0; */
+}
+.users-name-image{
+  width: 100%;
+  position: absolute;
+  top: -40px;
+  left: 40px;
+}
+.profile-top-underline{
+  border-bottom: 1px solid #96989bdc;
+  width: 100%;
+  /* border: 10px solid black; */
+  position: absolute;
+  top: 150px;
+
+}
+/* .user-profile-header::after{
+  width: 10px;
+  height: 10px;
+  background-color: blue;
+} */
+.profile-users-name{
+  /* margin-top: 50px; */
+  /* margin-left: 10px; */
+  font-size: 32px;
+  position: absolute;
+  top: 20px;
+  left: 220px;
+}
+.profile-body{
+  text-align: center;
+
+}
