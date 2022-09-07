@@ -30,6 +30,16 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
 
     let textAreaUpload;
     textAreaUpload = document.querySelector('.textarea-with-upload')
+
+    if(!addImg){
+      return;
+    } else {
+      textAreaUpload.scrollBy({
+        top: 250,
+        behavior: 'smooth'
+      })
+    }
+
     if(content.length > 338 || addImg){
       textAreaUpload.style.overflowY = 'scroll'
     } else {
@@ -40,19 +50,6 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
   }, [content, addImg]);
 
 
-  useEffect(() => {
-    let textAreaUpload;
-    textAreaUpload = document.querySelector('.textarea-with-upload')
-    console.log(textAreaUpload.scrollHeight)
-    if(!addImg){
-      return;
-    } else {
-      textAreaUpload.scrollBy({
-        top: 250,
-        behavior: 'smooth'
-      })
-    }
-  }, [addImg]);
 
   const handleCreatePost = async (e) => {
     e.preventDefault()

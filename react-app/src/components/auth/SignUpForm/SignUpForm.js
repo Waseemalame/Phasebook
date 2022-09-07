@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { signUp } from '../../../store/session';
+import "../authStyles/SignUpForm.css"
 
-const SignUpForm = () => {
+const SignUpForm = ({ setShowSignupModal }) => {
   const [errors, setErrors] = useState([]);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -50,69 +51,82 @@ const SignUpForm = () => {
     return <Redirect to='/' />;
   }
 
+  const cancelSignup = () => {
+    setShowSignupModal(false)
+  }
+
   return (
-    <form onSubmit={onSignUp}>
+    <form className='signup-form' onSubmit={onSignUp}>
+      <div className="signup-header">
+        <h1>Sign Up</h1>
+        <p>It's quick and easy.</p>
+      </div>
+      <div onClick={cancelSignup} className="cancel-signup">
+        <img className='cancel-signup-icon' src="https://img.icons8.com/sf-regular-filled/24/000000/x.png" alt="cancel"/>
+
+      </div>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
-        <label>User Name</label>
+
+      <div className="first-last-signup">
+
+          <input
+            type='text'
+            name='firstname'
+            placeholder='First name'
+            onChange={updateFirstname}
+            value={firstname}
+          ></input>
+
+
+          <input
+            type='text'
+            name='lastname'
+            placeholder='Last name'
+            onChange={updateLastname}
+            value={lastname}
+          ></input>
+
+      </div>
         <input
           type='text'
           name='username'
           onChange={updateUsername}
           value={username}
         ></input>
-      </div>
-      <div>
-        <label>First Name</label>
-        <input
-          type='text'
-          name='firstname'
-          onChange={updateFirstname}
-          value={firstname}
-        ></input>
-      </div>
-      <div>
-        <label>Last Name</label>
-        <input
-          type='text'
-          name='lastname'
-          onChange={updateLastname}
-          value={lastname}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
+
+
         <input
           type='text'
           name='email'
+          placeholder='Email'
           onChange={updateEmail}
           value={email}
         ></input>
-      </div>
-      <div>
-        <label>Password</label>
+
+
         <input
           type='password'
           name='password'
+          placeholder='New password'
           onChange={updatePassword}
           value={password}
         ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
+
+
         <input
           type='password'
           name='repeat_password'
+          placeholder='Confirm password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
         ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
+
+      <button className='signup-form-btn' type='submit'>Sign Up</button>
     </form>
   );
 };

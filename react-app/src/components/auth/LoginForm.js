@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { demoLogin, login } from '../../store/session';
 
 import "./authStyles/LoginForm.css"
+import SignUpFormModal from './SignUpForm';
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
@@ -68,6 +69,7 @@ const LoginForm = () => {
           )}
         <p className='or-text'>Or</p>
         <button onClick={handleDemoLogin} className='login-submit' type='button'>Demo Login</button>
+        <SignUpFormModal />
       </form>
     </div>
   );
