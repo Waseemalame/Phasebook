@@ -22,7 +22,13 @@ const EditPostForm = ({ post }) => {
       Edit post
     </div>
     <div className="create-post-user-info">
-        <img className="post-user-image" src={post.user.profile_image_url} alt="" />
+    {user.profile_image_url ? (
+          <img className="post-user-image" src={user.profile_image_url} alt="" />
+
+          ) : (
+
+            <img className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
+        )}
         <span className='user-first-last'>{post.user.first_name} {post.user.last_name}</span>
     </div>
     <form className="create-post-form" onSubmit={handleEditPost}>
