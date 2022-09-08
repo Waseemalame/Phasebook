@@ -13,14 +13,15 @@ const [isFocused, setIsFocused] = useState(false);
 const textAreaRef = useRef(null)
   const dispatch = useDispatch()
 
-
-
   useEffect(() => {
     let errors = []
     if(commentContent.length > 200){
-      errors.push('Comment cannot be greater than 200 character')
+      errors.push('Comment cannot be greater than 200 character *')
       setErrorValidators(errors);
-    } else {
+    } else if(commentContent.length < 1 || commentContent.trim().length === 0) {
+      errors.push('Comment cannot be empty *')
+      setErrorValidators(errors)
+    }else {
       setErrorValidators([])
     }
   }, [commentContent.length])
@@ -62,14 +63,16 @@ const textAreaRef = useRef(null)
   const cancelEditComment = () => {
     setEditClicked(false)
   }
-  const onEnterPress = (e) => {
 
+  const onEnterPress = (e) => {
     if(e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
-      handleCommentEdit(e)
+      if(errorValidators.length === 0){
+        handleCommentEdit(e)
+      }
     }
-
   }
+
   const escCancelEdit = (e) => {
     if(e.keyCode === 27){
       cancelEditComment()

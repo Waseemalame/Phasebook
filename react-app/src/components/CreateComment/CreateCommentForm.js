@@ -18,7 +18,7 @@ const userSession = useSelector(state => state.session.user)
   useEffect(() => {
     let errors = []
     if(commentContent.length > 200){
-      errors.push('Comment cannot be greater than 200 character')
+      errors.push('Comment cannot be greater than 200 character *')
       setErrorValidators(errors);
     } else {
       setErrorValidators([])
