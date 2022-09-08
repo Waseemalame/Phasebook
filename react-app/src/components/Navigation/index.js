@@ -52,11 +52,18 @@ const Navigation = ({ searchList, setSearchList}) => {
   const redirectProfile = () => {
     history.push(`/users/${current_user.id}`)
   }
+  const gitHubClick = () => {
+
+  }
 
   return (
     <div className="nav-container">
       <ul className='nav-list'>
         <li className='search-nav'>
+          <img onClick={redirectHome} id="logo" className={searchList ? 'hide-icon' : 'phasebook-icon'} src="https://i.imgur.com/XwPiQNW.png" alt=""/>
+
+        </li>
+        {/* <li className='search-nav'>
           <div onClick={() => setSearchList(true)}  ref={listRef} className={searchList === false ? 'nav-left' : 'nav-left-clicked'}>
             <img onClick={redirectHome} id="logo" className={searchList ? 'hide-icon' : ''} src="https://img.icons8.com/color/50/000000/facebook-new.png" alt=""/>
             <div onClick={() => setSearchList(true)} className="search-bar">
@@ -74,16 +81,25 @@ const Navigation = ({ searchList, setSearchList}) => {
               <UsersList setSearchList={setSearchList} searchString={searchString} />
             )}
           </div>
-        </li>
+        </li> */}
         <li>
           <div className="nav-middle">
-            <img src="https://img.icons8.com/material-outlined/20/000000/home--v4.png" alt=""/>
-            <img src="https://img.icons8.com/ios-glyphs/20/000000/github.png" alt=""/>
+            {/* <img src="https://img.icons8.com/material-outlined/20/000000/home--v4.png" alt=""/> */}
+            <a href="https://www.linkedin.com/in/waseemalame/"><img className='linkedin-icon' src="https://i.imgur.com/7rn4mNr.png" alt="linkedin"/></a>
+            <a href="https://github.com/Waseemalame/Phasebook"><img className='github-icon' src="https://i.imgur.com/0Bc87qz.png" alt="github-phasedbook"/></a>
+
           </div>
         </li>
         <li>
           <div className="nav-right">
-            <img onClick={() => setProfileDropDown(true)} className='post-user-image' src={current_user?.profile_image_url} alt=""/>
+            {/* <img onClick={() => setProfileDropDown(true)} className='post-user-image' src={current_user?.profile_image_url} alt=""/> */}
+            {current_user.profile_image_url ? (
+          <img onClick={() => setProfileDropDown(true)} className="post-user-image" src={current_user.profile_image_url} alt="" />
+
+          ) : (
+
+            <img onClick={() => setProfileDropDown(true)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
+        )}
             {/* <img onClick={redirectProfile} className='post-user-image' src={current_user?.profile_image_url} alt=""/> */}
           </div>
           {profileDropDown ? (

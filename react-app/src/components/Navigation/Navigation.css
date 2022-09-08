@@ -63,8 +63,15 @@
 .hide-icon{
   display: none;
 }
+
 #logo{
   cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+.search-nav{
+  margin-left: 20px;
 }
 .search-bar{
   display: flex;
@@ -101,8 +108,9 @@
   width: 100%;
   align-self: flex-end;
   justify-content: flex-end;
-  padding-right: 15px;
+  /* padding-right: 15px; */
   background-color: white;
+  margin-right: 15px;
 
 }
 
@@ -161,4 +169,13 @@
   padding-left: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.github-icon{
+  width: 24px;
+  height: 24px;
+}
+.linkedin-icon{
+  width: 24px;
+  height: 24px;
 }
