@@ -7,6 +7,8 @@ import { updateComment } from '../../../store/comment'
 import "./CommentEditForm.css"
 const CommentEditForm = ({ comment, post, current_user, setEditClicked, editClicked }) => {
 const [commentContent, setCommentContent] = useState(comment?.comment_content);
+const [errorValidators, setErrorValidators] = useState([]);
+
 const [isFocused, setIsFocused] = useState(false);
 const textAreaRef = useRef(null)
   const dispatch = useDispatch()
@@ -23,6 +25,17 @@ const textAreaRef = useRef(null)
     }
 
   }, []);
+
+  useEffect(() => {
+    let errors = []
+    if(commentContent.length > 200){
+      errors.push('Comment cannot be greater than 200 character')
+      setErrorValidators(errors);
+    } else {
+      setErrorValidators([])
+    }
+  }, [commentContent.length])
+
   const addFocus = () => {
     if(editClicked){
 
@@ -69,6 +82,8 @@ const textAreaRef = useRef(null)
   }
   return (
     <form className="edit-comment-form" onSubmit={handleCommentEdit}>
+      <ul className='edit-comment-errors'>{errorValidators.map(error =><li>{error}</li>)}</ul>
+
     <textarea
           id="edit-comment-textarea"
           className='edit-form-input'
@@ -93,6 +108,8 @@ const textAreaRef = useRef(null)
 
         <button className='edit-form-btn' type="button"><span className='cancel-comment-edit' onClick={cancelEditComment}>Cancel</span></button>
     )}
+      <button disabled={errorValidators.length > 0} className='submit-comment-edit-btn' type="submit"><strong>Save</strong></button>
+
   </form>
   )
 }
