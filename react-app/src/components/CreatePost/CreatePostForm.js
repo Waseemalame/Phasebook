@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createPost, getPostsThunk } from '../../store/post';
 import UploadPicture from "../UploadPicture/UploadPicture"
 import "./CreatePostForm.css"
@@ -10,7 +11,7 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
   const [addImg, setAddImg] = useState(false);
-
+  const history = useHistory()
   const dispatch = useDispatch()
 
   const handleCreatePost = async (e) => {
@@ -91,14 +92,22 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
     const file = e.target.files[0];
     setImage(file);
 }
-
+const redirectProfile = (user) => {
+  history.push(`/users/${user.id}`)
+}
   return (
     <div className='create-post-container'>
       <div className="create-post-header">
         Create post
       </div>
       <div className="create-post-user-info">
-          <img className="post-user-image" src={user.profile_image_url} alt="" />
+        {user.profile_image_url ? (
+          <img onClick={() => redirectProfile(user)} className="post-user-image" src={user.profile_image_url} alt="" />
+
+          ) : (
+
+            <img onClick={() => redirectProfile(user)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
+        )}
           <span className='user-first-last'>{user.first_name} {user.last_name}</span>
       </div>
       <form className="create-post-form" onSubmit={handleCreatePost}>
