@@ -7,6 +7,7 @@ import "./CreatePostForm.css"
 
 const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
   const user = useSelector(state => state.session.user);
+  const [errorValidations, setErrorValidations] = useState([]);
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
@@ -52,6 +53,7 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
   }
 
   useEffect(() => {
+    let uploadImageLabel = document.querySelector('.upload-image-label')
     let textArea;
     textArea = document.querySelector(".create-post-textarea")
     const textareaHeight = () => {
@@ -88,6 +90,16 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
 
   }, [content, addImg]);
 
+  useEffect(() => {
+    let errors = [];
+    if(content.length > 2000) {
+      errors.push('Post content must not exceed 2000 characters')
+      setErrorValidations([errors])
+    } else {
+      setErrorValidations([])
+    }
+  }, [content.length]);
+
   const updateImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -111,6 +123,8 @@ const redirectProfile = (user) => {
           <span className='user-first-last'>{user.first_name} {user.last_name}</span>
       </div>
       <form className="create-post-form" onSubmit={handleCreatePost}>
+      <ul className='create-post-errors'>{errorValidations.map(error =><li>{error}</li>)}</ul>
+
         <div className="create-form-inner-container">
         <div className='textarea-with-upload'>
 
@@ -120,6 +134,7 @@ const redirectProfile = (user) => {
                placeholder={`What's on your mind, ${user.first_name}?`}
                value={content}
                onChange={(e) => setContent(e.target.value)}
+               required
                />
                {addImg && (
         <div className='file-input-container' id='f-i-c'>
@@ -149,7 +164,7 @@ const redirectProfile = (user) => {
             <div>Add to your post</div>
             <div onClick={() => setAddImg(true)} className="img-upload-icon"></div>
            </div>
-           <button className='create-post-btn' type="submit">Post</button>
+           <button disabled={errorValidations.length > 0} className='create-post-btn' type="submit">Post</button>
         </div>
 
 
