@@ -21,6 +21,7 @@
 .comment-text{
   margin-top: 5px;
   line-height: 18px;
+  word-wrap: break-word;
 }
 .edit-comment-div{
   /* display: flex; */

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createComment, getComments } from '../../store/comment';
 import { getPostsThunk } from '../../store/post';
@@ -13,8 +14,16 @@ const dispatch = useDispatch()
 const userSession = useSelector(state => state.session.user)
 
 
-let errors = [];
-
+// let errors = [];
+  useEffect(() => {
+    let errors = []
+    if(commentContent.length > 200){
+      errors.push('Comment cannot be greater than 200 character')
+      setErrorValidators(errors);
+    } else {
+      setErrorValidators([])
+    }
+  }, [commentContent.length])
   const commentSubmit = async(e) => {
     e.preventDefault();
     const data = {
@@ -24,15 +33,13 @@ let errors = [];
     }
 
     let newComment = await dispatch(createComment(data))
-    if(commentContent.length === 0){
-      errors.push('Your comment needs at least one character')
-      setErrorValidators(errors);
-    }
+
 
     dispatch(getComments(post.id))
     dispatch(getPostsThunk())
 
     setCommentContent('')
+    setErrorValidators([])
     return newComment
   }
 
@@ -49,14 +56,14 @@ let errors = [];
             <img className="comment-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
         )}
       <form className="comment-form" onSubmit={commentSubmit}>
-        <ul>{errorValidators.map(error =><li>{error}</li>)}</ul>
+        <ul className='create-comment-errors'>{errorValidators.map(error =><li>{error}</li>)}</ul>
           <input type="text"
           className='comment-input'
              value={commentContent}
              onChange={updateComment}
              placeholder='Write a comment...'
              required />
-      {/* <button type="submit">Post</button> */}
+      <button disabled={errorValidators.length > 0} className='submit-comment-btn' type="submit"><strong>Submit</strong></button>
         </form>
     </div>
   )
