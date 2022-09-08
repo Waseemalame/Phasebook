@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../../store/session';
@@ -6,6 +7,7 @@ import "../authStyles/SignUpForm.css"
 
 const SignUpForm = ({ setShowSignupModal }) => {
   const [errors, setErrors] = useState([]);
+  const [submitAttempted, setSubmitAttempted] = useState(false);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [username, setUsername] = useState('');
@@ -15,11 +17,37 @@ const SignUpForm = ({ setShowSignupModal }) => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if(submitAttempted){
+
+      if(password === repeatPassword){
+        if(password.length < 8){
+          setErrors(['Password must be greater than 7 characters'])
+        } else {
+          return;
+        }
+      } else {
+
+        setErrors(['Passwords must match'])
+      }
+
+    }
+  }, [password, repeatPassword, submitAttempted])
+
   const onSignUp = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
+
+    setSubmitAttempted(true)
+
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password, lastname, firstname));
+      const data = await dispatch(signUp(username, email, password, firstname, lastname));
       if (data) {
+        // const newData = data.split(': ')
+        // console.log(newData)
+        // if(!password === repeatPassword){
+        //   data.concat(['Passowrds must match'])
+        // }
         setErrors(data)
       }
     }
@@ -65,7 +93,7 @@ const SignUpForm = ({ setShowSignupModal }) => {
         <img className='cancel-signup-icon' src="https://img.icons8.com/sf-regular-filled/24/000000/x.png" alt="cancel"/>
 
       </div>
-      <div>
+      <div className='all-errors'>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
