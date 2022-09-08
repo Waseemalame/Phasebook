@@ -36,10 +36,18 @@ let errors = [];
     return newComment
   }
 
+
   return (
 
     <div className="create-comment-container">
-      <img className='comment-user-image' src={userSession.profile_image_url} alt="" />
+      {/* <img className='comment-user-image' src={userSession.profile_image_url} alt="" /> */}
+      {userSession.profile_image_url ? (
+          <img className="comment-user-image" src={userSession.profile_image_url} alt="" />
+
+          ) : (
+
+            <img className="comment-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
+        )}
       <form className="comment-form" onSubmit={commentSubmit}>
         <ul>{errorValidators.map(error =><li>{error}</li>)}</ul>
           <input type="text"

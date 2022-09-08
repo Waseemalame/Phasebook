@@ -3,7 +3,7 @@
   /* margin: 0 auto; */
   display: flex;
   justify-content: center;
-  height: 90vh;
+  /* height: 90vh; */
 
 }
 .profile-top{
@@ -68,5 +68,10 @@
 }
 .profile-body{
   text-align: center;
-
+  width: 200px;
+  height: 30px;
+  /* position: absolute; */
+  /* background-color: blue; */
+  margin: 170px auto 0;
+  font-weight: 700;
 }

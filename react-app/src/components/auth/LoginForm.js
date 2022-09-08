@@ -37,7 +37,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <div className="fb-header-div"><img className='fb-header-img' src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg" alt="" /></div>
+      <div className="fb-header-div"><img className='fb-header-img' src="https://i.imgur.com/HwGVt4u.png" alt="" /></div>
       <form className='login-form' onSubmit={onLogin}>
         <div className='email-div'>
           {/* <label htmlFor='email'>Email</label> */}

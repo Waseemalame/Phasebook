@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import CommentOptionsModal from '../CommentOptions';
 import CommentEditForm from './CommentEditForm';
 
@@ -7,13 +8,26 @@ const SingleComment = ({ comment, current_user, post }) => {
   const [showCommentOptions, setShowCommentOptions] = useState(false);
   const [editClicked, setEditClicked] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const history = useHistory()
+
+    const redirectProfile = (user) => {
+    history.push(`/users/${user.id}`)
+  }
+
   return (
     <div>
       <div className="one-comment"
                         onMouseEnter={() => setShowCommentOptions(true)}
                         onMouseLeave={!modalOpen ? () => setShowCommentOptions(false) : () => null}>
       {/* <div className="one-comment"> */}
-      <div><img className='comment-user-image' src={comment?.user.profile_image_url} alt="" /></div>
+      {/* <div><img className='comment-user-image' src={comment?.user.profile_image_url} alt="" /></div> */}
+      {comment?.user.profile_image_url ? (
+          <img onClick={() => redirectProfile(comment.user)} className="comment-user-image profile-icon-click" src={comment?.user.profile_image_url} alt="" />
+
+          ) : (
+
+            <img onClick={() => redirectProfile(comment.user)} className="comment-user-image profile-icon-click" src="https://i.imgur.com/hrQWTvu.png" alt="" />
+        )}
       <div className="full-comment">
         {!editClicked ? (
         <div>

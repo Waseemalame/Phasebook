@@ -41,3 +41,6 @@
 .cancel-comment-edit:hover{
   text-decoration: underline;
 }
+.profile-icon-click{
+  cursor: pointer;
+}

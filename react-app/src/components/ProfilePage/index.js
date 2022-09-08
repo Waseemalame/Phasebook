@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { getPostsThunk } from '../../store/post';
 import LogoutButton from '../auth/LogoutButton';
+import CreateCommentForm from '../CreateComment/CreateCommentForm';
 import CreatePostModal from '../CreatePost';
 import CreatePostForm from '../CreatePost/CreatePostForm';
+import CommentView from '../Feed/CommentView';
+import PostOptionsModal from '../PostOptions';
+
 import "./ProfilePage.css"
 function ProfilePage() {
   const [user, setUser] = useState({});
   const { userId }  = useParams();
+  const current_user = useSelector(state => state.session.user)
+
+  const posts = useSelector(state => Object.values(state.posts))
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const usersPosts = posts.filter(post => post.user.id === user.id)
 
   useEffect(() => {
     if (!userId) {
@@ -19,8 +31,16 @@ function ProfilePage() {
     })();
   }, [userId]);
 
+  useEffect(() => {
+    dispatch(getPostsThunk())
+  }, [dispatch]);
+
   if (!user) {
     return null;
+  }
+
+  const redirectProfile = (user) => {
+    history.push(`/users/${user.id}`)
   }
 
   return (
@@ -62,10 +82,41 @@ function ProfilePage() {
         </div>
       </div>
         <div className="profile-body">
-          Posts
+          {usersPosts.length > 0 ? 'Posts' : 'No Posts Created'}
         </div>
-        <CreatePostModal />
+        {/* <CreatePostModal /> */}
+        <div className='feed-posts'>
+
+        {usersPosts && usersPosts.reverse().map(post => (
+          <div className="single-post">
+            <div className="post-user-info">
+              <div>{post.user.profile_image_url ? (
+                <img onClick={() => redirectProfile(post.user)} className="post-user-image" src={post.user.profile_image_url} alt="" />
+
+                    ) : (
+
+                <img onClick={() => redirectProfile(post.user)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
+        )}</div>
+              <span className='user-first-last'>{post.user?.first_name} {post.user?.last_name}</span>
+            </div>
+              {current_user.id === post.user.id ? (
+                <PostOptionsModal post={post} />
+
+              ) : (
+                ''
+              )}
+            <div className='post-content'>{post.content}</div>
+            <div className="post-images">
+              <img className='single-post-image' src={post?.images[0]?.image_url} alt="" />
+            </div>
+            <div className="post-underline"></div>
+            <CommentView post={post} />
+            <CreateCommentForm post={post} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
+
 export default ProfilePage;
