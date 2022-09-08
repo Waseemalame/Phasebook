@@ -99,7 +99,7 @@ function ProfilePage() {
         )}</div>
               <span className='user-first-last'>{post.user?.first_name} {post.user?.last_name}</span>
             </div>
-              {current_user.id === post.id ? (
+              {current_user.id === post.user.id ? (
                 <PostOptionsModal post={post} />
 
               ) : (
