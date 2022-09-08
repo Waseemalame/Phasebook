@@ -3,7 +3,8 @@
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
-  height: 454px;
+  /* height: 454px; */
+  min-height: 454px;
   width: 432px;
   margin: 0 auto;
   background-color: white;
@@ -60,7 +61,8 @@
   background-color: #00A400;
   border: none;
   outline: none;
-  margin-top: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   height: 36px;
   width: 192px;
   border-radius: 5px;
@@ -100,4 +102,9 @@
   top: 20px;
   right: 16px;
   cursor: pointer;
+}
+.all-errors{
+  color: red;
+  font-size: 16px;
+  text-align: center;
 }

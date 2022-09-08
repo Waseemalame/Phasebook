@@ -35,7 +35,6 @@ function UsersList({ searchString, setSearchList }) {
         {/* <ul>{userComponents}</ul> */}
         {users.map(user => (
           <div>
-            {console.log(user)}
             {((user.username).toLowerCase().includes(searchString.toLowerCase()) && searchString !== '') ||
                 ((user.first_name).toLowerCase().includes(searchString.toLowerCase()) && searchString !== '')
              ? (

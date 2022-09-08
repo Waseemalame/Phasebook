@@ -114,11 +114,18 @@ export const signUp = (username, email, password, firstname, lastname) => async 
 
   if (response.ok) {
     const data = await response.json();
+    console.log('wtfwtwftwfwt')
+    console.log('wtfwtwftwfwt')
+    console.log('wtfwtwftwfwt')
+    console.log('wtfwtwftwfwt')
+    console.log('wtfwtwftwfwt')
     dispatch(setUser(data))
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
+    console.log(data)
     if (data.errors) {
+      console.log(data.errors)
       return data.errors;
     }
   } else {
