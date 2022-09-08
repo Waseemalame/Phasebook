@@ -19,11 +19,30 @@
   background-color: #e4e6e887;
   padding: 8px 12px;
   width: 100%;
+  padding-right: 100px;
 }
 .comment-user-image{
   width: 30px;
   height: 30px;
   border-radius: 100%;
   margin-right: 5px;
-
+}
+.submit-comment-btn{
+  color: rgba(0, 0, 255, 0.645);
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  bottom: 24px;
+  right: 30px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.create-comment-errors{
+  color: red;
+}
+.create-comment-errors>li{
+  text-decoration: none;
+  list-style: none;
+  font-size: 12px;
+  margin-left: 70px;
 }
