@@ -13,18 +13,7 @@ const [isFocused, setIsFocused] = useState(false);
 const textAreaRef = useRef(null)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    let editCommentField = document.getElementById('edit-comment-textarea');
-    const end = editCommentField.value.length
-    editCommentField.setSelectionRange(end, end)
-    editCommentField.focus()
-    if(document.activeElement === textAreaRef.current){
-      console.log("focused")
-    } else{
-      console.log("not focused!")
-    }
 
-  }, []);
 
   useEffect(() => {
     let errors = []
@@ -42,13 +31,21 @@ const textAreaRef = useRef(null)
       let editCommentField = document.getElementById('edit-comment-textarea');
       const end = editCommentField.value.length
       editCommentField.setSelectionRange(end, end)
-      editCommentField.focus()
+      // editCommentField.focus()
       setIsFocused(true)
+
     }
     // setIsFocused(false)
   }
+  const handleTextAreaClick = () => {
+    let editCommentField = document.getElementById('edit-comment-textarea');
+    console.log('hihihi')
+  }
   const removeFocus = () => {
+    let editCommentField = document.getElementById('edit-comment-textarea');
+    // editCommentField.blur()
     setIsFocused(false)
+
   }
   const handleCommentEdit = (e) => {
     e.preventDefault()
@@ -87,8 +84,8 @@ const textAreaRef = useRef(null)
     <textarea
           id="edit-comment-textarea"
           className='edit-form-input'
-
-          ref={textAreaRef}
+          onClick={() => handleTextAreaClick()}
+          // ref={textAreaRef}
           onFocus={addFocus}
           onBlur={removeFocus}
           type="text"
@@ -100,6 +97,7 @@ const textAreaRef = useRef(null)
               escCancelEdit(e)
             }
           }
+          autoFocus
            />
     {isFocused ? (
 
