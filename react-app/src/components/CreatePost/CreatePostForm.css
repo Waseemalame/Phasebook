@@ -1,6 +1,6 @@
 .create-post-container{
   width: 500px;
-  height: 428px;
+  min-height: 440px;
 
 }
 .create-post-header{
@@ -220,4 +220,13 @@
   font-size: 17px;
   color: #65676B;
   outline: none;
+}
+.create-post-errors{
+  color: red;
+}
+.create-post-errors>li{
+  text-decoration: none;
+  list-style: none;
+  font-size: 16px;
+  margin-left: 75px;
 }
