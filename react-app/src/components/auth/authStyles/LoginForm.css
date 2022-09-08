@@ -16,6 +16,8 @@ body{
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .fb-header-img{
+  margin-top: 20px;
+  margin-bottom: 20px;
   width: 200px;
 }
 .fb-header-div{
