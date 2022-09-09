@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal } from "../context/Modal";
 import DeletePost from "./DeletePost";
-
+import "./DeletePost.css"
 
 function DeletePostModal({ post, setShowPostOptionsModal }) {
   // const dispatch = useDispatch();
