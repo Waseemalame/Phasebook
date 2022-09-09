@@ -40,3 +40,6 @@
   background-color: #F0F2F5;
   border-radius: 3px;
 }
+.edit-comment-btn{
+  cursor: pointer;
+}

@@ -17,7 +17,7 @@
 .delete-comment-btn{
   border: none;
   background-color: transparent;
-  /* text-align: none; */
+  cursor: pointer;
 }
 .delete-options{
   display: flex;
@@ -25,11 +25,8 @@
   align-items: center;
   margin-top: 40px;
   margin-right: 15px;
-  /* padding-right: 20px; */
 }
-.delete-options > * {
-  /* padding-right: 10px; */
-}
+
 .no-delete{
   color: #1b74e4;
   margin-right: 30px;
