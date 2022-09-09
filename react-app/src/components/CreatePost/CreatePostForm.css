@@ -57,7 +57,6 @@
 }
 
 .textarea-with-upload::-webkit-scrollbar{
-  border-radius: 20px;
   width: 10px;
 }
 
@@ -72,16 +71,13 @@
 .textarea-with-upload::-webkit-scrollbar-thumb{
   transition-duration: 1000ms;
   transition-delay: 1000ms;
-}
-
-.textarea-with-upload:hover::-webkit-scrollbar-thumb{
   padding-right: 20px;
   background-color: lightgray;
   margin-bottom: 0;
   margin-top: 0;
   border-radius: 20px;
-
 }
+
 
 .create-form-inner-container::-webkit-scrollbar {
   display: none;
