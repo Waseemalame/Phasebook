@@ -2,11 +2,11 @@ import React from 'react'
 import DeletePostModal from '../DeletePost'
 import EditPostModal from '../EditPost'
 
-const PostOptions = ({ post }) => {
+const PostOptions = ({ post, setShowPostOptionsModal }) => {
   return (
-    <div>
-      <EditPostModal post={post} />
-      <DeletePostModal post={post} />
+    <div className='post-options-menu'>
+      <EditPostModal setShowPostOptionsModal={setShowPostOptionsModal} post={post} />
+      <DeletePostModal setShowPostOptionsModal={setShowPostOptionsModal} post={post} />
     </div>
   )
 }
