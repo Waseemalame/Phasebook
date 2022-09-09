@@ -10,7 +10,7 @@ const CommentOptions = ({setShowOptionsModal, editClicked, setEditClicked, user,
 
   return (
     <div className='comment-options-container'>
-      <div onClick={() => setEditClicked(true)}>Edit</div>
+      <div className='edit-comment-btn' onClick={() => setEditClicked(true)}>Edit</div>
       <DeleteCommentModal setShowOptionsModal={setShowOptionsModal} post={post} comment={comment} />
     </div>
   )

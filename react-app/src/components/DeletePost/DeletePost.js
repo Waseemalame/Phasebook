@@ -6,6 +6,8 @@ const DeletePost = ({ post, setShowDeleteModal, setShowPostOptionsModal }) => {
   const dispatch = useDispatch();
   const handleDeletePost = () => {
     dispatch(deletePostThunk(post.id))
+    setShowPostOptionsModal(false)
+    setShowDeleteModal(false)
   }
   return (
     <div>
