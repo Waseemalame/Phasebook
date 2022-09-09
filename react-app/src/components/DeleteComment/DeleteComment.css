@@ -33,10 +33,12 @@
 .no-delete{
   color: #1b74e4;
   margin-right: 30px;
+  cursor: pointer;
 }
 .yes-delete{
   background-color: #1b74e4;
   color: white;
   padding: 8px 30px;
   border-radius: 8px;
+  cursor: pointer;
 }
