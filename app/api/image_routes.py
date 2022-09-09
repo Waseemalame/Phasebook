@@ -53,3 +53,13 @@ def upload_image():
     db.session.add(new_image)
     db.session.commit()
     return {"image_url": url}
+
+@image_routes.route("/<image_id>", methods=["DELETE"])
+def delete_image(image_id):
+
+    image = Image.query.get(image_id)
+
+    db.session.delete(image)
+    db.session.commit()
+
+    return "Successfully Deleted"
