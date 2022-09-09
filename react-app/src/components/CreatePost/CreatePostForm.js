@@ -148,16 +148,17 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
 const redirectProfile = (user) => {
   history.push(`/users/${user.id}`)
 }
-const handleClick = () => {
-
+const removeImage = () => {
+  setImage(null)
 }
-
 
 
   return (
     <div className='create-post-container'>
       <div className="create-post-header">
         Create post
+        <div onClick={() => setShowModal(false)} className="cancel-post">X</div>
+
       </div>
       <div className="create-post-user-info">
         {user.profile_image_url ? (
@@ -187,7 +188,11 @@ const handleClick = () => {
                {addImg && (
         <div className='file-input-container' id='f-i-c'>
           {image ? (
+            <div>
               <img className='preview-image' src='' alt=""/>
+              <div onClick={() => removeImage()} className="remove-image">X</div>
+            </div>
+
           ) : (
 
             <label className='upload-image-label' htmlFor="upload-image-input">
