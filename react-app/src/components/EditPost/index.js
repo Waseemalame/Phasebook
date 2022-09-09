@@ -3,21 +3,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Modal } from "../context/Modal";
 import EditPostForm from "./EditPostForm";
 import "./EditPostForm.css"
-function EditPostModal({ post }) {
+function EditPostModal({ post, setShowPostOptionsModal }) {
   // const dispatch = useDispatch();
-  const [showModal, setShowModal] = useState(false);
+  const [showEditPostModal, setShowEditPostModal] = useState(false);
   const user = useSelector(state => state.session.user);
 
   return (
     <>
-      <div className="post-options-menu">
-        <div className="edit-post-button" onClick={() => setShowModal(true)}>
+        <div className="edit-post-button" onClick={() => setShowEditPostModal(true)}>
           Edit
         </div>
-      </div>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <EditPostForm post={post} />
+      {showEditPostModal && (
+        <Modal onClose={() => setShowEditPostModal(false)}>
+          <EditPostForm
+             setShowEditPostModal={setShowEditPostModal}
+             showEditPostModal={showEditPostModal}
+             setShowPostOptionsModal={setShowPostOptionsModal}
+             post={post} />
         </Modal>
       )}
     </>
