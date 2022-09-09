@@ -48,11 +48,14 @@
   color: red;
 }
 .edit-comment-errors>li{
+  padding-right: 15px;
+  text-align: center;
   text-decoration: none;
   list-style: none;
   font-size: 12px;
-  margin-left: 45px;
+  /* margin-left: 45px; */
   position: absolute;
   top: -15px;
   font-weight: 700;
+  width: 100%;
 }

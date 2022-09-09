@@ -16,7 +16,7 @@ const textAreaRef = useRef(null)
   useEffect(() => {
     let errors = []
     if(commentContent.length > 200){
-      errors.push('Comment cannot be greater than 200 character *')
+      errors.push('Comment cannot be greater than 200 characters *')
       setErrorValidators(errors);
     } else if(commentContent.length < 1 || commentContent.trim().length === 0) {
       errors.push('Comment cannot be empty *')
