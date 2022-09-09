@@ -122,6 +122,7 @@ const SignUpForm = ({ setShowSignupModal }) => {
         <input
           type='text'
           name='username'
+          placeholder='Username'
           onChange={updateUsername}
           value={username}
         ></input>

@@ -4,21 +4,19 @@ import { Modal } from "../context/Modal";
 import DeletePost from "./DeletePost";
 
 
-function DeletePostModal({ post }) {
+function DeletePostModal({ post, setShowPostOptionsModal }) {
   // const dispatch = useDispatch();
-  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const user = useSelector(state => state.session.user);
 
   return (
     <>
-      <div className="post-options-menu">
-        <div className="edit-post-button" onClick={() => setShowModal(true)}>
+        <div className="delete-post-button" onClick={() => setShowDeleteModal(true)}>
           Delete
         </div>
-      </div>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <DeletePost post={post} />
+      {showDeleteModal && (
+        <Modal onClose={() => setShowDeleteModal(false)}>
+          <DeletePost post={post} setShowPostOptionsModal={setShowPostOptionsModal} setShowDeleteModal={setShowDeleteModal}/>
         </Modal>
       )}
     </>
