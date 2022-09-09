@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { getImagesThunk } from '../../store/image';
 import { createPost, getPostsThunk } from '../../store/post';
 import UploadPicture from "../UploadPicture/UploadPicture"
 import "./CreatePostForm.css"
@@ -52,6 +53,7 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
       setContent('')
 
       setShowModal(false)
+      dispatch(getImagesThunk())
       dispatch(getPostsThunk())
   }
 
@@ -90,9 +92,12 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
   // ERROR VALIDATIONS
   useEffect(() => {
     let errors = [];
-    if(content.length > 2000) {
-      errors.push('Post content must not exceed 2000 characters')
-      setErrorValidations([errors])
+  if(content.trim().length === 0) {
+    errors.push('Post content must not be empty *')
+    setErrorValidations([errors])
+  }  else if(content.length > 2000) {
+    errors.push('Post content must not exceed 2000 characters *')
+    setErrorValidations([errors])
     } else {
       setErrorValidations([])
     }
@@ -100,6 +105,7 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
 
   // IMAGE PREVIEW
   useEffect(() => {
+    console.log(image)
     if(image){
       const preview = document.querySelector('.preview-image');
       const file = image;
