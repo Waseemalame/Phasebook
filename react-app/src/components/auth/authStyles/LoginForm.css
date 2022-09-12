@@ -71,3 +71,13 @@ body{
   flex-direction: column;
   padding-top: 10px;
 }
+
+.about-text{
+  font-size: 12px;
+  text-align: center;
+  word-wrap: break-word;
+  width: 800px;
+  margin: 20px auto;
+  /* padding: 0 auto; */
+  border-top: 1px solid lightgray;
+}
