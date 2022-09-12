@@ -30,13 +30,21 @@ def check_last(form, field):
     last_name = field.data
     if not last_name:
         raise ValidationError('Last name is required')
+    if len(last_name) > 20:
+        raise ValidationError('Last name must be less than 20 characters')
 
+def check_first(form, field):
+    first_name = field.data
+    if not first_name:
+        raise ValidationError('First name is required')
+    if len(first_name) > 20:
+        raise ValidationError('First name must be less than 20 characters')
 
 class SignUpForm(FlaskForm):
     username = StringField(
         'username', validators=[username_exists])
     email = StringField('email', validators=[user_exists])
-    first_name = StringField('First Name')
+    first_name = StringField('First Name', validators=[check_first])
     last_name = StringField('Last Name', validators=[check_last])
     profile_image_url = StringField('Profile Image')
     password = StringField('password', validators=[DataRequired()])

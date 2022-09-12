@@ -30,26 +30,28 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
 
 
     const new_post = await dispatch(createPost(data))
+    if(image){
 
-    const formData = new FormData();
-    formData.append("image", image);
-    formData.append("post_id", new_post.id)
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("post_id", new_post.id)
 
-    const res = await fetch('/api/images/', {
-      method: "POST",
-      body: formData,
-  });
-  if (res.ok) {
-    const new_image = await res.json();
-    new_post["image_url"] = new_image.image_url
-    setImageLoading(false);
-}
-  else {
-      setImageLoading(false);
-      // a real app would probably use more advanced
-      // error handling
-      console.log("error");
-  }
+      const res = await fetch('/api/images/', {
+        method: "POST",
+        body: formData,
+      });
+      if (res.ok) {
+        const new_image = await res.json();
+        new_post["image_url"] = new_image.image_url
+        setImageLoading(false);
+      }
+      else {
+        setImageLoading(false);
+        // a real app would probably use more advanced
+        // error handling
+        console.log("error");
+      }
+    }
       setContent('')
 
       setShowModal(false)
@@ -105,7 +107,6 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
 
   // IMAGE PREVIEW
   useEffect(() => {
-    console.log(image)
     if(image){
       const preview = document.querySelector('.preview-image');
       const file = image;

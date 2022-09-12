@@ -16,12 +16,32 @@ def seed_images():
   image5 = Image(
     image_url = "https://images.unsplash.com/photo-1500835556837-99ac94a94552?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60", post_id = 5
   )
+  image6 = Image(
+    image_url = "https://i.imgur.com/eqXiAMA.jpg", post_id = 6
+  )
+  image7 = Image(
+    image_url = "https://i.imgur.com/QNXyYw5.jpg", post_id = 7
+  )
+  image8 = Image(
+    image_url = "https://i.imgur.com/0FCxZSC.jpg", post_id = 8
+  )
+  image9 = Image(
+    image_url = "https://i.imgur.com/j5X0DvE.jpg", post_id = 9
+  )
+  image10 = Image(
+    image_url = "https://i.imgur.com/jfzGqHv.jpg", post_id = 10
+  )
 
   db.session.add(image1)
   db.session.add(image2)
   db.session.add(image3)
   db.session.add(image4)
   db.session.add(image5)
+  db.session.add(image6)
+  db.session.add(image7)
+  db.session.add(image8)
+  db.session.add(image9)
+  db.session.add(image10)
 
   db.session.commit()
 

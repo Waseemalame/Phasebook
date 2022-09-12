@@ -12,7 +12,6 @@ function CreatePostModal( ) {
   const history = useHistory()
   useEffect(() => {
     const bodyEl = document.querySelector("body")
-    console.log(showModal)
     if(showModal){
       // bodyEl.style = `overflow:hidden`
     } else {
