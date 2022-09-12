@@ -83,6 +83,7 @@ const LoginForm = () => {
         <button onClick={handleDemoLogin} className='login-submit' type='button'>Demo Login</button>
         <SignUpFormModal />
       </form>
+      <div className='about-text'>Phasedbook allows users to access a world-wide social network for creating posts and comments. By logging in or creating an account, you acknowledge that this is not Facebook and anything you post is at your discretion. Enjoy!</div>
     </div>
   );
 };
