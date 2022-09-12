@@ -27,27 +27,40 @@ function ProfilePage() {
   const [requestPending, setRequestPending] = useState(false);
   const [isFriend, setIsFriend] = useState(false);
   const [requestId, setRequestId] = useState(null);
+  const [isUpdated, setIsUpdated] = useState(false);
 
 
   useEffect(() => {
-    console.log(requestPending)
-    console.log(requestId)
-    friendRequests?.forEach(request => {
-      if(user.id === request.user2_id){
-        setRequestSent(true)
-      } else if(user.id === request.user1_id){
-        setRequestPending(true)
-        setRequestId(request.id)
-      }
-    })
+    console.log(isFriend)
+    if(!isFriend){
 
+      friendRequests?.forEach(request => {
+        if(user.id === request.user2_id){
+          setRequestSent(true)
+        } else if(user.id === request.user1_id){
+          setRequestPending(true)
+          setRequestId(request.id)
+        }
+      })
+    }
+
+  }, [friendRequests, friends, user.id, requestPending, requestId, isFriend, current_user]);
+
+  useEffect(() => {
+    console.log(current_user.id)
+    console.log(friends, 'friend!')
     friends.forEach(friend => {
       if(user.id === friend.user2_id || user.id === friend.user1_id){
         setIsFriend(true)
       }
     })
+    console.log(isFriend)
 
-  }, [friendRequests, friends, user.id, requestPending, requestId]);
+  });
+
+  const checkIsFriend = () => {
+
+  }
 
   useEffect(() => {
     if (!userId) {
@@ -66,6 +79,7 @@ function ProfilePage() {
 
   useEffect(() => {
     dispatch(getPostsThunk())
+    dispatch(getUserFriendsThunk(current_user.id))
   }, [dispatch, current_user]);
 
   if (!user) {
@@ -97,9 +111,21 @@ function ProfilePage() {
     }
 
     const updatedRequest = await dispatch(acceptFriendRequestThunk(data))
+    setIsFriend(true)
     if(updatedRequest){
-      dispatch(getUserFriendsThunk(current_user.id))
+      // dispatch(getUserFriendsThunk(current_user.id))
     }
+    console.log(isFriend)
+    console.log('is friend now?!?!?!?!')
+    console.log('is friend now?!?!?!?!')
+    console.log('is friend now?!?!?!?!')
+    console.log('is friend now?!?!?!?!')
+    console.log(isFriend)
+    console.log('is friend now?!?!?!?!')
+    console.log('is friend now?!?!?!?!')
+    console.log('is friend now?!?!?!?!')
+    console.log('is friend now?!?!?!?!')
+
 
   }
 
@@ -138,10 +164,14 @@ function ProfilePage() {
             </div>
             <div className="profile-top-underline">
             <div>
+            {isFriend && current_user.id !== user.id && (
+                <div className="friend-request-btn">Remove Friend</div>
+
+                  )}
                 {current_user.id !== user.id && (
 
                   <div>
-                {requestPending && (
+                {requestPending && !isFriend && (
                   <div onClick={approveFriendRequest} className="friend-request-btn">Approve Friend</div>
                   )}
               </div>
@@ -150,13 +180,20 @@ function ProfilePage() {
               {(current_user.id !== user.id && !isFriend && !requestPending) && (
 
                 <div className="friend-request-section">
-                {requestSent ? (
-                  <div onClick={cancelFriendRequest} className="friend-request-btn">Cancel Request</div>
-                  ) : (
-                    <div onClick={sendFriendRequest} className="friend-request-btn">Add Friend</div>
-                )}
+                  {!isFriend && (
+                <div>
+                  {requestSent ? (
+                    <div onClick={cancelFriendRequest} className="friend-request-btn">Cancel Request</div>
+                    ) : (
+                      <div onClick={sendFriendRequest} className="friend-request-btn">Add Friend</div>
+                  )}
+                </div>
+
+                  )}
+
               </div>
               )}
+
 
             </div>
           </div>
