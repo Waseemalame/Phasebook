@@ -43,11 +43,6 @@ const SignUpForm = ({ setShowSignupModal }) => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password, firstname, lastname));
       if (data) {
-        // const newData = data.split(': ')
-        // console.log(newData)
-        // if(!password === repeatPassword){
-        //   data.concat(['Passowrds must match'])
-        // }
         setErrors(data)
       }
     }

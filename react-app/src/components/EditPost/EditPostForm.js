@@ -23,12 +23,6 @@ const EditPostForm = ({ post, setShowEditPostModal, setShowPostOptionsModal}) =>
 
   const [imageUrl, setImageUrl] = useState('');
 
-  useEffect(() => {
-    console.log(image)
-    console.log('IMAGE IN UDEEFFECT')
-    console.log(newImage)
-    console.log('NEWNEWNEWIMAGE IN UDEEFFECT')
-  }, [image, newImage]);
   const handleEditPost = async (e) => {
 
     e.preventDefault()
@@ -44,8 +38,6 @@ const EditPostForm = ({ post, setShowEditPostModal, setShowPostOptionsModal}) =>
 
     dispatch(updatePostThunk(data, post.id))
 
-    console.log(image)
-    console.log(newImage)
     const formData = new FormData();
     if(image && !newImage){
       formData.append("image", image);
@@ -86,9 +78,7 @@ const EditPostForm = ({ post, setShowEditPostModal, setShowPostOptionsModal}) =>
             setShowPostOptionsModal(false)
 
   }
-    useEffect(() => {
-      console.log(newImage)
-    }, [newImage]);
+
     // STYLING
     useEffect(() => {
       let uploadImageLabel = document.querySelector('.upload-image-label')

@@ -32,7 +32,6 @@ const textAreaRef = useRef(null)
       let editCommentField = document.getElementById('edit-comment-textarea');
       const end = editCommentField.value.length
       editCommentField.setSelectionRange(end, end)
-      // editCommentField.focus()
       setIsFocused(true)
 
     }
@@ -40,11 +39,9 @@ const textAreaRef = useRef(null)
   }
   const handleTextAreaClick = () => {
     let editCommentField = document.getElementById('edit-comment-textarea');
-    console.log('hihihi')
   }
   const removeFocus = () => {
     let editCommentField = document.getElementById('edit-comment-textarea');
-    // editCommentField.blur()
     setIsFocused(false)
 
   }
