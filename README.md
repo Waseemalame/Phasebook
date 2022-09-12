@@ -17,6 +17,14 @@ Phasedbook is a website built for users to socialize and connect from all around
 * Docker
 * Heroku
 
+## Heroku Live Link
+https://phasedbook.herokuapp.com/
+
+## Features
+* Read, create, update, and delete Posts
+* Read, create, update, and delete Comments
+* View users' profile pages to display a list of posts created by the owner of the profile page
+
 
 ## Login Page
 ![image](https://user-images.githubusercontent.com/73668892/189577478-79e86cb9-c799-48d5-93b9-b799a79b45a9.png)
