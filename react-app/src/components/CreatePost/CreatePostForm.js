@@ -107,7 +107,6 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
 
   // IMAGE PREVIEW
   useEffect(() => {
-    console.log(image)
     if(image){
       const preview = document.querySelector('.preview-image');
       const file = image;

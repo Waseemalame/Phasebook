@@ -15,7 +15,6 @@ const LoginForm = () => {
 
   useEffect(() => {
     const signupBtn = document.querySelector(".signup-div")
-    console.log(signupBtn)
     if(!errors.length > 0){
       signupBtn.style.marginTop = '50px'
     } else {
