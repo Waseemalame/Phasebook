@@ -40,7 +40,7 @@ const SignUpForm = ({ setShowSignupModal }) => {
 
 
     setSubmitAttempted(true)
-    if (password === repeatPassword && !(password.length < 7)) {
+    if (password === repeatPassword && !(password.length < 8)) {
       const data = await dispatch(signUp(username, email, password, firstname, lastname));
       if (data) {
         setErrors(data)
