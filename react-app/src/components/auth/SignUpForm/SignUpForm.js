@@ -24,7 +24,7 @@ const SignUpForm = ({ setShowSignupModal }) => {
         if(password.length < 8){
           setErrors(['Password must be greater than 7 characters'])
         } else {
-          return;
+          setErrors([])
         }
       } else {
 
@@ -38,9 +38,9 @@ const SignUpForm = ({ setShowSignupModal }) => {
     e.preventDefault();
     e.stopPropagation();
 
-    setSubmitAttempted(true)
 
-    if (password === repeatPassword) {
+    setSubmitAttempted(true)
+    if (password === repeatPassword && !(password.length < 7)) {
       const data = await dispatch(signUp(username, email, password, firstname, lastname));
       if (data) {
         setErrors(data)
