@@ -1,6 +1,6 @@
 # Phasedbook
 
-Phasedbook is a website built for users to socialize and connect from all around the world by creating posts and commenting on posts.
+Phasedbook is a website built for users to socialize and connect from all around the world by creating posts and commenting on posts. Phasedbook will have future implementations of features such as friend requests and searching for users through a search bar.
 
 ## Tech Stack
 * JavaScript
