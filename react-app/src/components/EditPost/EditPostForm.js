@@ -23,7 +23,12 @@ const EditPostForm = ({ post, setShowEditPostModal, setShowPostOptionsModal}) =>
 
   const [imageUrl, setImageUrl] = useState('');
 
-
+  useEffect(() => {
+    console.log(image)
+    console.log('IMAGE IN UDEEFFECT')
+    console.log(newImage)
+    console.log('NEWNEWNEWIMAGE IN UDEEFFECT')
+  }, [image, newImage]);
   const handleEditPost = async (e) => {
 
     e.preventDefault()
@@ -32,30 +37,47 @@ const EditPostForm = ({ post, setShowEditPostModal, setShowPostOptionsModal}) =>
       user_id: user.id,
       image_url: image || newImage
     }
-    dispatch(deleteImagesThunk(post.images[0]?.id))
+    if((newImage || !image) && post.images[0]){
+
+      dispatch(deleteImagesThunk(post.images[0]?.id))
+    }
 
     dispatch(updatePostThunk(data, post.id))
 
-
+    console.log(image)
+    console.log(newImage)
     const formData = new FormData();
-    formData.append("image", image || newImage);
+    if(image && !newImage){
+      formData.append("image", image);
+    } else if(newImage && !image){
+      formData.append("image", newImage);
+    }
     formData.append("post_id", post.id)
+    if(!image && !newImage){
+      setContent('')
+      dispatch(getImagesThunk())
+      dispatch(getPostsThunk())
 
-    const res = await fetch('/api/images/', {
-      method: "POST",
-      body: formData,
-  });
-  if (res.ok) {
-    const new_image = await res.json();
-    post["image_url"] = new_image.image_url
-    setImageLoading(false);
-}
-  else {
-      setImageLoading(false);
-      // a real app would probably use more advanced
-      // error handling
-      console.log("error");
-  }
+      setShowEditPostModal(false)
+      setShowPostOptionsModal(false)
+    } else {
+
+      const res = await fetch('/api/images/', {
+        method: "POST",
+        body: formData,
+      });
+      if (res.ok) {
+        const new_image = await res.json();
+        post["image_url"] = new_image.image_url
+        setImageLoading(false);
+      }
+      else {
+        setImageLoading(false);
+        // a real app would probably use more advanced
+        // error handling
+        console.log("error");
+      }
+    }
       setContent('')
       dispatch(getImagesThunk())
       dispatch(getPostsThunk())
