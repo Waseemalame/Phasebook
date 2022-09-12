@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { acceptFriendRequestThunk, createFriendRequestThunk, getUserFriendsThunk } from '../../store/friend';
 import { getPostsThunk } from '../../store/post';
 import LogoutButton from '../auth/LogoutButton';
 import CreateCommentForm from '../CreateComment/CreateCommentForm';
@@ -16,9 +17,37 @@ function ProfilePage() {
   const current_user = useSelector(state => state.session.user)
 
   const posts = useSelector(state => Object.values(state.posts))
+  const friends = useSelector(state => state.friends.friends)
+  const friendRequests = useSelector(state => (state.friends.friendships))
   const history = useHistory()
   const dispatch = useDispatch()
   const usersPosts = posts.filter(post => post.user.id === user.id)
+
+  const [requestSent, setRequestSent] = useState(false);
+  const [requestPending, setRequestPending] = useState(false);
+  const [isFriend, setIsFriend] = useState(false);
+  const [requestId, setRequestId] = useState(null);
+
+
+  useEffect(() => {
+    console.log(requestPending)
+    console.log(requestId)
+    friendRequests?.forEach(request => {
+      if(user.id === request.user2_id){
+        setRequestSent(true)
+      } else if(user.id === request.user1_id){
+        setRequestPending(true)
+        setRequestId(request.id)
+      }
+    })
+
+    friends.forEach(friend => {
+      if(user.id === friend.user2_id || user.id === friend.user1_id){
+        setIsFriend(true)
+      }
+    })
+
+  }, [friendRequests, friends, user.id, requestPending, requestId]);
 
   useEffect(() => {
     if (!userId) {
@@ -32,8 +61,12 @@ function ProfilePage() {
   }, [userId]);
 
   useEffect(() => {
+    console.log(user.id)
+  }, [user]);
+
+  useEffect(() => {
     dispatch(getPostsThunk())
-  }, [dispatch]);
+  }, [dispatch, current_user]);
 
   if (!user) {
     return null;
@@ -41,6 +74,33 @@ function ProfilePage() {
 
   const redirectProfile = (user) => {
     history.push(`/users/${user.id}`)
+  }
+
+  const sendFriendRequest = () => {
+    const data = {
+      user1_id: current_user.id,
+      user2_id: user.id,
+      status: "pending"
+    }
+    dispatch(createFriendRequestThunk(data))
+  }
+  const cancelFriendRequest = () => {
+
+  }
+  const approveFriendRequest = async () => {
+
+    const data = {
+      id: requestId,
+      user1_id: user.id,
+      user2_id: current_user.id,
+      status: 'accepted'
+    }
+
+    const updatedRequest = await dispatch(acceptFriendRequestThunk(data))
+    if(updatedRequest){
+      dispatch(getUserFriendsThunk(current_user.id))
+    }
+
   }
 
   return (
@@ -77,6 +137,27 @@ function ProfilePage() {
               <span><strong>{user?.first_name} {user.last_name}</strong></span>
             </div>
             <div className="profile-top-underline">
+            <div>
+                {current_user.id !== user.id && (
+
+                  <div>
+                {requestPending && (
+                  <div onClick={approveFriendRequest} className="friend-request-btn">Approve Friend</div>
+                  )}
+              </div>
+                )}
+            </div>
+              {(current_user.id !== user.id && !isFriend && !requestPending) && (
+
+                <div className="friend-request-section">
+                {requestSent ? (
+                  <div onClick={cancelFriendRequest} className="friend-request-btn">Cancel Request</div>
+                  ) : (
+                    <div onClick={sendFriendRequest} className="friend-request-btn">Add Friend</div>
+                )}
+              </div>
+              )}
+
             </div>
           </div>
         </div>

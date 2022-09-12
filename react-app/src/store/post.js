@@ -1,6 +1,7 @@
 import { ADD_COMMENT, LOAD_COMMENTS } from "./comment"
 
 const GET_ALL_POSTS = "posts/get-user-posts"
+const GET_USERS_POSTS = "posts/one-user-posts"
 const UPDATE_POST = "posts/update-post"
 const GET_PROFILE_NAME = "posts/get-profile-username"
 const DELETE_POST = "posts/delete-post"
@@ -10,6 +11,13 @@ const addPost = (post) => {
     return {
         type: CREATE_POST,
         post
+    }
+}
+
+const getUsersPosts = (posts) => {
+    return {
+        type: GET_USERS_POSTS,
+        posts
     }
 }
 
@@ -93,6 +101,10 @@ export const getPostsThunk = () => async dispatch => {
         dispatch(getAllPosts(posts));
         return res;
     }
+}
+
+export const getOneUsersPostsThunk = (userId) => async dispatch => {
+
 }
 
 export const updatePostThunk = (payload, postId) => async dispatch => {

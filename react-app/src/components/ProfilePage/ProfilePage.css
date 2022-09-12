@@ -75,3 +75,11 @@
   margin: 170px auto 0;
   font-weight: 700;
 }
+
+.friend-request-btn{
+  border: 1px solid black;
+  width: 100px;
+  text-align: center;
+  background-color: rgba(0, 26, 255, 0.587);
+  cursor: pointer;
+}

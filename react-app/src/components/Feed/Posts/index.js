@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { getComments } from '../../../store/comment';
+import { getFriendsPostsThunk, getUserFriendsThunk } from '../../../store/friend';
 import { getImagesThunk } from '../../../store/image';
 import { getPostsThunk } from '../../../store/post';
 import CreateCommentForm from '../../CreateComment/CreateCommentForm';
@@ -20,12 +21,24 @@ const Posts = () => {
   const posts = useSelector(state => Object.values(state.posts))
   const history = useHistory()
   const current_user = useSelector(state => state.session.user)
+  const friends = useSelector(state => Object.values(state.friends))
+  const friendsPosts = useSelector(state => state.friends.posts)
+
 
   useEffect(() => {
     dispatch(getPostsThunk())
     dispatch(getComments())
     dispatch(getImagesThunk())
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getUserFriendsThunk(current_user.id))
+    dispatch(getFriendsPostsThunk(current_user.id))
+  }, [dispatch, current_user.id]);
+
+  useEffect(() => {
+    console.log(friendsPosts)
+  }, [friendsPosts]);
 
   const redirectProfile = (user) => {
     history.push(`/users/${user.id}`)

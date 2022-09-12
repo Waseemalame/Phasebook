@@ -13,6 +13,7 @@ import LeftSideBar from './components/LeftSideBar';
 import Navigation from './components/Navigation';
 import Posts from './components/Feed/Posts';
 import "./index.css"
+import { getFriendRequestsThunk } from './store/friend';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -20,6 +21,10 @@ function App() {
   const user = useSelector(state => state.session.user)
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getFriendRequestsThunk(user?.id))
+
+  }, [dispatch, user?.id]);
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
