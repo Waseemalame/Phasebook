@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { acceptFriendRequestThunk, createFriendRequestThunk, getUserFriendsThunk } from '../../store/friend';
+import { acceptFriendRequestThunk, createFriendRequestThunk, deleteFriendThunk, getUserFriendsThunk } from '../../store/friend';
 import { getPostsThunk } from '../../store/post';
 import LogoutButton from '../auth/LogoutButton';
 import CreateCommentForm from '../CreateComment/CreateCommentForm';
@@ -28,35 +28,46 @@ function ProfilePage() {
   const [isFriend, setIsFriend] = useState(false);
   const [requestId, setRequestId] = useState(null);
   const [isUpdated, setIsUpdated] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
 
   useEffect(() => {
-    console.log(isFriend)
+
     if(!isFriend){
 
       friendRequests?.forEach(request => {
-        if(user.id === request.user2_id){
+        if(user.id === request?.user2_id){
           setRequestSent(true)
-        } else if(user.id === request.user1_id){
+        } else if(user.id === request?.user1_id){
           setRequestPending(true)
           setRequestId(request.id)
         }
       })
     }
 
-  }, [friendRequests, friends, user.id, requestPending, requestId, isFriend, current_user]);
+
+  }, [friendRequests, friends, user.id, requestPending, requestId, isFriend, current_user, isDeleted]);
 
   useEffect(() => {
-    console.log(current_user.id)
-    console.log(friends, 'friend!')
-    friends.forEach(friend => {
-      if(user.id === friend.user2_id || user.id === friend.user1_id){
+    if(isDeleted){
+      setIsFriend(false)
+    }
+  }, [isDeleted]);
+  useEffect(() => {
+
+
+    friends?.forEach(friend => {
+      if(user.id === friend?.user2_id || user.id === friend?.user1_id){
         setIsFriend(true)
+      } else {
+        setIsFriend(false)
       }
     })
     console.log(isFriend)
 
   });
+  // useEffect(() => {
+  // }, [dispatch, current_user.id]);
 
   const checkIsFriend = () => {
 
@@ -115,17 +126,12 @@ function ProfilePage() {
     if(updatedRequest){
       // dispatch(getUserFriendsThunk(current_user.id))
     }
-    console.log(isFriend)
-    console.log('is friend now?!?!?!?!')
-    console.log('is friend now?!?!?!?!')
-    console.log('is friend now?!?!?!?!')
-    console.log('is friend now?!?!?!?!')
-    console.log(isFriend)
-    console.log('is friend now?!?!?!?!')
-    console.log('is friend now?!?!?!?!')
-    console.log('is friend now?!?!?!?!')
-    console.log('is friend now?!?!?!?!')
-
+  }
+  const deleteFriend = () => {
+    console.log(requestId)
+    dispatch(deleteFriendThunk(requestId))
+    dispatch(getUserFriendsThunk(current_user.id))
+    setIsDeleted(true)
 
   }
 
@@ -165,7 +171,7 @@ function ProfilePage() {
             <div className="profile-top-underline">
             <div>
             {isFriend && current_user.id !== user.id && (
-                <div className="friend-request-btn">Remove Friend</div>
+                <div onClick={deleteFriend} className="friend-request-btn">Remove Friend</div>
 
                   )}
                 {current_user.id !== user.id && (

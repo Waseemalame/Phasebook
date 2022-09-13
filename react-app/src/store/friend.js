@@ -3,6 +3,7 @@ export const LOAD_FRIEND_REQUESTS = "friends/LOAD_FRIEND_REQUESTS"
 export const LOAD_FRIENDS_POSTS = "friends/FRIENDS_POSTS"
 export const CREATE_REQUEST = "friends/CREATE_REQUEST"
 export const UPDATE_REQUEST = "friends/UPDATE_REQUEST"
+export const DELETE_FRIEND = 'friends/DELETE_FRIEND'
 const getFriendRequests = (friendRequests) => ({
   type: LOAD_FRIEND_REQUESTS,
   friendRequests
@@ -27,6 +28,20 @@ const updateFriendRequest = (updatedRequest) => ({
   type: UPDATE_REQUEST,
   updatedRequest
 })
+
+const deleteFriend = (requestId) => ({
+  type: DELETE_FRIEND,
+  requestId
+})
+
+export const deleteFriendThunk = (requestId) => async (dispatch) => {
+  const response = await fetch(`/api/friendships/requests/${requestId}`, {
+    method: 'delete'
+  })
+  if (response.ok){
+    dispatch(deleteFriend(requestId))
+  }
+}
 
 export const getFriendRequestsThunk = (userId) => async (dispatch) => {
   const res = await fetch(`/api/friendships/${userId}`)
@@ -92,13 +107,15 @@ export const acceptFriendRequestThunk = (data) => async (dispatch) => {
   }
 }
 
+
+
 const initialState = {friends: [], friendships: []};
 const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_FRIEND_REQUESTS:
       const allRequests = {}
       console.log(action.friendRequests)
-      // action.friendRequests.friendRequests.forEach(request => {
+      // action.friendRequests.forEach(request => {
       //   allRequests[request.id] = request;
       // })
       return {
@@ -113,7 +130,7 @@ const friendsReducer = (state = initialState, action) => {
     case LOAD_FRIENDS:
       return {
         ...state,
-        ...action.friends
+        // ...action.friends
       };
       case LOAD_FRIENDS_POSTS:
       const friendsPosts = {}
@@ -125,11 +142,31 @@ const friendsReducer = (state = initialState, action) => {
         console.log(state)
         return {
           ...state,
-          ...state.friends,
+          // ...state.friends,
           friendships: [...state.friendships, action.newFriendRequest],
           // ...action.newFriendRequest,
           // ...state.friendships,
         }
+      case DELETE_FRIEND:
+        const newState = { ...state }
+
+        console.log(newState.friends)
+        console.log('new state!!!!!!!!!!===============================')
+        console.log('new state!!!!!!!!!!===============================')
+        console.log('new state!!!!!!!!!!===============================')
+        console.log('new state!!!!!!!!!!===============================')
+        console.log('new state!!!!!!!!!!===============================')
+        console.log('new state!!!!!!!!!!===============================')
+        newState.friends?.forEach((friend, index) => {
+          if(friend.id === action.requestId)
+          delete newState.friends[index]
+        })
+        newState.friendships?.forEach((friendship, index) => {
+          if(friendship.id === action.requestId)
+          delete newState.friendships[index]
+        })
+        // delete newState.friendships[action.requestId]
+        return newState
     default:
       return state;
   }

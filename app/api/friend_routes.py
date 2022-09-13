@@ -97,3 +97,11 @@ def accept_request(requestId):
 
   db.session.commit()
   return request.to_dict()
+
+@friend_routes.route('/requests/<requestId>', methods=["DELETE"])
+def delete_request(requestId):
+  request = Friendship.query.get(requestId)
+  db.session.delete(request)
+  db.session.commit()
+
+  return "Successfully Deleted"
