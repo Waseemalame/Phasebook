@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
-import UsersList from '../UsersList';
+
 import './Navigation.css'
 
 const Navigation = ({ searchList, setSearchList}) => {
@@ -55,6 +55,9 @@ const Navigation = ({ searchList, setSearchList}) => {
   const gitHubClick = () => {
 
   }
+  const redirectFriendsList = () => {
+    history.push(`/users/friends/${current_user.id}`)
+  }
 
   return (
     <div className="nav-container">
@@ -105,6 +108,7 @@ const Navigation = ({ searchList, setSearchList}) => {
           {profileDropDown ? (
             <div className='profile-dropdown'>
               <div className='profile-click' onClick={redirectProfile}><strong>Profile</strong></div>
+              <div className='friends-click' onClick={redirectFriendsList}><strong>Friends</strong></div>
               <LogoutButton />
 
             </div>
