@@ -5,7 +5,6 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm/SignUpForm'
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
 import ProfilePage from './components/ProfilePage';
 import { authenticate } from './store/session';
 import SideBar from './components/Feed/SideBar';
@@ -13,13 +12,14 @@ import LeftSideBar from './components/LeftSideBar';
 import Navigation from './components/Navigation';
 import Posts from './components/Feed/Posts';
 import "./index.css"
-
+import UsersList from './components/UsersList/UsersList';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [searchList, setSearchList] = useState(false);
   const user = useSelector(state => state.session.user)
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
@@ -47,6 +47,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <ProfilePage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/friends/:userId/' exact={true} >
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           {/* <div className='home-display'> */}
