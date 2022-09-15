@@ -75,3 +75,15 @@
   margin: 170px auto 0;
   font-weight: 700;
 }
+
+.friend-btn{
+  border: none;
+  background-color: #E4E6EB;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.friend-btn:hover{
+  background-color: #D8DADF;
+}
