@@ -6,13 +6,13 @@ import { useHistory } from 'react-router-dom';
 import { getComments } from '../../../store/comment';
 import { getImagesThunk } from '../../../store/image';
 import { getPostsThunk } from '../../../store/post';
+import { getAllRequestsThunk } from '../../../store/request';
 import CreateCommentForm from '../../CreateComment/CreateCommentForm';
 import CreatePostModal from '../../CreatePost';
 import EditPostModal from '../../EditPost';
 import PostOptionsModal from '../../PostOptions';
 import CommentView from '../CommentView';
 import './Posts.css'
-
 const Posts = () => {
 
   const dispatch = useDispatch()
@@ -25,6 +25,8 @@ const Posts = () => {
     dispatch(getPostsThunk())
     dispatch(getComments())
     dispatch(getImagesThunk())
+    dispatch(getAllRequestsThunk())
+
   }, [dispatch]);
 
   const redirectProfile = (user) => {
