@@ -90,7 +90,7 @@ const requestsReducer = (state = initialState, action) => {
         newRequests[request.id] = request
       })
       return {
-        ...state,
+
         ...newRequests
       }
     // case ONE_REQUEST:
