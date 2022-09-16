@@ -34,6 +34,9 @@ def seed_users():
     friendship6 = FriendRequest(
       sender_id = 4, recipient_id = 5, status="accepted"
     )
+    friendship7 = FriendRequest(
+    sender_id = 3, recipient_id = 5, status="accepted"
+  )
 
     demo.friends.append(marnie)
     marnie.friends.append(demo)
@@ -41,6 +44,8 @@ def seed_users():
     bobbie.friends.append(demo)
     demo.friends.append(najwa)
     bobbie.friends.append(marnie)
+    bobbie.friends.append(jessica)
+    jessica.friends.append(bobbie)
     marnie.friends.append(bobbie)
     najwa.friends.append(demo)
     demo.friends.append(jessica)
