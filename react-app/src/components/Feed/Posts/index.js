@@ -10,6 +10,7 @@ import { getAllRequestsThunk } from '../../../store/request';
 import CreateCommentForm from '../../CreateComment/CreateCommentForm';
 import CreatePostModal from '../../CreatePost';
 import EditPostModal from '../../EditPost';
+import Map, { WrappedMap } from '../../Map';
 import PostOptionsModal from '../../PostOptions';
 import CommentView from '../CommentView';
 import './Posts.css'
@@ -66,6 +67,12 @@ const Posts = () => {
           </div>
         ))}
       </span>
+      <WrappedMap
+          googleMapURL={`googleMapURL=https://maps.googleapis.com/maps/api/js?key=AIzaSyCP2T7NfqmCm0aV62pHZazAMYDY7f_BnJg`}
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+          />
     </div>
   )
 }

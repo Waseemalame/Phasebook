@@ -9,12 +9,12 @@ import { ModalProvider } from './components/context/Modal';
 const store = configureStore();
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Provider store={store}>
         <ModalProvider>
           <App />
         </ModalProvider>
       </Provider>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
