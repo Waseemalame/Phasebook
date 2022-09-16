@@ -4,6 +4,7 @@ from app.models import db, User, Post, Comment, FriendRequest
 from flask_login import current_user
 from app.forms import FriendForm
 
+
 friend_routes = Blueprint('requests', __name__, url_prefix="/requests")
 
 @friend_routes.route('')
@@ -50,12 +51,26 @@ def accept_request(requestId):
   request.recipient_id = recipient_id
   request.status = status
 
+  sender = User.query.get(sender_id)
+  recipient = User.query.get(recipient_id)
+  current_user.friends.append(sender)
+  sender.friends.append(current_user)
   db.session.commit()
   return request.to_dict()
 
 @friend_routes.route('/<requestId>', methods=["DELETE"])
 def delete_request(requestId):
   request = FriendRequest.query.get(requestId)
+  sender = User.query.get(request.sender_id)
+  recipient = User.query.get(request.recipient_id)
+  for friend in recipient.friends:
+    if(friend.id == sender.id):
+      idx = recipient.friends.index(sender)
+      recipient.friends.pop(idx)
+  for friend in sender.friends:
+    if(friend.id == recipient.id):
+      idx = sender.friends.index(recipient)
+      sender.friends.pop(idx)
   db.session.delete(request)
   db.session.commit()
 

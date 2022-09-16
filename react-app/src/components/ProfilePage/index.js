@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { getPostsThunk } from '../../store/post';
 import { createRequestThunk, deleteRequestThunk, getAllRequestsThunk, updateFriendRequestThunk } from '../../store/request';
+import { authenticate } from '../../store/session';
 import LogoutButton from '../auth/LogoutButton';
 import CreateCommentForm from '../CreateComment/CreateCommentForm';
 import CreatePostModal from '../CreatePost';
@@ -76,21 +77,32 @@ function ProfilePage() {
     dispatch(createRequestThunk(data))
     dispatch(getAllRequestsThunk())
   }
-  const updateRequest = () => {
+  const updateRequest = async () => {
     const data = {
       id: one_request.id,
       sender_id: userId,
       recipient_id: current_user.id,
       status: 'accepted'
     }
-    dispatch(updateFriendRequestThunk(data))
+    const updatedReq = await dispatch(updateFriendRequestThunk(data))
+    if(updatedReq){
+
+    }
+
     setStatus('accepted')
+    if(updatedReq){
+      dispatch(authenticate());
+    }
   }
-  const deleteRequest = () => {
+  const deleteRequest = async () => {
     if(!one_request){
     } else {
-      dispatch(deleteRequestThunk(one_request.id))
+      const deletedReq = await dispatch(deleteRequestThunk(one_request.id))
       setStatus('')
+
+        dispatch(authenticate());
+
+
     }
   }
 
