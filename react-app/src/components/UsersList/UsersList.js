@@ -7,6 +7,7 @@ import "./UsersList.css"
 function UsersList({ searchString, setSearchList }) {
   const [users, setUsers] = useState([]);
   const [mutualFriends, setMutualFriends] = useState([]);
+  const [currentFriend, setCurrentFriend] = useState('');
   const history = useHistory()
   const requests = useSelector(state => Object.values(state.friendRequests))
   const current_user = useSelector(state => state.session.user)
@@ -29,6 +30,7 @@ function UsersList({ searchString, setSearchList }) {
     const response = await fetch(`/api/users/mutualfriends/${friendId}`);
     const responseData = await response.json();
     setMutualFriends(responseData.users);
+
   }
 
   const userComponents = users.map((user) => {
@@ -46,7 +48,7 @@ function UsersList({ searchString, setSearchList }) {
   const redirectProfile = (user) => {
     history.push(`/users/${user.id}`)
   }
-  let currentFriend;
+
   return (
 
       <div className='friend-list-container'>
@@ -64,8 +66,11 @@ function UsersList({ searchString, setSearchList }) {
                                 </div>
 
                               <div>{friend.first_name} {friend.last_name}</div>
-                              {currentFriend = friend.username}
-                              <div className='mutual-friend-click' onClick={async (e, friendId) => findMutualFriends(e, friend.id)}>Mutual Friends</div>
+
+                              <div className='mutual-friend-click' onClick={async (e, friendId) =>{
+                                                                    findMutualFriends(e, friend.id)
+                                                                    setCurrentFriend(friend.first_name + ' ' + friend.last_name)
+                                                                    }}>Mutual Friends</div>
                             </div>
           ))}
           {mutualFriends.length > 0 && mutualFriends.map(mutualFriend => (
