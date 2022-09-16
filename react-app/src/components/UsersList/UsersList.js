@@ -29,6 +29,7 @@ function UsersList({ searchString, setSearchList }) {
     e.stopPropagation()
     const response = await fetch(`/api/users/mutualfriends/${friendId}`);
     const responseData = await response.json();
+    console.log(responseData)
     setMutualFriends(responseData.users);
 
   }
@@ -73,9 +74,10 @@ function UsersList({ searchString, setSearchList }) {
                                                                     }}>Mutual Friends</div>
                             </div>
           ))}
+          {currentFriend && <div>Mutual Friends with {currentFriend}</div>}
+
           {mutualFriends.length > 0 && mutualFriends.map(mutualFriend => (
             <div className='mutual-friend-container'>
-            <div>Mutual Friends with {currentFriend}</div>
             <div>
                                 {mutualFriend.profile_image_url ? (
                                   <img onClick={() => redirectProfile(mutualFriend)} className="friend-image" src={mutualFriend.profile_image_url} alt="" />
