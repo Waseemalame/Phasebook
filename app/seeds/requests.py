@@ -6,7 +6,7 @@ def seed_friends():
     sender_id = 1, recipient_id = 2, status="accepted"
   )
   friendship2 = FriendRequest(
-    sender_id = 1, recipient_id = 3, status="pending"
+    sender_id = 1, recipient_id = 3, status="accepted"
   )
   friendship3 = FriendRequest(
     sender_id = 2, recipient_id = 3, status="accepted"
@@ -20,6 +20,7 @@ def seed_friends():
   friendship6 = FriendRequest(
     sender_id = 4, recipient_id = 5, status="accepted"
   )
+
   db.session.add(friendship1)
   db.session.add(friendship2)
   db.session.add(friendship3)

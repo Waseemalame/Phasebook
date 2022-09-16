@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
 
     posts = db.relationship('Post', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
-    friends = relationship("User", secondary=request,
+    friends = db.relationship("User", secondary=request,
                         primaryjoin=id==request.c.sender_id,
                         secondaryjoin=id==request.c.recipient_id,
     )
@@ -48,13 +48,7 @@ class User(db.Model, UserMixin):
         return "User(%r)" % User
 
 
-    requests = db.relationship('User',
-                               secondary=request,
-                               primaryjoin=(request.c.sender_id == id),
-                               secondaryjoin=(request.c.recipient_id == id),
-                            #    backref=db.backref("requests", uselist=False),
-                            #    lazy='dynamic'
-                               )
+
 
     @property
     def password(self):
@@ -67,6 +61,16 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def new_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'username': self.username,
+            'email': self.email,
+            'profile_image_url': self.profile_image_url,
+        }
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -75,8 +79,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'profile_image_url': self.profile_image_url,
-            'friends': self.friends,
-            'requests': self.requests
+            'friends': [friend.new_dict() for friend in self.friends],
         }
 
 class FriendRequest(db.Model):
@@ -86,12 +89,12 @@ class FriendRequest(db.Model):
   status = db.Column("status", db.String, nullable=False)
   sender_id = db.Column("sender_id", db.Integer, db.ForeignKey('users.id'))
   recipient_id = db.Column("recipient_id", db.Integer, db.ForeignKey("users.id"))
-#   sender = db.relationship
-  friends = relationship("User", secondary=request,
-                      primaryjoin=id==request.c.sender_id,
-                      secondaryjoin=id==request.c.recipient_id,
-                      backref=db.backref("users", uselist=False),
-  )
+#   friends = relationship("User", secondary=request,
+#                       primaryjoin=id==request.c.sender_id,
+#                       secondaryjoin=id==request.c.recipient_id,
+#                       backref=db.backref("users", uselist=False),
+#                       overlaps="friends,requests"
+#   )
 
 
   def to_dict(self):
