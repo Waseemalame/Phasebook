@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { getPostsThunk } from '../../store/post';
-import { createRequestThunk, deleteRequestThunk, getAllRequestsThunk, updateFriendRequestThunk } from '../../store/request';
+import { deleteRequestThunk, getAllFriendsThunk, updateFriendRequestThunk } from '../../store/request';
 import { authenticate } from '../../store/session';
 import LogoutButton from '../auth/LogoutButton';
 import CreateCommentForm from '../CreateComment/CreateCommentForm';
@@ -20,9 +20,9 @@ function ProfilePage() {
   const history = useHistory()
   const dispatch = useDispatch()
   const usersPosts = posts.filter(post => post.user.id === user.id)
-  const requests = useSelector(state => Object.values(state.friendRequests))
+  // const requests = useSelector(state => Object.values(state.friendRequests))
   const [status, setStatus] = useState('');
-  const [one_request, setOne_request] = useState(undefined);
+  const [one_request, setOne_request] = useState('');
 
   useEffect(() => {
     if (!userId) {
@@ -34,32 +34,48 @@ function ProfilePage() {
       setUser(user);
     })();
   }, [userId]);
-
-  useEffect(() => {
-    if(requests){
-      const user_id = parseInt(userId)
-      let oneRequest;
-        oneRequest = requests.filter(request => {
-          return (request.recipient_id === user_id || request.sender_id === user_id) &&
-          (request.recipient_id === current_user.id || request.sender_id === current_user.id)
-        })
-        if(oneRequest[0]){
-          setStatus(oneRequest[0].status)
-          setOne_request(oneRequest[0])
-        } else {
-          setStatus('')
-        }
-    }
-  }, [requests, current_user, userId]);
-
-  useEffect(() => {
-    dispatch(getAllRequestsThunk())
-  }, [userId, dispatch]);
-
-
   useEffect(() => {
     dispatch(getPostsThunk())
   }, [dispatch]);
+  useEffect(() => {
+
+    console.log('INSDIE USE EFFECT FOR ONE REQ!!!!!!!!!!!!!!')
+    console.log(one_request)
+    console.log('INSDIE USE EFFECT FOR ONE REQ!!!!!!!!!!!!!!')
+
+  }, [one_request]);
+
+  const user_id = parseInt(userId)
+  useEffect(() => {
+
+        // oneRequest = requests.filter(request => {
+        //   return (request.recipient_id === user_id || request.sender_id === user_id) &&
+        //   (request.recipient_id === current_user.id || request.sender_id === current_user.id)
+        // })
+        (async () => {
+          if(user_id === current_user.id) return;
+          const response = await fetch(`/api/requests/profile/${user_id}`);
+          const oneRequest = await response.json();
+          if(Object.values(oneRequest).length < 1){
+            console.log(oneRequest)
+            setStatus('')
+            setOne_request(oneRequest)
+          } else {
+
+            setStatus(oneRequest.status)
+            setOne_request(oneRequest);
+          }
+        })();
+
+
+  }, [current_user, user_id]);
+
+  useEffect(() => {
+    dispatch(getAllFriendsThunk())
+  }, [userId, dispatch]);
+
+
+
 
   if (!user) {
     return null;
@@ -68,14 +84,21 @@ function ProfilePage() {
   const redirectProfile = (user) => {
     history.push(`/users/${user.id}`)
   }
-  const createRequest = () => {
-    const data = {
-      sender_id: current_user.id,
-      recipient_id: user.id,
-      status: "pending"
-    }
-    dispatch(createRequestThunk(data))
-    dispatch(getAllRequestsThunk())
+  const createRequest = async () => {
+    const formData = new FormData()
+    formData.append("sender_id", current_user.id)
+    formData.append("recipient_id", user.id)
+    formData.append("status", "pending")
+    const res = await fetch(`/api/requests`, {
+      method: 'POST',
+      body: formData
+    })
+    const result = await res.json()
+
+
+    setOne_request(result.one_request)
+    // dispatch(getAllFriendsThunk())
+    setStatus('pending')
   }
   const updateRequest = async () => {
     const data = {
@@ -90,19 +113,23 @@ function ProfilePage() {
     }
 
     setStatus('accepted')
-    if(updatedReq){
-      dispatch(authenticate());
-    }
   }
   const deleteRequest = async () => {
-    if(!one_request){
-    } else {
-      const deletedReq = await dispatch(deleteRequestThunk(one_request.id))
+
+    if(one_request.status === 'pending'){
+      const res = await fetch(`/api/requests/${one_request.id}/${user_id}`, {
+        method: "DELETE"
+      })
+      if (res.ok){
+        setStatus('')
+      }
+    } else if(one_request.status === 'accepted') {
+      const data = {
+        requestId: one_request.id,
+        userId: user_id
+      }
+      await dispatch(deleteRequestThunk(data))
       setStatus('')
-
-        dispatch(authenticate());
-
-
     }
   }
 

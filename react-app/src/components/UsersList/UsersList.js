@@ -9,7 +9,6 @@ function UsersList({ searchString, setSearchList }) {
   const [mutualFriends, setMutualFriends] = useState([]);
   const [currentFriend, setCurrentFriend] = useState('');
   const history = useHistory()
-  const requests = useSelector(state => Object.values(state.friendRequests))
   const current_user = useSelector(state => state.session.user)
   const dispatch = useDispatch()
   useEffect(() => {
@@ -69,12 +68,12 @@ function UsersList({ searchString, setSearchList }) {
                               <div>{friend.first_name} {friend.last_name}</div>
 
                               <div className='mutual-friend-click' onClick={async (e, friendId) =>{
-                                                                    findMutualFriends(e, friend.id)
+                                                                    // findMutualFriends(e, friend.id)
                                                                     setCurrentFriend(friend.first_name + ' ' + friend.last_name)
                                                                     }}>Mutual Friends</div>
                             </div>
           ))}
-          {currentFriend && <div>Mutual Friends with {currentFriend}</div>}
+          {/* {currentFriend && <div>Mutual Friends with {currentFriend}</div>}
 
           {mutualFriends.length > 0 && mutualFriends.map(mutualFriend => (
             <div className='mutual-friend-container'>
@@ -90,7 +89,7 @@ function UsersList({ searchString, setSearchList }) {
 
                               <div>{mutualFriend.first_name} {mutualFriend.last_name}</div>
             </div>
-          ))}
+          ))} */}
       </div>
 
   );

@@ -43,13 +43,13 @@ function App() {
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+          {/* <UsersList/> */}
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <ProfilePage />
         </ProtectedRoute>
         <ProtectedRoute path='/users/friends/:userId/' exact={true} >
-          <UsersList />
+          {/* <UsersList /> */}
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           {/* <div className='home-display'> */}
