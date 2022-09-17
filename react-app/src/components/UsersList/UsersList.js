@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { getAllRequestsThunk } from '../../store/request';
+import { getAllFriendsThunk, getAllRequestsThunk } from '../../store/request';
 import "./UsersList.css"
 function UsersList({ searchString, setSearchList }) {
   const [users, setUsers] = useState([]);
   const [mutualFriends, setMutualFriends] = useState([]);
   const [currentFriend, setCurrentFriend] = useState('');
   const history = useHistory()
-  const requests = useSelector(state => Object.values(state.friendRequests))
   const current_user = useSelector(state => state.session.user)
+  const friends = useSelector(state => Object.values(state.friends))
   const dispatch = useDispatch()
   useEffect(() => {
     async function fetchData() {
@@ -21,7 +21,9 @@ function UsersList({ searchString, setSearchList }) {
     fetchData();
   }, []);
 
-
+useEffect(() => {
+  dispatch(getAllFriendsThunk())
+}, [dispatch]);
 
 
 
@@ -29,9 +31,7 @@ function UsersList({ searchString, setSearchList }) {
     e.stopPropagation()
     const response = await fetch(`/api/users/mutualfriends/${friendId}`);
     const responseData = await response.json();
-    console.log(responseData)
     setMutualFriends(responseData.users);
-
   }
 
   const userComponents = users.map((user) => {
@@ -54,7 +54,7 @@ function UsersList({ searchString, setSearchList }) {
 
       <div className='friend-list-container'>
         <span className='friends-header'>Friends</span>
-          {current_user.friends.map(friend => (
+          {friends && friends.map(friend => (
                             <div onClick={() => redirectProfile(friend)} className='friend'>
                               <div>
                                 {friend.profile_image_url ? (
@@ -74,7 +74,7 @@ function UsersList({ searchString, setSearchList }) {
                                                                     }}>Mutual Friends</div>
                             </div>
           ))}
-          {currentFriend && <div>Mutual Friends with {currentFriend}</div>}
+          {mutualFriends.length > 0 && currentFriend && <div>Mutual Friends with {currentFriend}</div>}
 
           {mutualFriends.length > 0 && mutualFriends.map(mutualFriend => (
             <div className='mutual-friend-container'>

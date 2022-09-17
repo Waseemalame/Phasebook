@@ -4,7 +4,6 @@ from app.models import db, Post, Comment
 from app.forms import PostForm, CommentForm
 from flask_login import current_user
 
-# post_routes = Blueprint("home", __name__, url_prefix="/user") /posts
 post_routes = Blueprint("posts", __name__, url_prefix="/posts")
 
 
@@ -108,11 +107,6 @@ def delete_post(post_id):
 
     if not post:
         return "Error 404: The post you're looking for couldn't be found"
-
-    # if current_user.id == post.user.id:
-    #     post = Post.query.get(post_id)
-    # else:
-    #     return '403: unauthorized user'
 
     db.session.delete(post)
     db.session.commit()

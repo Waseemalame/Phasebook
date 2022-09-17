@@ -1,19 +1,10 @@
-// const ONE_REQUEST = "requests/ONE_REQUEST"
-const ALL_REQUESTS = "requests/ALL_REQUESTS"
-const CREATE_REQUEST = "requests/CREATE_REQUEST"
-const UPDATE_REQUEST = "friends/UPDATE_REQUEST"
+const ALL_FRIENDS = "requests/ALL_FRIENDS"
+const UPDATE_REQUEST = "requests/UPDATE_REQUEST"
 const DELETE_REQUEST = "requests/DELETE_REQUEST"
-// const getOne = (request) => ({
-//   type: ONE_REQUEST,
-//   request
-// })
-const getAll = (requests) => ({
-  type: ALL_REQUESTS,
-  requests
-})
-const createOne = (request) => ({
-  type: CREATE_REQUEST,
-  request
+
+const getAll = (friends) => ({
+  type: ALL_FRIENDS,
+  friends
 })
 const updateFriendRequest = (request) => ({
   type: UPDATE_REQUEST,
@@ -24,37 +15,11 @@ const deleteOne = (requestId) => ({
   requestId
 })
 
-// export const getOneRequestThunk = (userId) => async (dispatch) => {
-//   const res = await fetch(`/api/requests/profile/${userId}`)
-//   if(res.ok){
-//     const request = await res.json()
-//     dispatch(getOne(request))
-//   }
-// }
-export const getAllRequestsThunk = () => async (dispatch) => {
+export const getAllFriendsThunk = () => async (dispatch) => {
   const res = await fetch(`/api/requests`)
   if(res.ok){
-    const requests = await res.json()
-    dispatch(getAll(requests))
-  }
-}
-export const createRequestThunk = (data) => async (dispatch) => {
-  const {
-    sender_id,
-    recipient_id,
-    status
-  } = data
-  const formData = new FormData()
-  formData.append("sender_id", sender_id)
-  formData.append("recipient_id", recipient_id)
-  formData.append("status", status)
-  const res = await fetch(`/api/requests`, {
-    method: 'POST',
-    body: formData
-  })
-  if(res.ok){
-    const request = await res.json()
-    dispatch(createOne(request))
+    const friends = await res.json()
+    dispatch(getAll(friends.all_friends))
   }
 }
 export const updateFriendRequestThunk = (data) => async (dispatch) => {
@@ -70,42 +35,28 @@ export const updateFriendRequestThunk = (data) => async (dispatch) => {
     return request
   }
 }
-export const deleteRequestThunk = (requestId) => async (dispatch) => {
-  const res = await fetch(`/api/requests/${requestId}`, {
+export const deleteRequestThunk = (data) => async (dispatch) => {
+
+  const res = await fetch(`/api/requests/${data.requestId}/${data.userId}`, {
     method: "DELETE"
   })
   if (res.ok){
-    dispatch(deleteOne(requestId))
+
+    dispatch(deleteOne(data.userId))
   }
 }
 
 const initialState = {};
-
-
 const requestsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ALL_REQUESTS:
+    case ALL_FRIENDS:
       const newRequests = {};
-      action.requests.all_requests.forEach(request => {
-        newRequests[request.id] = request
+      action.friends.forEach(friend => {
+        newRequests[friend.id] = friend
       })
       return {
 
         ...newRequests
-      }
-    // case ONE_REQUEST:
-    //   console.log(action.request.one_request)
-    //   console.log(state.oneRequest)
-    //   return {
-    //     ...state,
-    //     oneRequest: action.request.one_request[0],
-    //   }
-    case CREATE_REQUEST:
-      console.log(state)
-      console.log(action.request)
-      return {
-        ...state,
-        [action.request.one_request.id]: action.request.one_request
       }
     case UPDATE_REQUEST:
       return {

@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { getComments } from '../../../store/comment';
 import { getImagesThunk } from '../../../store/image';
 import { getPostsThunk } from '../../../store/post';
-import { getAllRequestsThunk } from '../../../store/request';
+import { getAllFriendsThunk } from '../../../store/request';
 import CreateCommentForm from '../../CreateComment/CreateCommentForm';
 import CreatePostModal from '../../CreatePost';
 import EditPostModal from '../../EditPost';
@@ -25,7 +25,7 @@ const Posts = () => {
     dispatch(getPostsThunk())
     dispatch(getComments())
     dispatch(getImagesThunk())
-    dispatch(getAllRequestsThunk())
+    dispatch(getAllFriendsThunk())
 
   }, [dispatch]);
 
@@ -37,9 +37,9 @@ const Posts = () => {
   return (
     <div className='main-feed'>
       <CreatePostModal />
-      <span className='feed-posts'>
-        {posts.reverse().map(post => (
-          <div className="single-post">
+      <div className='feed-posts'>
+        {posts && posts.reverse().map(post => (
+          <div id={`feed${post.id}`} className="single-post">
             <div className="post-user-info">
               <div>{post.user.profile_image_url ? (
                 <img onClick={() => redirectProfile(post.user)} className="post-user-image" src={post.user.profile_image_url} alt="" />
@@ -65,7 +65,7 @@ const Posts = () => {
             <CreateCommentForm post={post} />
           </div>
         ))}
-      </span>
+      </div>
     </div>
   )
 }

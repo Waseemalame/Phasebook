@@ -1,7 +1,7 @@
 from ..models import db, Post
 
 
-# Adds demo posts
+# Adding posts
 def seed_posts():
     demo1 = Post(
         content="Selling laptops comment below if interested", user_id=1)

@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   session,
   posts: postsReducer,
   comments: commentsReducer,
-  friendRequests: requestsReducer,
+  friends: requestsReducer,
   images: imagesReducer
 });
 

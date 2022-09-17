@@ -6,12 +6,7 @@ from sqlalchemy.schema import UniqueConstraint
 from flask_login import UserMixin
 
 
-request = db.Table("requests",
-                        db.Column('sender_id', db.Integer, db.ForeignKey('users.id')),
-                        db.Column('recipient_id', db.Integer, db.ForeignKey('users.id')),
-                        db.Column('status', db.String),
-                        UniqueConstraint('sender_id', 'recipient_id', name='unique_friendships')
-                        )
+
 
 
 
@@ -29,20 +24,21 @@ class User(db.Model, UserMixin):
 
     posts = db.relationship('Post', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
-    friends = db.relationship("User", secondary=request,
-                        primaryjoin=id==request.c.sender_id,
-                        secondaryjoin=id==request.c.recipient_id,
-    )
 
-    def befriend(self, friend):
-        if friend not in self.friends:
-            self.friends.append(friend)
-            friend.friends.append(self)
+    sender = db.relationship("FriendRequest",
+                            foreign_keys="[FriendRequest.sender_id]",
+                            back_populates="req_sender",
+                            cascade='all, delete-orphan',
+                            passive_deletes=True
+                            )
 
-    def unfriend(self, friend):
-        if friend in self.friends:
-            self.friends.remove(friend)
-            friend.friends.remove(self)
+    recipient = db.relationship("FriendRequest",
+                            foreign_keys="[FriendRequest.recipient_id]",
+                            back_populates="req_recipient",
+                            cascade='all, delete-orphan',
+                            passive_deletes=True
+                            )
+
 
     def __repr__(self):
         return "User(%r)" % User
@@ -61,16 +57,6 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def new_dict(self):
-        return {
-            'id': self.id,
-            'first_name': self.first_name,
-            'last_name': self.last_name,
-            'username': self.username,
-            'email': self.email,
-            'profile_image_url': self.profile_image_url,
-        }
-
     def to_dict(self):
         return {
             'id': self.id,
@@ -79,28 +65,4 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'profile_image_url': self.profile_image_url,
-            'friends': [friend.new_dict() for friend in self.friends],
         }
-
-class FriendRequest(db.Model):
-  __tablename__ = "friendRequests"
-
-  id = db.Column(db.Integer, primary_key=True)
-  status = db.Column("status", db.String, nullable=False)
-  sender_id = db.Column("sender_id", db.Integer, db.ForeignKey('users.id'))
-  recipient_id = db.Column("recipient_id", db.Integer, db.ForeignKey("users.id"))
-#   friends = relationship("User", secondary=request,
-#                       primaryjoin=id==request.c.sender_id,
-#                       secondaryjoin=id==request.c.recipient_id,
-#                       backref=db.backref("users", uselist=False),
-#                       overlaps="friends,requests"
-#   )
-
-
-  def to_dict(self):
-    return {
-        'id': self.id,
-        'status': self.status,
-        'sender_id': self.sender_id,
-        'recipient_id': self.recipient_id
-    }
