@@ -1,5 +1,6 @@
 from ..models import db, Image
 
+# Adding images
 def seed_images():
   image1 = Image(
     image_url = "https://images.unsplash.com/photo-1511385348-a52b4a160dc2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=907&q=80", post_id = 1

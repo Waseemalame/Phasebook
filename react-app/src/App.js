@@ -49,7 +49,7 @@ function App() {
           <ProfilePage />
         </ProtectedRoute>
         <ProtectedRoute path='/users/friends/:userId/' exact={true} >
-          {/* <UsersList /> */}
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           {/* <div className='home-display'> */}

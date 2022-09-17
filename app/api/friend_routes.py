@@ -9,14 +9,12 @@ friend_routes = Blueprint('requests', __name__, url_prefix="/requests")
 
 @friend_routes.route('')
 def all_friends():
-  friend_requests = User.query.join(FriendRequest,
+  friends = User.query.join(FriendRequest,
     (FriendRequest.recipient_id == User.id) | (FriendRequest.sender_id == User.id)).filter(
     (FriendRequest.sender_id == current_user.id) | (FriendRequest.recipient_id == current_user.id)
     ).filter(FriendRequest.status == 'accepted').filter(User.id != current_user.id).all()
 
-  # requests = [request.to_dict() for request in friend_requests]
-  # return {'all_requests': requests}
-  return {'all_requests': [friend_request.to_dict() for friend_request in friend_requests]}
+  return {'all_friends': [friend.to_dict() for friend in friends]}
 
 @friend_routes.route('/profile/<userId>')
 def get_one(userId):
@@ -27,12 +25,6 @@ def get_one(userId):
   if one_request:
     return one_request.to_dict()
   else: return {}
-
-# @friend_routes.route('/profile/<user_id>')
-# def one_request(user_id):
-#   friend_request = FriendRequest.query.filter((FriendRequest.sender_id == current_user.id) | (FriendRequest.recipient_id == current_user.id)).filter((FriendRequest.sender_id == user_id) | (FriendRequest.recipient_id == user_id))
-#   request = [request.to_dict() for request in friend_request]
-#   return { 'one_request': request }
 
 @friend_routes.route("", methods=["POST"])
 def create_friend_request():
@@ -57,7 +49,7 @@ def accept_request(requestId):
   request = FriendRequest.query.get(requestId)
   updated_request = FriendForm()
 
-  # updated_request['csrf_token'].data = request.cookies['csrf_token']
+  updated_request['csrf_token'].data = request.cookies['csrf_token']
   sender_id = updated_request.data["sender_id"]
   recipient_id = updated_request.data["recipient_id"]
   status = updated_request.data["status"]
@@ -68,8 +60,6 @@ def accept_request(requestId):
 
   sender = User.query.get(sender_id)
   recipient = User.query.get(recipient_id)
-  # current_user.friends.append(sender)
-  # sender.friends.append(current_user)
 
   db.session.commit()
   return sender.to_dict()

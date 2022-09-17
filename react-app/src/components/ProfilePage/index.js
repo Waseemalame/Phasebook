@@ -37,13 +37,6 @@ function ProfilePage() {
   useEffect(() => {
     dispatch(getPostsThunk())
   }, [dispatch]);
-  useEffect(() => {
-
-    console.log('INSDIE USE EFFECT FOR ONE REQ!!!!!!!!!!!!!!')
-    console.log(one_request)
-    console.log('INSDIE USE EFFECT FOR ONE REQ!!!!!!!!!!!!!!')
-
-  }, [one_request]);
 
   const user_id = parseInt(userId)
   useEffect(() => {
@@ -57,7 +50,6 @@ function ProfilePage() {
           const response = await fetch(`/api/requests/profile/${user_id}`);
           const oneRequest = await response.json();
           if(Object.values(oneRequest).length < 1){
-            console.log(oneRequest)
             setStatus('')
             setOne_request(oneRequest)
           } else {
@@ -187,7 +179,7 @@ function ProfilePage() {
         <div className='feed-posts'>
 
         {usersPosts && usersPosts.reverse().map(post => (
-          <div className="single-post">
+          <div id={`profile${post.id}`} className="single-post">
             <div className="post-user-info">
               <div>{post.user.profile_image_url ? (
                 <img onClick={() => redirectProfile(post.user)} className="post-user-image" src={post.user.profile_image_url} alt="" />

@@ -1,6 +1,6 @@
 from app.models import db, User, FriendRequest
 
-
+# Adding friends
 def seed_friends():
   friendship1 = FriendRequest(
     sender_id = 1, recipient_id = 2, status="accepted"

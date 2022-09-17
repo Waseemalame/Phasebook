@@ -37,7 +37,7 @@ const Posts = () => {
   return (
     <div className='main-feed'>
       <CreatePostModal />
-      <span className='feed-posts'>
+      <div className='feed-posts'>
         {posts && posts.reverse().map(post => (
           <div id={`feed${post.id}`} className="single-post">
             <div className="post-user-info">
@@ -65,7 +65,7 @@ const Posts = () => {
             <CreateCommentForm post={post} />
           </div>
         ))}
-      </span>
+      </div>
     </div>
   )
 }

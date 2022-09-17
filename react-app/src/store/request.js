@@ -1,10 +1,7 @@
 const ALL_FRIENDS = "requests/ALL_FRIENDS"
-const UPDATE_REQUEST = "friends/UPDATE_REQUEST"
+const UPDATE_REQUEST = "requests/UPDATE_REQUEST"
 const DELETE_REQUEST = "requests/DELETE_REQUEST"
-// const getOne = (request) => ({
-//   type: ONE_REQUEST,
-//   request
-// })
+
 const getAll = (friends) => ({
   type: ALL_FRIENDS,
   friends
@@ -21,8 +18,8 @@ const deleteOne = (requestId) => ({
 export const getAllFriendsThunk = () => async (dispatch) => {
   const res = await fetch(`/api/requests`)
   if(res.ok){
-    const requests = await res.json()
-    dispatch(getAll(requests))
+    const friends = await res.json()
+    dispatch(getAll(friends.all_friends))
   }
 }
 export const updateFriendRequestThunk = (data) => async (dispatch) => {
@@ -50,13 +47,11 @@ export const deleteRequestThunk = (data) => async (dispatch) => {
 }
 
 const initialState = {};
-
-
 const requestsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ALL_FRIENDS:
       const newRequests = {};
-      action.friends.all_requests.forEach(friend => {
+      action.friends.forEach(friend => {
         newRequests[friend.id] = friend
       })
       return {
@@ -69,8 +64,6 @@ const requestsReducer = (state = initialState, action) => {
         [action.request.id]: action.request
       }
     case DELETE_REQUEST:
-      console.log(action)
-      console.log('---------------------------action')
       const newState = { ...state }
       delete newState[action.requestId]
       return newState

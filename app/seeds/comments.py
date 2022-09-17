@@ -1,5 +1,6 @@
 from ..models import db, Comment
 
+# Adding comments
 def seed_comments():
     demo1 = Comment(
         comment_content="How much?", user_id=2, post_id=1)

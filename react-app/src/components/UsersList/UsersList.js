@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { getAllRequestsThunk } from '../../store/request';
+import { getAllFriendsThunk, getAllRequestsThunk } from '../../store/request';
 import "./UsersList.css"
 function UsersList({ searchString, setSearchList }) {
   const [users, setUsers] = useState([]);
@@ -10,6 +10,7 @@ function UsersList({ searchString, setSearchList }) {
   const [currentFriend, setCurrentFriend] = useState('');
   const history = useHistory()
   const current_user = useSelector(state => state.session.user)
+  const friends = useSelector(state => Object.values(state.friends))
   const dispatch = useDispatch()
   useEffect(() => {
     async function fetchData() {
@@ -20,7 +21,9 @@ function UsersList({ searchString, setSearchList }) {
     fetchData();
   }, []);
 
-
+useEffect(() => {
+  dispatch(getAllFriendsThunk())
+}, [dispatch]);
 
 
 
@@ -28,9 +31,7 @@ function UsersList({ searchString, setSearchList }) {
     e.stopPropagation()
     const response = await fetch(`/api/users/mutualfriends/${friendId}`);
     const responseData = await response.json();
-    console.log(responseData)
     setMutualFriends(responseData.users);
-
   }
 
   const userComponents = users.map((user) => {
@@ -53,7 +54,7 @@ function UsersList({ searchString, setSearchList }) {
 
       <div className='friend-list-container'>
         <span className='friends-header'>Friends</span>
-          {current_user.friends.map(friend => (
+          {friends && friends.map(friend => (
                             <div onClick={() => redirectProfile(friend)} className='friend'>
                               <div>
                                 {friend.profile_image_url ? (
@@ -68,12 +69,12 @@ function UsersList({ searchString, setSearchList }) {
                               <div>{friend.first_name} {friend.last_name}</div>
 
                               <div className='mutual-friend-click' onClick={async (e, friendId) =>{
-                                                                    // findMutualFriends(e, friend.id)
+                                                                    findMutualFriends(e, friend.id)
                                                                     setCurrentFriend(friend.first_name + ' ' + friend.last_name)
                                                                     }}>Mutual Friends</div>
                             </div>
           ))}
-          {/* {currentFriend && <div>Mutual Friends with {currentFriend}</div>}
+          {currentFriend && <div>Mutual Friends with {currentFriend}</div>}
 
           {mutualFriends.length > 0 && mutualFriends.map(mutualFriend => (
             <div className='mutual-friend-container'>
@@ -89,7 +90,7 @@ function UsersList({ searchString, setSearchList }) {
 
                               <div>{mutualFriend.first_name} {mutualFriend.last_name}</div>
             </div>
-          ))} */}
+          ))}
       </div>
 
   );
