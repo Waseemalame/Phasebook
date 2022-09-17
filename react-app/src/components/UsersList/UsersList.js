@@ -74,7 +74,7 @@ useEffect(() => {
                                                                     }}>Mutual Friends</div>
                             </div>
           ))}
-          {currentFriend && <div>Mutual Friends with {currentFriend}</div>}
+          {mutualFriends.length > 0 && currentFriend && <div>Mutual Friends with {currentFriend}</div>}
 
           {mutualFriends.length > 0 && mutualFriends.map(mutualFriend => (
             <div className='mutual-friend-container'>
