@@ -3,7 +3,6 @@ import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { getAllFriendsThunk, getAllRequestsThunk } from '../../store/request';
-import "./UsersList.css"
 function UsersList({ searchString, setSearchList }) {
   const [users, setUsers] = useState([]);
   const [mutualFriends, setMutualFriends] = useState([]);
