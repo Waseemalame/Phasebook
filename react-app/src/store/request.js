@@ -55,7 +55,7 @@ const requestsReducer = (state = initialState, action) => {
         newRequests[friend.id] = friend
       })
       return {
-
+        // ...state,
         ...newRequests
       }
     case UPDATE_REQUEST:
