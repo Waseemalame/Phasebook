@@ -1,0 +1,46 @@
+.friends-list{
+  display: flex;
+  flex-wrap: wrap;
+  width: 21em;
+  justify-content: space-between;
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-right: 16px;
+  /* border: 2px solid black; */
+}
+
+.profile-friends-info{
+
+  margin-left: 16px;
+  margin-top: 16px;
+}
+.friend-header{
+}
+.friends-amount{
+  color: #65676B;
+}
+.friends-info-top{
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  justify-content: space-between;
+}
+.see-all-friends{
+  /* font-size: 16px; */
+  /* line-height: 100px; */
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin-right: 16px;
+  color: blue;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.see-all-friends:hover{
+  background-color: rgba(211, 211, 211, 0.426);
+
+}

@@ -15,6 +15,21 @@ def seed_users():
         username='jes', email='jessica@aa.io', password='password', first_name='Jessica', last_name='Cobal', profile_image_url="https://i.imgur.com/5M3eHqJ.jpg")
     elon = User(
         username='El', email='elon@aa.io', password='password', first_name='Elawn', last_name='Musk', profile_image_url="https://i.imgur.com/OU4TPeO.jpg")
+    jonnie = User(
+        username='jonnie', email='jonnie@aa.io', password='password', first_name='Jonny', last_name='Naymer', profile_image_url="https://i.imgur.com/ee9qpPt.jpg")
+    julie = User(
+        username='julie', email='julie@aa.io', password='password', first_name='Julie', last_name='Manter', profile_image_url="https://i.imgur.com/yBel3zZ.jpg")
+    kim = User(
+        username='kim', email='kim@aa.io', password='password', first_name='Kimberly', last_name='Stuther', profile_image_url="https://i.imgur.com/6lklKBn.jpg")
+    durlabh = User(
+        username='durlabh', email='durlabh@aa.io', password='password', first_name='Durlabh', last_name='Daliwal', profile_image_url="https://i.imgur.com/dfYu66h.jpg")
+    aanya = User(
+        username='aanya', email='aanya@aa.io', password='password', first_name='Aanya', last_name='Chen', profile_image_url="https://i.imgur.com/eI0KA3A.jpg")
+    ishir = User(
+        username='ishir', email='ishir@aa.io', password='password', first_name='Ishir', last_name='Sing', profile_image_url="https://i.imgur.com/bmKbhPn.jpg")
+    rufus = User(
+        username='rufus', email='rufus@aa.io', password='password', first_name='Rufus', last_name='Oyemade', profile_image_url="https://i.imgur.com/cQHXpwT.jpg")
+
 
     db.session.add(demo)
     db.session.add(marnie)
@@ -22,6 +37,13 @@ def seed_users():
     db.session.add(najwa)
     db.session.add(jessica)
     db.session.add(elon)
+    db.session.add(jonnie)
+    db.session.add(julie)
+    db.session.add(kim)
+    db.session.add(durlabh)
+    db.session.add(aanya)
+    db.session.add(ishir)
+    db.session.add(rufus)
 
     db.session.commit()
 

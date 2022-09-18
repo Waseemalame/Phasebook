@@ -49,7 +49,7 @@ def accept_request(requestId):
   request = FriendRequest.query.get(requestId)
   updated_request = FriendForm()
 
-  updated_request['csrf_token'].data = request.cookies['csrf_token']
+  # updated_request['csrf_token'].data = request.cookies['csrf_token']
   sender_id = updated_request.data["sender_id"]
   recipient_id = updated_request.data["recipient_id"]
   status = updated_request.data["status"]
