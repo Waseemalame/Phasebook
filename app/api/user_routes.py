@@ -15,9 +15,19 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+@user_routes.route('/<user_id>/friends')
+@login_required
+def users_friends(user_id):
+    users_friends = User.query.join(FriendRequest,
+    (FriendRequest.recipient_id == User.id) | (FriendRequest.sender_id == User.id)).filter(
+    (FriendRequest.sender_id == user_id) | (FriendRequest.recipient_id == user_id)
+    ).filter(FriendRequest.status == 'accepted').filter(User.id != user_id).all()
+
+    return {'friends': [friend.to_dict() for friend in users_friends]}
+
 @user_routes.route('/mutualfriends/<user_id>')
 @login_required
-def user_friends(user_id):
+def mutual_friends(user_id):
 
     current_user_friends = User.query.join(FriendRequest,
     (FriendRequest.recipient_id == User.id) | (FriendRequest.sender_id == User.id)).filter(
