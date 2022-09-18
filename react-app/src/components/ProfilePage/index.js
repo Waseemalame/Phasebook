@@ -9,6 +9,7 @@ import CreateCommentForm from '../CreateComment/CreateCommentForm';
 import CreatePostModal from '../CreatePost';
 import CreatePostForm from '../CreatePost/CreatePostForm';
 import CommentView from '../Feed/CommentView';
+import FriendsList from '../Friends/FriendList';
 import PostOptionsModal from '../PostOptions';
 
 import "./ProfilePage.css"
@@ -23,7 +24,11 @@ function ProfilePage() {
   // const requests = useSelector(state => Object.values(state.friendRequests))
   const [status, setStatus] = useState('');
   const [one_request, setOne_request] = useState('');
+  const [mutualFriends, setMutualFriends] = useState([]);
+  const [accepted, setAccepted] = useState(false);
+  const [deleted, setDeleted] = useState(false);
 
+  // Find User
   useEffect(() => {
     if (!userId) {
       return;
@@ -34,39 +39,39 @@ function ProfilePage() {
       setUser(user);
     })();
   }, [userId]);
+
+  // Find Mutual Friends with Profile Owner
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(`/api/users/mutualfriends/${userId}`);
+      const responseData = await response.json();
+      setMutualFriends(responseData.users);
+    })();
+
+  }, [userId]);
   useEffect(() => {
     dispatch(getPostsThunk())
   }, [dispatch]);
 
+
   const user_id = parseInt(userId)
   useEffect(() => {
 
-        // oneRequest = requests.filter(request => {
-        //   return (request.recipient_id === user_id || request.sender_id === user_id) &&
-        //   (request.recipient_id === current_user.id || request.sender_id === current_user.id)
-        // })
         (async () => {
           if(user_id === current_user.id) return;
           const response = await fetch(`/api/requests/profile/${user_id}`);
           const oneRequest = await response.json();
           if(Object.values(oneRequest).length < 1){
             setStatus('')
-            setOne_request(oneRequest)
+            setOne_request('')
           } else {
-
             setStatus(oneRequest.status)
             setOne_request(oneRequest);
           }
         })();
 
 
-  }, [current_user, user_id]);
-
-  useEffect(() => {
-    dispatch(getAllFriendsThunk())
-  }, [userId, dispatch]);
-
-
+  }, [current_user, user_id, accepted]);
 
 
   if (!user) {
@@ -89,7 +94,6 @@ function ProfilePage() {
 
 
     setOne_request(result.one_request)
-    // dispatch(getAllFriendsThunk())
     setStatus('pending')
   }
   const updateRequest = async () => {
@@ -103,110 +107,130 @@ function ProfilePage() {
     if(updatedReq){
 
     }
+    setAccepted(true)
 
     setStatus('accepted')
+
+    dispatch(getAllFriendsThunk())
+
   }
   const deleteRequest = async () => {
+    if(status === 'accepted') {
 
-    if(one_request.status === 'pending'){
+      const data = {
+        requestId: one_request.id,
+        userId: user_id
+      }
+      const deletedFriend = await dispatch(deleteRequestThunk(data))
+      setOne_request('')
+      setDeleted(true)
+      setStatus('')
+      dispatch(getAllFriendsThunk())
+
+    }
+    else if(status !== 'accepted'){
       const res = await fetch(`/api/requests/${one_request.id}/${user_id}`, {
         method: "DELETE"
       })
       if (res.ok){
         setStatus('')
       }
-    } else if(one_request.status === 'accepted') {
-      const data = {
-        requestId: one_request.id,
-        userId: user_id
-      }
-      await dispatch(deleteRequestThunk(data))
-      setStatus('')
     }
+
   }
 
   return (
     <div className="profile-page">
-      <div className="profile-container">
-        <div className="profile-top">
-          <div className="cover-photo-container">
-            <div className="edit-cover-photo">
-            </div>
-          </div>
-          <div className="user-profile-header">
-            <div className="users-name-image">
-              <div className="profile-user-image">
-                {user.profile_image_url ? (
-                  <img className='profile-image' src={user.profile_image_url} alt="" />
-                ) : (
-                  <img className='profile-image' src="https://scontent-lax3-1.xx.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=cp0_dst-png_p60x60&_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=jvAgaOmK2RAAX_4kkp6&_nc_ht=scontent-lax3-1.xx&oh=00_AT_MK_StZzlT1-HqibhO9GFRjxGQA9w3wR6h8Ltolictug&oe=633D2A78" alt="" />
-                )}
+      <div className="profile-top-container">
+        <div className="profile-container">
+          <div className="profile-top">
+            <div className="cover-photo-container">
+              <div className="edit-cover-photo">
               </div>
             </div>
-            <div className="profile-users-name">
-              <span><strong>{user?.first_name} {user.last_name}</strong></span>
-              {current_user.id !== user.id && (
-               <div>
-                <div>{status === 'accepted' && (
-                  <button className='friend-btn' onClick={deleteRequest}>Remove friend</button>
-                )}
-                </div>
-                <div>{(status === 'pending' && one_request?.recipient_id !== current_user.id) && (
-                  <button className='friend-btn' onClick={deleteRequest}>Cancel request</button>
-                )}
-                </div>
-                <div>{(status === 'pending' && one_request?.recipient_id === current_user.id) && (
-                  <button className='friend-btn' onClick={updateRequest}>Approve request</button>
-                )}
-                </div>
-                <div>{status === '' && (
-                  <button className='friend-btn' onClick={createRequest}>Add friend</button>
-                )}
+            <div className="user-profile-header">
+              <div className="users-name-image">
+                <div className="profile-user-info">
+                  {user.profile_image_url ? (
+                    <img className='profile-image' src={user.profile_image_url} alt="" />
+                  ) : (
+                    <img className='profile-image' src="https://scontent-lax3-1.xx.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=cp0_dst-png_p60x60&_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=jvAgaOmK2RAAX_4kkp6&_nc_ht=scontent-lax3-1.xx&oh=00_AT_MK_StZzlT1-HqibhO9GFRjxGQA9w3wR6h8Ltolictug&oe=633D2A78" alt="" />
+                  )}
                 </div>
               </div>
-              )}
-
-            </div>
-            <div className="profile-top-underline">
+              <div className="profile-users-name">
+                <span><strong>{user?.first_name} {user.last_name}</strong></span>
+                {current_user.id !== user.id && (
+                 <div>
+                  <div>{status === 'accepted' && (
+                    <button className='friend-btn' onClick={deleteRequest}>Remove friend</button>
+                  )}
+                  </div>
+                  <div>{(status === 'pending' && one_request?.recipient_id !== current_user.id) && (
+                    <button className='friend-btn' onClick={deleteRequest}>Cancel request</button>
+                  )}
+                  </div>
+                  <div>{(status === 'pending' && one_request?.recipient_id === current_user.id) && (
+                    <button className='friend-btn' onClick={updateRequest}>Approve request</button>
+                  )}
+                  </div>
+                  <div>{status === '' && (
+                    <button className='friend-btn' onClick={createRequest}>Add friend</button>
+                  )}
+                  </div>
+                </div>
+                )}
+              </div>
+              <div className="profile-top-underline">
             </div>
           </div>
         </div>
       </div>
         <div className="profile-body">
-          {usersPosts.length > 0 ? 'Posts' : 'No Posts Created'}
+          {usersPosts.length > 0 ? (
+            <span className='profile-post-header'>Posts</span>
+          ) : 'No Posts Created'}
         </div>
-        {/* <CreatePostModal /> */}
-        <div className='feed-posts'>
-
-        {usersPosts && usersPosts.reverse().map(post => (
-          <div id={`profile${post.id}`} className="single-post">
-            <div className="post-user-info">
-              <div>{post.user.profile_image_url ? (
-                <img onClick={() => redirectProfile(post.user)} className="post-user-image" src={post.user.profile_image_url} alt="" />
-
-                    ) : (
-
-                <img onClick={() => redirectProfile(post.user)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
-                    )}
-              </div>
-              <span className='user-first-last'>{post.user?.first_name} {post.user?.last_name}</span>
-            </div>
-              {current_user.id === post.user.id ? (
-                <PostOptionsModal post={post} />
-
-              ) : (
-                ''
-              )}
-            <div className='post-content'>{post.content}</div>
-            <div className="post-images">
-              <img className='single-post-image' src={post?.images[0]?.image_url} alt="" />
-            </div>
-            <div className="post-underline"></div>
-            <CommentView post={post} />
-            <CreateCommentForm post={post} />
-          </div>
-        ))}
       </div>
+        {/* <CreatePostModal /> */}
+        <div className="profile-lower">
+          <div className="friends-list-container">
+            <FriendsList user={user}
+                         mutualFriends={mutualFriends}
+                         accepted={accepted}
+                         deleted={deleted}
+                         setAccepted={setAccepted}
+                         setDeleted={setDeleted}
+                         />
+          </div>
+          <div className='feed-posts'>
+          {usersPosts && usersPosts.reverse().map(post => (
+            <div id={`profile${post.id}`} className="single-post">
+              <div className="post-user-info">
+                <div>{post.user.profile_image_url ? (
+                  <img onClick={() => redirectProfile(post.user)} className="post-user-image" src={post.user.profile_image_url} alt="" />
+                      ) : (
+                  <img onClick={() => redirectProfile(post.user)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
+                      )}
+                </div>
+                <span className='user-first-last'>{post.user?.first_name} {post.user?.last_name}</span>
+              </div>
+                {current_user.id === post.user.id ? (
+                  <PostOptionsModal post={post} />
+                ) : (
+                  ''
+                )}
+              <div className='post-content'>{post.content}</div>
+              <div className="post-images">
+                <img className='single-post-image' src={post?.images[0]?.image_url} alt="" />
+              </div>
+              <div className="post-underline"></div>
+              <CommentView post={post} />
+              <CreateCommentForm post={post} />
+            </div>
+          ))}
+                </div>
+        </div>
     </div>
   );
 }
