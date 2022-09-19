@@ -22,7 +22,6 @@ const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setD
       const users_friends = await response.json();
       setFriends(users_friends.friends);
     })();
-    // dispatch(getAllFriendsThunk())
     if(deleted === true){
       setDeleted(false)
     }
@@ -31,6 +30,21 @@ const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setD
     }
   }, [userId, user, accepted, deleted]);
 
+
+  let friendsList = document.querySelector(".friends-list")
+  useEffect(() => {
+    if(friends.length === 2 ||
+      friends.length === 5 ||
+      friends.length === 8
+      ){
+        if(friendsList){
+
+          friendsList.style.justifyContent = 'space-around'
+        } else {
+          friendsList.style.justifyContent = 'space-between'
+        }
+      }
+  }, [friends, friendsList]);
 
 
   return (
@@ -42,7 +56,7 @@ const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setD
         </div>
         <span className='friends-amount'>{friends.length} {current_user.id !== userId ? (
           `(${mutualFriends.length} mutual)`
-        ) : 'friends'} </span>
+        ) : 'friend(s)'} </span>
       </div>
       <div className='friends-list'>
         {friends && friends.map((friend, i) => (

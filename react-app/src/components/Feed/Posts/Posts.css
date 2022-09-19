@@ -64,6 +64,8 @@
   height: 40px;
   border-radius: 100%;
   cursor: pointer;
+  object-fit: cover;
+  user-select: none;
 }
 .post-content{
   width: 100%;
@@ -79,6 +81,8 @@
 .single-post-image{
   padding: -16px;
   width: 100%;
+  user-select: none;
+
 }
 .post-underline{
   border-bottom: 1px solid #e4e6e8ec;

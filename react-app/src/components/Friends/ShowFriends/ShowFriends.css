@@ -1,0 +1,103 @@
+.sf-container{
+  width: 55.5em;
+  height: max-content;
+  background-color: white;
+  margin: 0 auto;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  min-height: 40em;
+  /* height: 100%; */
+}
+.sf-upper{
+  padding: 16px;
+  display: flex;
+  justify-content: space-around;
+}
+.sf-friend-requests{
+  color: #1771E8;
+  font-size: 16px;
+}
+.sf-friend-image{
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+  cursor: pointer;
+  user-select: none;
+}
+.sf-friend-image:hover {
+  -webkit-filter: brightness(90%);
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+.sf-friend-image:active{
+
+  -webkit-filter: brightness(80%);
+  -webkit-transition: all 50ms ease;
+  -moz-transition: all 50ms ease;
+  -o-transition: all 50ms ease;
+  -ms-transition: all 50ms ease;
+  transition: all 50ms ease;
+  transform: scale(0.99);
+
+}
+.sf-friend-info{
+}
+.sf-one{
+  width: 26em;
+}
+.sf-friend{
+  display: flex;
+  align-items: center;
+  border: 1px solid #e5e6e9;
+  width: 26em;
+  padding-left: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  position: relative;
+}
+.show-friend-cards{
+  /* display: flex; */
+}
+.sf-body{
+  display: flex;
+  padding-left: 16px;
+  padding-right: 16px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.sf-user-fullname{
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sf-user-fullname:hover{
+  text-decoration: underline;
+}
+.sf-options{
+  position: absolute;
+  top: 45%;
+  right: 10px;
+}
+.sf-friend-btn{
+  border: none;
+  background-color: #E4E6EB;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  top: 35%;
+  right: 10px;
+}
+.sf-friend-btn:hover{
+  background-color: #D8DADF;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { getPostsThunk } from '../../store/post';
@@ -10,6 +11,7 @@ import CreatePostModal from '../CreatePost';
 import CreatePostForm from '../CreatePost/CreatePostForm';
 import CommentView from '../Feed/CommentView';
 import FriendsList from '../Friends/FriendList';
+import ShowFriends from '../Friends/ShowFriends';
 import PostOptionsModal from '../PostOptions';
 
 import "./ProfilePage.css"
@@ -27,7 +29,9 @@ function ProfilePage() {
   const [mutualFriends, setMutualFriends] = useState([]);
   const [accepted, setAccepted] = useState(false);
   const [deleted, setDeleted] = useState(false);
-
+  const [clickedFriends, setClickedFriends] = useState(false);
+  const [clickedPosts, setClickedPosts] = useState(true);
+  const postsRef = useRef()
   // Find User
   useEffect(() => {
     if (!userId) {
@@ -52,7 +56,52 @@ function ProfilePage() {
   useEffect(() => {
     dispatch(getPostsThunk())
   }, [dispatch]);
+  // let postsEl = document.querySelector(".profile-post-header")
+  let postsEl = document.querySelector("#post-header")
+  let friendsEl = document.querySelector("#friends-header")
 
+  useEffect(() => {
+    if(postsEl) postsEl.focus()
+    // if(friendsEl) friendsEl.focus()
+  }, []);
+
+  const postsClick = () => {
+    if(friendsEl && clickedFriends){
+      setClickedFriends(false)
+      setClickedPosts(true)
+    }
+    setTimeout(() => {
+      if(postsEl){
+        if(clickedPosts){
+          window.scrollBy({
+            top: -500,
+            behavior: 'smooth'
+          })
+        }
+      }
+    }, 500)
+  }
+
+  const friendsClick = () => {
+          // postsRef.current.scrollIntoView()
+
+    if(friendsEl){
+      if(clickedFriends){
+        setTimeout(() => {
+          window.scrollBy({
+            top: -500,
+            behavior: 'smooth'
+          })
+        }, 500)
+      }
+      if(postsEl){
+        if(clickedPosts){
+          setClickedFriends(true)
+          setClickedPosts(false)
+        }
+      }
+    }
+  }
 
   const user_id = parseInt(userId)
   useEffect(() => {
@@ -81,6 +130,7 @@ function ProfilePage() {
   const redirectProfile = (user) => {
     history.push(`/users/${user.id}`)
   }
+
   const createRequest = async () => {
     const formData = new FormData()
     formData.append("sender_id", current_user.id)
@@ -91,11 +141,10 @@ function ProfilePage() {
       body: formData
     })
     const result = await res.json()
-
-
     setOne_request(result.one_request)
     setStatus('pending')
   }
+
   const updateRequest = async () => {
     const data = {
       id: one_request.id,
@@ -105,15 +154,12 @@ function ProfilePage() {
     }
     const updatedReq = await dispatch(updateFriendRequestThunk(data))
     if(updatedReq){
-
     }
     setAccepted(true)
-
     setStatus('accepted')
-
     dispatch(getAllFriendsThunk())
-
   }
+
   const deleteRequest = async () => {
     if(status === 'accepted') {
 
@@ -126,7 +172,6 @@ function ProfilePage() {
       setDeleted(true)
       setStatus('')
       dispatch(getAllFriendsThunk())
-
     }
     else if(status !== 'accepted'){
       const res = await fetch(`/api/requests/${one_request.id}/${user_id}`, {
@@ -136,8 +181,9 @@ function ProfilePage() {
         setStatus('')
       }
     }
-
   }
+
+
 
   return (
     <div className="profile-page">
@@ -187,13 +233,28 @@ function ProfilePage() {
         </div>
       </div>
         <div className="profile-body">
-          {usersPosts.length > 0 ? (
-            <span className='profile-post-header'>Posts</span>
-          ) : 'No Posts Created'}
+            <span id="post-header"
+                  ref = {postsRef}
+                  onClick={postsClick}
+                  className={!clickedPosts ? 'profile-post-header' : 'profile-post-header-active'}>Posts</span>
+            <span id="friends-header"
+                  onClick={friendsClick}
+                  className={!clickedFriends ? 'profile-friends-header' : 'profile-post-header-active'}>Friends</span>
         </div>
       </div>
-        {/* <CreatePostModal /> */}
-        <div className="profile-lower">
+        {clickedFriends && <ShowFriends
+                            user={user}
+                            setClickedPosts={setClickedPosts}
+                            setClickedFriends={setClickedFriends}
+                            mutualFriends={mutualFriends}
+                            setAccepted={setAccepted}
+                            setDeleted={setDeleted}
+                            deleted={deleted}
+                            accepted={accepted}
+                            setMutualFriends={setMutualFriends}
+                            />}
+        {clickedPosts && (
+          <div className="profile-lower">
           <div className="friends-list-container">
             <FriendsList user={user}
                          mutualFriends={mutualFriends}
@@ -203,6 +264,8 @@ function ProfilePage() {
                          setDeleted={setDeleted}
                          />
           </div>
+
+            {/* <CreatePostModal /> */}
           <div className='feed-posts'>
           {usersPosts && usersPosts.reverse().map(post => (
             <div id={`profile${post.id}`} className="single-post">
@@ -210,15 +273,15 @@ function ProfilePage() {
                 <div>{post.user.profile_image_url ? (
                   <img onClick={() => redirectProfile(post.user)} className="post-user-image" src={post.user.profile_image_url} alt="" />
                       ) : (
-                  <img onClick={() => redirectProfile(post.user)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
+                        <img onClick={() => redirectProfile(post.user)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
                       )}
                 </div>
                 <span className='user-first-last'>{post.user?.first_name} {post.user?.last_name}</span>
               </div>
                 {current_user.id === post.user.id ? (
                   <PostOptionsModal post={post} />
-                ) : (
-                  ''
+                  ) : (
+                    ''
                 )}
               <div className='post-content'>{post.content}</div>
               <div className="post-images">
@@ -229,8 +292,9 @@ function ProfilePage() {
               <CreateCommentForm post={post} />
             </div>
           ))}
-                </div>
         </div>
+      </div>
+          )}
     </div>
   );
 }

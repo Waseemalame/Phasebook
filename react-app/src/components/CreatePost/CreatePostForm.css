@@ -216,6 +216,7 @@
   font-size: 17px;
   color: #65676B;
   outline: none;
+  user-select: none;
 }
 .create-post-errors{
   color: red;
