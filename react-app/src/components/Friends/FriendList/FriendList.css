@@ -36,11 +36,19 @@
   align-items: center;
   height: 30px;
   margin-right: 16px;
-  color: blue;
+  color: rgba(0, 0, 255, 0.62);
   cursor: pointer;
   border-radius: 3px;
 }
 .see-all-friends:hover{
   background-color: rgba(211, 211, 211, 0.426);
-
+}
+.see-all-friends:active{
+  background-color: rgba(211, 211, 211, 0.87);
+  transform: scale(0.97);
+}
+.see-all-friends::selection{
+  /* color:transparent; */
+  /* color: rgba(0, 0, 255, 0.62); */
+  user-select: none;
 }
