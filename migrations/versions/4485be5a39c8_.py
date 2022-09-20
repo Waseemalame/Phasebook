@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: be6a32af0ab9
+Revision ID: 4485be5a39c8
 Revises: 
-Create Date: 2022-09-16 17:19:24.107429
+Create Date: 2022-09-19 21:51:31.365259
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'be6a32af0ab9'
+revision = '4485be5a39c8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,6 +37,17 @@ def upgrade():
     sa.Column('recipient_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['recipient_id'], ['users.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ondelete='CASCADE'),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('messages',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('msg_sender_id', sa.Integer(), nullable=False),
+    sa.Column('msg_recipient_id', sa.Integer(), nullable=False),
+    sa.Column('msg_body', sa.String(length=2000), nullable=False),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['msg_recipient_id'], ['users.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['msg_sender_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('posts',
@@ -72,6 +83,7 @@ def downgrade():
     op.drop_table('images')
     op.drop_table('comments')
     op.drop_table('posts')
+    op.drop_table('messages')
     op.drop_table('friendRequests')
     op.drop_table('users')
     # ### end Alembic commands ###

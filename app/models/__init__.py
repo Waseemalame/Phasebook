@@ -4,3 +4,4 @@ from .post import Post
 from .comment import Comment
 from .image import Image
 from .request import FriendRequest
+from .message import Message
