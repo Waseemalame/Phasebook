@@ -67,6 +67,7 @@ const MsgPopUp = () => {
 
         // when component unmounts, disconnect
         return (() => {
+            socket.emit('dm_leave', { username: current_user.username, recipient: msgUser.id });
             socket.disconnect()
             setMessages([]);
         })
