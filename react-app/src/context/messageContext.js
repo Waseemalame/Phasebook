@@ -6,6 +6,7 @@ export const useMessageContext = () => useContext(MessageContext)
 export default function MessageContextProvider(props){
   const [showMsgPopup, setShowMsgPopup] = useState(false);
   const [msgUser, setMsgUser] = useState(null);
+  const [messages, setMessages] = useState([])
 
   return (
     <MessageContext.Provider
@@ -13,7 +14,9 @@ export default function MessageContextProvider(props){
       showMsgPopup,
       setShowMsgPopup,
       msgUser,
-      setMsgUser
+      setMsgUser,
+      messages,
+      setMessages
     }}
     >
       {props.children}
