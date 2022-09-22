@@ -4,8 +4,8 @@ from flask_socketio import SocketIO, emit, join_room, send, leave_room
 
 if os.environ.get('FLASK_ENV') == 'production':
   origins = [
-    'https://phasedbook.herokuapp.com/',
-    'http://phasedbook.herokuapp.com/'
+    'https://phasedbook.herokuapp.com',
+    'http://phasedbook.herokuapp.com'
   ]
 else:
   origins = '*'
