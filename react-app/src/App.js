@@ -19,7 +19,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const [searchList, setSearchList] = useState(false);
   const user = useSelector(state => state.session.user)
-  const { showMsgPopup, setShowMsgPopup } = useMessageContext()
+  const { showMsgPopup, setShowMsgPopup, setMsgUser } = useMessageContext()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,7 +61,7 @@ function App() {
           {/* </div> */}
         </ProtectedRoute>
       </Switch>
-      {showMsgPopup && <MsgPopUp />}
+      {user && showMsgPopup && <MsgPopUp />}
     </BrowserRouter>
   );
 }
