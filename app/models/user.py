@@ -49,11 +49,11 @@ class User(db.Model, UserMixin):
     #                         back_populates='received_msg'
     #                         )
 
-    msg_sender = db.relationship("Message",
+    messages_sent = db.relationship("Message",
                           foreign_keys="[Message.msg_sender_id]",
                           back_populates='msg_sender'
                           )
-    msg_recipient = db.relationship("Message",
+    messages_received = db.relationship("Message",
                           foreign_keys='[Message.msg_recipient_id]',
                           back_populates='msg_recipient'
                           )
