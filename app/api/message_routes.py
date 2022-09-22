@@ -6,7 +6,7 @@ from flask_login import current_user
 message_routes = Blueprint("messages", __name__, url_prefix="/messages")
 
 
-@message_routes.route('/<userId>')
+@message_routes.route('/<userId>', methods=["GET"])
 def get_messages(userId):
   user = User.query.get(userId)
   all_messages = Message.query.join(User,
