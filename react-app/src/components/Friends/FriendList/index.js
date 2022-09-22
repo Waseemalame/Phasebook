@@ -17,10 +17,15 @@ const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setD
   useEffect(() => {
 
     (async () => {
-      const response = await fetch(`/api/users/${userId}/friends`);
+      if(userId){
+        console.log(userId, 'userId')
+        console.log(typeof(userId), 'type of userId')
 
-      const users_friends = await response.json();
-      setFriends(users_friends.friends);
+        const response = await fetch(`/api/users/${userId}/friends`);
+
+        const users_friends = await response.json();
+        setFriends(users_friends.friends);
+      }
     })();
     if(deleted === true){
       setDeleted(false)
