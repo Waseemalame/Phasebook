@@ -28,7 +28,7 @@ const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setD
     if(accepted === true){
       setAccepted(false)
     }
-  }, [userId, user, accepted, deleted]);
+  }, [userId, user, accepted, deleted, setAccepted, setDeleted]);
 
 
   let friendsList = document.querySelector(".friends-list")
