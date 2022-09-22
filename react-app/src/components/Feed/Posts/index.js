@@ -22,7 +22,7 @@ const Posts = () => {
   const posts = useSelector(state => Object.values(state.posts))
   const history = useHistory()
   const current_user = useSelector(state => state.session.user)
-  const { showMsgPopup, setShowMsgPopup, msgUser, setMsgUser } = useMessageContext()
+  const { showMsgPopup, setShowMsgPopup, msgUser, setMsgUser, messages, setMessages } = useMessageContext()
   useEffect(() => {
     dispatch(getPostsThunk())
     dispatch(getComments())
@@ -35,8 +35,29 @@ const Posts = () => {
     history.push(`/users/${user.id}`)
   }
   const messagePopup = (user) => {
-    setShowMsgPopup(true)
-    setMsgUser(user)
+    if(user.id === current_user.id){
+      setShowMsgPopup(false)
+      setMsgUser(null)
+      return
+    }
+    if(msgUser){
+      setShowMsgPopup(false)
+      setMsgUser(null)
+      setMessages([])
+    } else
+    if(showMsgPopup){
+      // return;
+      setShowMsgPopup(false)
+      setMsgUser(null)
+      setShowMsgPopup(true)
+      setMsgUser(user)
+      setMessages([])
+
+
+      // return
+    }
+      setShowMsgPopup(true)
+      setMsgUser(user)
 
   }
 
