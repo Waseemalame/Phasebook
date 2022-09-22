@@ -18,9 +18,6 @@ const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setD
 
     (async () => {
       if(userId){
-        console.log(userId, 'userId')
-        console.log(typeof(userId), 'type of userId')
-
         const response = await fetch(`/api/users/${userId}/friends`);
 
         const users_friends = await response.json();

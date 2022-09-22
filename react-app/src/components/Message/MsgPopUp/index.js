@@ -22,9 +22,6 @@ const MsgPopUp = () => {
 
     useEffect(() => {
       if(!current_user) return
-      console.log(roomId)
-      console.log(current_user.id)
-      console.log(msgUser.id)
       if(current_user.id !== msgUser.id){
 
           if(roomId === `${current_user.id}-${msgUser.id}` || roomId === `${msgUser.id}-${current_user.id}`){
@@ -33,10 +30,8 @@ const MsgPopUp = () => {
               if(roomId === `${current_user.id}-${msgUser.id}` || roomId === `${msgUser.id}-${current_user.id}`){
 
                 const res = await fetch(`/api/messages/${msgUser.id}`)
-                console.log(res)
                 if(res.ok){
                   const messages = await res.json()
-                  console.log(messages.all_messages)
                   setMessageHistory(messages.all_messages)
                 }
               }
@@ -78,8 +73,6 @@ const MsgPopUp = () => {
     useEffect(() => {
       if(msgContainer){
         msgContainer.scrollTop = msgContainer.scrollHeight
-
-        console.log(msgContainer.scrollHeight)
       }
     });
 
