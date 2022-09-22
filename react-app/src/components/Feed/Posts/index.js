@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
+import { useMessageContext } from '../../../context/messageContext';
 import { getComments } from '../../../store/comment';
 import { getImagesThunk } from '../../../store/image';
 import { getPostsThunk } from '../../../store/post';
@@ -12,6 +13,7 @@ import CreatePostModal from '../../CreatePost';
 import EditPostModal from '../../EditPost';
 import PostOptionsModal from '../../PostOptions';
 import CommentView from '../CommentView';
+
 import './Posts.css'
 const Posts = () => {
 
@@ -20,7 +22,7 @@ const Posts = () => {
   const posts = useSelector(state => Object.values(state.posts))
   const history = useHistory()
   const current_user = useSelector(state => state.session.user)
-
+  const { showMsgPopup, setShowMsgPopup, msgUser, setMsgUser, messages, setMessages } = useMessageContext()
   useEffect(() => {
     dispatch(getPostsThunk())
     dispatch(getComments())
@@ -32,7 +34,32 @@ const Posts = () => {
   const redirectProfile = (user) => {
     history.push(`/users/${user.id}`)
   }
+  const messagePopup = (user) => {
+    if(user.id === current_user.id){
+      setShowMsgPopup(false)
+      setMsgUser(null)
+      return
+    }
+    if(msgUser){
+      setShowMsgPopup(false)
+      setMsgUser(null)
+      setMessages([])
+    } else
+    if(showMsgPopup){
+      // return;
+      setShowMsgPopup(false)
+      setMsgUser(null)
+      setShowMsgPopup(true)
+      setMsgUser(user)
+      setMessages([])
 
+
+      // return
+    }
+      setShowMsgPopup(true)
+      setMsgUser(user)
+
+  }
 
   return (
     <div className='main-feed'>
@@ -42,7 +69,10 @@ const Posts = () => {
           <div id={`feed${post.id}`} className="single-post">
             <div className="post-user-info">
               <div>{post.user.profile_image_url ? (
-                <img onClick={() => redirectProfile(post.user)} className="post-user-image" src={post.user.profile_image_url} alt="" />
+                <img onClick={() => {
+                  redirectProfile(post.user)
+                  messagePopup(post.user)
+                }} className="post-user-image" src={post.user.profile_image_url} alt="" />
 
                     ) : (
 

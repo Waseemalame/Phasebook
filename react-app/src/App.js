@@ -13,11 +13,13 @@ import Navigation from './components/Navigation';
 import Posts from './components/Feed/Posts';
 import "./index.css"
 import UsersList from './components/UsersList/UsersList';
+import { useMessageContext } from './context/messageContext';
+import MsgPopUp from './components/Message/MsgPopUp';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [searchList, setSearchList] = useState(false);
   const user = useSelector(state => state.session.user)
-
+  const { showMsgPopup, setShowMsgPopup, setMsgUser } = useMessageContext()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -59,6 +61,7 @@ function App() {
           {/* </div> */}
         </ProtectedRoute>
       </Switch>
+      {user && showMsgPopup && <MsgPopUp />}
     </BrowserRouter>
   );
 }
