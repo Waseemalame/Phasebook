@@ -1,7 +1,9 @@
 .profile-icon{
   border-radius: 999px;
   max-width: 30px;
+  height: 30px;
   margin-right: 2px;
+  object-fit: cover;
 }
 .sidebar-container{
   width: 280px;
