@@ -6,6 +6,7 @@ import { getPostsThunk } from '../../store/post';
 import { deleteRequestThunk, getAllFriendsThunk, updateFriendRequestThunk } from '../../store/request';
 import { authenticate } from '../../store/session';
 import LogoutButton from '../auth/LogoutButton';
+import { useProfileContext } from '../context/profileContext';
 import CreateCommentForm from '../CreateComment/CreateCommentForm';
 import CreatePostModal from '../CreatePost';
 import CreatePostForm from '../CreatePost/CreatePostForm';
@@ -29,9 +30,10 @@ function ProfilePage() {
   const [mutualFriends, setMutualFriends] = useState([]);
   const [accepted, setAccepted] = useState(false);
   const [deleted, setDeleted] = useState(false);
-  const [clickedFriends, setClickedFriends] = useState(false);
-  const [clickedPosts, setClickedPosts] = useState(true);
+  const { clickedFriends, setClickedFriends, clickedPosts, setClickedPosts, scrollToFriends } = useProfileContext()
   const postsRef = useRef()
+  const friendsRef = useRef()
+  const scrollRef = useRef()
   // Find User
   useEffect(() => {
     if (!userId) {
@@ -61,8 +63,9 @@ function ProfilePage() {
   let friendsEl = document.querySelector("#friends-header")
 
   useEffect(() => {
-    if(postsEl) postsEl.focus()
-    // if(friendsEl) friendsEl.focus()
+    if(scrollToFriends){
+      scrollRef.current.scrollIntoView()
+    }
   }, []);
 
   const postsClick = () => {
@@ -83,8 +86,7 @@ function ProfilePage() {
   }
 
   const friendsClick = () => {
-          // postsRef.current.scrollIntoView()
-
+    scrollRef.current.scrollIntoView()
     if(friendsEl){
       if(clickedFriends){
         setTimeout(() => {
@@ -194,7 +196,7 @@ function ProfilePage() {
               <div className="edit-cover-photo">
               </div>
             </div>
-            <div className="user-profile-header">
+            <div ref = {scrollRef} className="user-profile-header">
               <div className="users-name-image">
                 <div className="profile-user-info">
                   {user.profile_image_url ? (
@@ -227,8 +229,8 @@ function ProfilePage() {
                 </div>
                 )}
               </div>
-              <div className="profile-top-underline">
-            </div>
+              {/* <div ref = {scrollRef} className="profile-top-underline">
+            </div> */}
           </div>
         </div>
       </div>
@@ -238,6 +240,7 @@ function ProfilePage() {
                   onClick={postsClick}
                   className={!clickedPosts ? 'profile-post-header' : 'profile-post-header-active'}>Posts</span>
             <span id="friends-header"
+                  ref = {friendsRef}
                   onClick={friendsClick}
                   className={!clickedFriends ? 'profile-friends-header' : 'profile-post-header-active'}>Friends</span>
         </div>

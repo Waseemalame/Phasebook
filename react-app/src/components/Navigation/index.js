@@ -3,12 +3,12 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
-
+import { useProfileContext } from '../context/profileContext';
 import './Navigation.css'
 
 const Navigation = ({ searchList, setSearchList}) => {
   const current_user = useSelector(state => state.session.user)
-
+  const { setClickedFriends, setScrollToFriends, setClickedPosts } = useProfileContext()
   const [searchString, setSearchString] = useState('');
   const [profileDropDown, setProfileDropDown] = useState(false);
   const history = useHistory()
@@ -47,6 +47,9 @@ const Navigation = ({ searchList, setSearchList}) => {
     setSearchList(true)
   }
   const redirectHome = () => {
+    setScrollToFriends(false)
+    setClickedPosts(true)
+    setClickedFriends(false)
     history.push('/')
   }
   const redirectProfile = () => {
