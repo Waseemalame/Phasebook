@@ -7,11 +7,11 @@
 
 }
 .one-msg-popup{
-  width: 18em;
+  width: 20em;
   background-color: white;
-  height: 30em;
+  height: 27em;
   position: relative;
-  margin-right: 5em;
+  margin-right: 5.3em;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -31,10 +31,9 @@
   object-fit: cover;
 }
 .message-container{
-  /* border: 5px solid yellow; */
   width: 100%;
   margin-top: 1px;
-  height: 23em;
+  height: 20em;
   overflow-y: scroll;
   padding-left: 10px;
   padding-right: 10px;

@@ -1,32 +1,28 @@
 .profile-icon{
   border-radius: 999px;
-  /* width: 2000px; */
   max-width: 30px;
-  /* margin-left: 2px; */
   margin-right: 2px;
 }
 .sidebar-container{
-  margin-top: 20px;
   width: 280px;
-  position: absolute;
+  margin-left: 8px;
+  position: fixed;
 }
 .sidebar-container > * {
   /* margin: 10px; */
-  margin-left: 10px;
+  /* margin-left: 10px; */
   margin-bottom: 5px;
   max-width: 280px;
   display: flex;
   align-items: center;
-  padding: 5px;
-
-
+  padding: 8px;
 }
 .sidebar-container > div > *{
   width: 30px;
   margin-right: 10px;
 
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
   .sidebar-container{
     display: none;
   }
