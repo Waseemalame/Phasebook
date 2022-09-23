@@ -2,15 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
+import { useMessageContext } from '../../context/messageContext';
 import { getAllFriendsThunk, getAllRequestsThunk } from '../../store/request';
-function UsersList({ searchString, setSearchList }) {
+import "../RightSideBar/RightSideBar.css"
+function Contacts({ searchString, setSearchList }) {
   const [users, setUsers] = useState([]);
   const [mutualFriends, setMutualFriends] = useState([]);
   const [currentFriend, setCurrentFriend] = useState('');
   const history = useHistory()
   const current_user = useSelector(state => state.session.user)
   const friends = useSelector(state => Object.values(state.friends))
+  const { showMsgPopup, setShowMsgPopup, msgUser, setMsgUser, messages, setMessages } = useMessageContext()
   const dispatch = useDispatch()
+
   useEffect(() => {
     async function fetchData() {
       const response = await fetch('/api/users/');
@@ -48,32 +52,58 @@ useEffect(() => {
   const redirectProfile = (user) => {
     history.push(`/users/${user.id}`)
   }
+  const messagePopup = (user) => {
+    if(user.id === current_user.id){
+      setShowMsgPopup(false)
+      setMsgUser(null)
+      return
+    }
+    if(msgUser){
+      setShowMsgPopup(false)
+      setMsgUser(null)
+      setMessages([])
+    } else
+    if(showMsgPopup){
+      // return;
+      setShowMsgPopup(false)
+      setMsgUser(null)
+      setShowMsgPopup(true)
+      setMsgUser(user)
+      setMessages([])
+
+
+      // return
+    }
+      setShowMsgPopup(true)
+      setMsgUser(user)
+
+  }
 
   return (
 
-      <div className='friend-list-container'>
-        <span className='friends-header'>Friends</span>
+      <div className='contacts-container'>
+        <span className='contacts-header'>Contacts</span>
           {friends && friends.map(friend => (
-                            <div onClick={() => redirectProfile(friend)} className='friend'>
+                            <div onClick={() => messagePopup(friend)} className='contact'>
                               <div>
                                 {friend.profile_image_url ? (
-                                  <img className="friend-image" src={friend.profile_image_url} alt="" />
+                                  <img className="contact-image" src={friend.profile_image_url} alt="" />
 
                                   ) : (
 
-                                  <img className="friend-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
+                                  <img className="contact-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
                                 )}
                                 </div>
 
-                              <div>{friend.first_name} {friend.last_name}</div>
+                              <div className='contact-name'>{friend.first_name} {friend.last_name}</div>
 
-                              <div className='mutual-friend-click' onClick={async (e, friendId) =>{
+                              {/* <div className='mutual-friend-click' onClick={async (e, friendId) =>{
                                                                     findMutualFriends(e, friend.id)
                                                                     setCurrentFriend(friend.first_name + ' ' + friend.last_name)
-                                                                    }}>Mutual Friends</div>
+                                                                    }}>Mutual Friends</div> */}
                             </div>
           ))}
-          {mutualFriends.length > 0 && currentFriend && <div>Mutual Friends with {currentFriend}</div>}
+          {/* {mutualFriends.length > 0 && currentFriend && <div>Mutual Friends with {currentFriend}</div>}
 
           {mutualFriends.length > 0 && mutualFriends.map(mutualFriend => (
             <div className='mutual-friend-container'>
@@ -89,10 +119,10 @@ useEffect(() => {
 
                               <div>{mutualFriend.first_name} {mutualFriend.last_name}</div>
             </div>
-          ))}
+          ))} */}
       </div>
 
   );
 }
 
-export default UsersList;
+export default Contacts;

@@ -10,6 +10,6 @@ body{
   background-color: #F0F2F5;
 }
 .home-display{
-  display: flex;
-  /* justify-content: space-evenly; */
+  position: relative;
+  margin-top: 5em;
 }
