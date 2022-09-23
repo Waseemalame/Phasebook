@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { getPostsThunk } from '../../store/post';
 import { deleteRequestThunk, getAllFriendsThunk, updateFriendRequestThunk } from '../../store/request';
-import { authenticate } from '../../store/session';
-import LogoutButton from '../auth/LogoutButton';
 import { useProfileContext } from '../context/profileContext';
 import CreateCommentForm from '../CreateComment/CreateCommentForm';
 import CreatePostModal from '../CreatePost';
@@ -14,8 +12,10 @@ import CommentView from '../Feed/CommentView';
 import FriendsList from '../Friends/FriendList';
 import ShowFriends from '../Friends/ShowFriends';
 import PostOptionsModal from '../PostOptions';
+import EditProImg from './EditProImg';
 
 import "./ProfilePage.css"
+
 function ProfilePage() {
   const [user, setUser] = useState({});
   const { userId }  = useParams();
@@ -24,15 +24,12 @@ function ProfilePage() {
   const history = useHistory()
   const dispatch = useDispatch()
   const usersPosts = posts.filter(post => post.user.id === user.id)
-  // const requests = useSelector(state => Object.values(state.friendRequests))
   const [status, setStatus] = useState('');
   const [one_request, setOne_request] = useState('');
   const [mutualFriends, setMutualFriends] = useState([]);
   const [accepted, setAccepted] = useState(false);
   const [deleted, setDeleted] = useState(false);
-  const { clickedFriends, setClickedFriends, clickedPosts, setClickedPosts, scrollToFriends } = useProfileContext()
-  const postsRef = useRef()
-  const friendsRef = useRef()
+  const { clickedFriends, setClickedFriends, clickedPosts, setClickedPosts, scrollToFriends, profileImgPreview, proImgUpdated } = useProfileContext()
   const scrollRef = useRef()
   // Find User
   useEffect(() => {
@@ -40,11 +37,17 @@ function ProfilePage() {
       return;
     }
     (async () => {
+
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
-      setUser(user);
+      if(current_user.id === user.id){
+        setUser(current_user)
+      } else {
+        setUser(user);
+      }
+
     })();
-  }, [userId]);
+  }, [userId, current_user]);
 
   // Find Mutual Friends with Profile Owner
   useEffect(() => {
@@ -67,6 +70,7 @@ function ProfilePage() {
       scrollRef.current.scrollIntoView()
     }
   }, []);
+
 
   const postsClick = () => {
     if(friendsEl && clickedFriends){
@@ -199,11 +203,21 @@ function ProfilePage() {
             <div ref = {scrollRef} className="user-profile-header">
               <div className="users-name-image">
                 <div className="profile-user-info">
-                  {user.profile_image_url ? (
-                    <img className='profile-image' src={user.profile_image_url} alt="" />
-                  ) : (
-                    <img className='profile-image' src="https://scontent-lax3-1.xx.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=cp0_dst-png_p60x60&_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=jvAgaOmK2RAAX_4kkp6&_nc_ht=scontent-lax3-1.xx&oh=00_AT_MK_StZzlT1-HqibhO9GFRjxGQA9w3wR6h8Ltolictug&oe=633D2A78" alt="" />
-                  )}
+                  <>
+                  {profileImgPreview ? (
+
+                    <img className='profile-image-preview' src={profileImgPreview} alt="" />
+                    ) : (
+                      <>
+                      {user.profile_image_url ? (
+                        <img className='profile-image' src={user.profile_image_url} alt="" />
+                        ) : (
+                          <img className='profile-image' src="https://scontent-lax3-1.xx.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=cp0_dst-png_p60x60&_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=jvAgaOmK2RAAX_4kkp6&_nc_ht=scontent-lax3-1.xx&oh=00_AT_MK_StZzlT1-HqibhO9GFRjxGQA9w3wR6h8Ltolictug&oe=633D2A78" alt="" />
+                          )}
+                      </>
+                      )}
+                      <EditProImg user={current_user} />
+                  </>
                 </div>
               </div>
               <div className="profile-users-name">
@@ -236,11 +250,9 @@ function ProfilePage() {
       </div>
         <div className="profile-body">
             <span id="post-header"
-                  ref = {postsRef}
                   onClick={postsClick}
                   className={!clickedPosts ? 'profile-post-header' : 'profile-post-header-active'}>Posts</span>
             <span id="friends-header"
-                  ref = {friendsRef}
                   onClick={friendsClick}
                   className={!clickedFriends ? 'profile-friends-header' : 'profile-post-header-active'}>Friends</span>
         </div>
@@ -274,7 +286,7 @@ function ProfilePage() {
             <div id={`profile${post.id}`} className="single-post">
               <div className="post-user-info">
                 <div>{post.user.profile_image_url ? (
-                  <img onClick={() => redirectProfile(post.user)} className="post-user-image" src={post.user.profile_image_url} alt="" />
+                  <img onClick={() => redirectProfile(post.user)} className="post-user-image" src={current_user.id === post.user.id ? current_user.profile_image_url : post.user.profile_image_url} alt="" />
                       ) : (
                         <img onClick={() => redirectProfile(post.user)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
                       )}

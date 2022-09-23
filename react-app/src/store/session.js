@@ -1,7 +1,7 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
-
+const UPDATE_USER = 'session/UPDATE_USER'
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
@@ -10,6 +10,28 @@ const setUser = (user) => ({
 const removeUser = () => ({
   type: REMOVE_USER,
 })
+
+const updateUser = (user) => ({
+  type: UPDATE_USER,
+  user
+})
+export const updateUserThunk = (data) => async (dispatch) => {
+  console.log(data)
+  const { id, profile_image_url } = data
+  const formData = new FormData()
+  formData.append('profile_image_url', profile_image_url)
+  formData.append('user_id', id)
+  const res = await fetch(`/api/users/${id}`, {
+    method: 'PUT',
+    body: formData
+  })
+  if(res.ok){
+    const user = await res.json()
+    dispatch(updateUser(user))
+    // return user
+  }
+
+}
 
 const initialState = { user: null };
 
@@ -126,10 +148,14 @@ export const signUp = (username, email, password, firstname, lastname) => async 
   }
 }
 
+
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
+    case UPDATE_USER:
+      return { user: action.user }
     case REMOVE_USER:
       return { user: null }
     default:

@@ -45,7 +45,7 @@ const Posts = () => {
               <div>{post.user.profile_image_url ? (
                 <img onClick={() => {
                   redirectProfile(post.user)
-                }} className="post-user-image" src={post.user.profile_image_url} alt="" />
+                }} className="post-user-image" src={current_user.id === post.user.id ? current_user.profile_image_url : post.user.profile_image_url} alt="" />
 
                     ) : (
 

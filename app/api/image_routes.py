@@ -47,9 +47,9 @@ def upload_image():
 
     # iamge_url = image_form.data['image']
     post_id = image_form.data["post_id"]
-
+    user_id = image_form.data["user_id"]
     image_form['csrf_token'].data = request.cookies['csrf_token']
-    new_image = Image(image_url=url, post_id=post_id)
+    new_image = Image(image_url=url, post_id=post_id, user_id=user_id)
     db.session.add(new_image)
     db.session.commit()
     return {"image_url": url}

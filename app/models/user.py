@@ -20,11 +20,12 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(40))
     last_name = db.Column(db.String(40))
     profile_image_url = db.Column(db.String())
+    profile_banner_url = db.Column(db.String())
 
 
     posts = db.relationship('Post', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
-
+    images = db.relationship('Image', back_populates='user')
     sender = db.relationship("FriendRequest",
                             foreign_keys="[FriendRequest.sender_id]",
                             back_populates="req_sender",
@@ -82,4 +83,6 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'profile_image_url': self.profile_image_url,
+            'profile_banner_url': self.profile_banner_url,
+            'images': [image.to_dict() for image in self.images]
         }
