@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import db, User
 from flask_login import current_user
-
+from app.forms import UserForm
 from app.models.request import FriendRequest
 
 
@@ -47,6 +47,36 @@ def mutual_friends(user_id):
                 print(friend.to_dict())
                 friend_arr.append(friend)
     return {'users': [user.to_dict() for user in friend_arr]}
+
+
+@user_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def update_user(id):
+    user_form = UserForm()
+
+    user = User.query.get(id)
+    print(user_form.data)
+    user.profile_image_url = user_form.data['profile_image_url']
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    print('USER------------------------------------------------------------')
+    db.session.commit()
+
+    return user.to_dict()
 
 
 @user_routes.route('/<int:id>')
