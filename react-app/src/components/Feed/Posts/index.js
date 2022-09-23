@@ -22,7 +22,6 @@ const Posts = () => {
   const posts = useSelector(state => Object.values(state.posts))
   const history = useHistory()
   const current_user = useSelector(state => state.session.user)
-  const { showMsgPopup, setShowMsgPopup, msgUser, setMsgUser, messages, setMessages } = useMessageContext()
   useEffect(() => {
     dispatch(getPostsThunk())
     dispatch(getComments())
@@ -34,32 +33,7 @@ const Posts = () => {
   const redirectProfile = (user) => {
     history.push(`/users/${user.id}`)
   }
-  const messagePopup = (user) => {
-    if(user.id === current_user.id){
-      setShowMsgPopup(false)
-      setMsgUser(null)
-      return
-    }
-    if(msgUser){
-      setShowMsgPopup(false)
-      setMsgUser(null)
-      setMessages([])
-    } else
-    if(showMsgPopup){
-      // return;
-      setShowMsgPopup(false)
-      setMsgUser(null)
-      setShowMsgPopup(true)
-      setMsgUser(user)
-      setMessages([])
 
-
-      // return
-    }
-      setShowMsgPopup(true)
-      setMsgUser(user)
-
-  }
 
   return (
     <div className='main-feed'>
@@ -71,7 +45,6 @@ const Posts = () => {
               <div>{post.user.profile_image_url ? (
                 <img onClick={() => {
                   redirectProfile(post.user)
-                  messagePopup(post.user)
                 }} className="post-user-image" src={post.user.profile_image_url} alt="" />
 
                     ) : (

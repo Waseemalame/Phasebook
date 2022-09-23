@@ -1,12 +1,10 @@
 .main-feed{
-  margin-top: 55px;
-  margin-left: 80px;
-  margin-right: 80px;
+  margin-left: 8em;
+  margin-right: 8em;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  /* bottom: 0; */
   padding-bottom: 20px;
 }
 .single-post{
