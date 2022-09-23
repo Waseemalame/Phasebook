@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useMessageContext } from '../../context/messageContext';
 import { logout } from '../../store/session';
+import { useMessageContext } from '../context/messageContext';
 import "./authStyles/LogoutButton.css"
 
 const LogoutButton = () => {

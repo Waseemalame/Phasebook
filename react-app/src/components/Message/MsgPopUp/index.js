@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useMessageContext } from '../../../context/messageContext'
+import { useMessageContext } from '../../context/messageContext'
 import { createMessageThunk, loadMessagesThunk } from '../../../store/message'
 import { io } from 'socket.io-client'
 import "./MsgPopUp.css"
