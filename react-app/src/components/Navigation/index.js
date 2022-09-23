@@ -108,7 +108,6 @@ const Navigation = ({ searchList, setSearchList}) => {
           {profileDropDown ? (
             <div className='profile-dropdown'>
               <div className='profile-click' onClick={redirectProfile}><strong>Profile</strong></div>
-              <div className='friends-click' onClick={redirectFriendsList}><strong>Friends</strong></div>
               <LogoutButton />
 
             </div>
