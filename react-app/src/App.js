@@ -3,18 +3,18 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm/SignUpForm'
-import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import ProfilePage from './components/ProfilePage';
 import { authenticate } from './store/session';
 import SideBar from './components/Feed/SideBar';
-import RightSideBar from './components/RightSideBar';
 import Navigation from './components/Navigation';
+import { useMessageContext } from './components/context/messageContext';
 import Posts from './components/Feed/Posts';
-import "./index.css"
 import Contacts from './components/Contacts/Contacts';
-import { useMessageContext } from './context/messageContext';
 import MsgPopUp from './components/Message/MsgPopUp';
+
+import "./index.css"
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [searchList, setSearchList] = useState(false);

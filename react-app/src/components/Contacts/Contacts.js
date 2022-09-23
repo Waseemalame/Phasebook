@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useMessageContext } from '../../context/messageContext';
 import { getAllFriendsThunk, getAllRequestsThunk } from '../../store/request';
+import { useMessageContext } from '../context/messageContext';
 import "../RightSideBar/RightSideBar.css"
 function Contacts({ searchString, setSearchList }) {
   const [users, setUsers] = useState([]);

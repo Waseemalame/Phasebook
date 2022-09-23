@@ -3,11 +3,11 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
-import { useMessageContext } from '../../../context/messageContext';
 import { getComments } from '../../../store/comment';
 import { getImagesThunk } from '../../../store/image';
 import { getPostsThunk } from '../../../store/post';
 import { getAllFriendsThunk } from '../../../store/request';
+import { useMessageContext } from '../../context/messageContext';
 import CreateCommentForm from '../../CreateComment/CreateCommentForm';
 import CreatePostModal from '../../CreatePost';
 import EditPostModal from '../../EditPost';

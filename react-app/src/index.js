@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import configureStore from './store';
 import { ModalProvider } from './components/context/Modal';
-import MessageContextProvider from './context/messageContext';
+import MessageContextProvider from './components/context/messageContext';
 
 const store = configureStore();
 
