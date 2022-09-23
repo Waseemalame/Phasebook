@@ -8,11 +8,11 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import ProfilePage from './components/ProfilePage';
 import { authenticate } from './store/session';
 import SideBar from './components/Feed/SideBar';
-import LeftSideBar from './components/LeftSideBar';
+import RightSideBar from './components/RightSideBar';
 import Navigation from './components/Navigation';
 import Posts from './components/Feed/Posts';
 import "./index.css"
-import UsersList from './components/UsersList/UsersList';
+import Contacts from './components/Contacts/Contacts';
 import { useMessageContext } from './context/messageContext';
 import MsgPopUp from './components/Message/MsgPopUp';
 function App() {
@@ -51,14 +51,14 @@ function App() {
           <ProfilePage />
         </ProtectedRoute>
         <ProtectedRoute path='/users/friends/:userId/' exact={true} >
-          <UsersList />
+          <Contacts />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          {/* <div className='home-display'> */}
+          <div className='home-display'>
             <SideBar />
             <Posts />
-            <LeftSideBar />
-          {/* </div> */}
+            <Contacts />
+          </div>
         </ProtectedRoute>
       </Switch>
       {user && showMsgPopup && <MsgPopUp />}
