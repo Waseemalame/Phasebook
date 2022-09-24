@@ -1,0 +1,12 @@
+.like-icon-amount{
+  width: 18px;
+  height: 18px;
+}
+.like-amount{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.like-length{
+  margin-left: 5px;
+}
