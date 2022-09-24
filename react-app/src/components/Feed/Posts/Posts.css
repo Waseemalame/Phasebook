@@ -121,7 +121,14 @@
 }
 .click-like:hover, .click-comment:hover{
   background-color: #e4e6e872;
-  /* background-color: #a7a9aba2; */
+}
+.click-like:active, .click-comment:active{
+  -webkit-filter: brightness(90%);
+  -webkit-transition: all ease;
+  -moz-transition: all ease;
+  -o-transition: all ease;
+  -ms-transition: all ease;
+  transition: all ease;
 
 }
 .like-icon-text, .comment-icon-text{
