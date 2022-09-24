@@ -29,7 +29,8 @@ function ProfilePage() {
   const [mutualFriends, setMutualFriends] = useState([]);
   const [accepted, setAccepted] = useState(false);
   const [deleted, setDeleted] = useState(false);
-  const { clickedFriends, setClickedFriends, clickedPosts, setClickedPosts, scrollToFriends, profileImgPreview, proImgUpdated } = useProfileContext()
+  const [currUserProfile, setCurrUserProfile] = useState(false);
+  const { clickedFriends, setClickedFriends, clickedPosts, setClickedPosts, scrollToFriends, setProfileImgPreview, profileImgPreview, proImgUpdated } = useProfileContext()
   const scrollRef = useRef()
   // Find User
   useEffect(() => {
@@ -42,11 +43,13 @@ function ProfilePage() {
       const user = await response.json();
       if(current_user.id === user.id){
         setUser(current_user)
+        setProfileImgPreview('')
       } else {
         setUser(user);
       }
 
     })();
+
   }, [userId, current_user]);
 
   // Find Mutual Friends with Profile Owner
@@ -68,7 +71,12 @@ function ProfilePage() {
   useEffect(() => {
     if(scrollToFriends){
       scrollRef.current.scrollIntoView()
+
     }
+    if(current_user.id !== user.id){
+      setProfileImgPreview('')
+    }
+    scrollRef.current.focus()
   }, []);
 
 
@@ -204,7 +212,7 @@ function ProfilePage() {
               <div className="users-name-image">
                 <div className="profile-user-info">
                   <>
-                  {profileImgPreview ? (
+                  {(profileImgPreview && current_user.id === user.id) ? (
 
                     <img className='profile-image-preview' src={profileImgPreview} alt="" />
                     ) : (
@@ -216,7 +224,9 @@ function ProfilePage() {
                           )}
                       </>
                       )}
-                      <EditProImg user={current_user} />
+                      {current_user.id === user.id && (
+                        <EditProImg user={user} />
+                      )}
                   </>
                 </div>
               </div>

@@ -27,6 +27,7 @@
 
 #profile-img-input{
   display: none;
+  user-select: none;
 }
 .edit-pro-img-container{
   /* position: relative; */
@@ -35,6 +36,7 @@
   /* height: 36px;
   width: 36px; */
   /* position: relative; */
+  user-select: none;
 }
 .profile-img-label{
   font-size: 20px;
@@ -49,6 +51,7 @@
   position: absolute;
   bottom: 1.5em;
   left: 6em;
+  user-select: none;
 }
 .profile-img-label:hover{
   background-color: #D8DADF;
@@ -66,6 +69,7 @@
   justify-content: center;
   border-radius: 100%;
   cursor: pointer;
+  user-select: none;
 }
 .accept-profile-img:hover{
   background-color: #D8DADF;
@@ -83,6 +87,7 @@
   justify-content: center;
   border-radius: 100%;
   cursor: pointer;
+  user-select: none;
 }
 .decline-profile-img:hover{
   background-color: #D8DADF;
@@ -111,6 +116,7 @@
 }
 .profile-user-info{
   width: 860px;
+  user-select: none;
 }
 .profile-top-underline{
   border-bottom: 1px solid #96989b51;

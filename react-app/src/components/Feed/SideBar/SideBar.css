@@ -9,6 +9,7 @@
   width: 280px;
   margin-left: 16px;
   position: fixed;
+  user-select: none;
 }
 .sidebar-container > * {
   /* margin: 10px; */

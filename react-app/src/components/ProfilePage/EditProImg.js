@@ -7,7 +7,7 @@ import { useProfileContext } from '../context/profileContext';
 
 import "./ProfilePage.css"
 
-const EditProImg = () => {
+const EditProImg = ({ user }) => {
   const [profileImg, setProfileImg] = useState('');
   const current_user = useSelector(state => state.session.user)
 
@@ -18,7 +18,14 @@ const EditProImg = () => {
   const dispatch = useDispatch()
 
 
-
+  useEffect(() => {
+    if(current_user.id !== user.id){
+      setProfileImgPreview('')
+    }
+    return () => {
+      setProfileImgPreview('')
+    };
+  }, []);
   const updateImage = (e) => {
     e.preventDefault()
     const file = e.target.files[0];
