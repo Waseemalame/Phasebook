@@ -312,7 +312,6 @@ function ProfilePage() {
               <div className="post-images">
                 <img className='single-post-image' src={post?.images[0]?.image_url} alt="" />
               </div>
-              <div className="post-underline"></div>
               <CommentView post={post} />
               <CreateCommentForm post={post} />
             </div>

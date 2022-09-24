@@ -19,7 +19,7 @@
   position: relative;
 
 }
-.single-post > *:not(.post-images){
+.single-post > *:not(.post-images, .like-comment-section){
   padding-left: 16px;
   padding-right: 16px;
 }
@@ -86,57 +86,67 @@
   margin: 0;
   max-height: max-content;
   caret-color: transparent;
-
 }
+
 .single-post-image{
-  padding: -16px;
   width: 100%;
   user-select: none;
-
+  margin-bottom: -1px;
 }
-.post-underline{
-  border-bottom: 1px solid #e4e6e8ec;
-  margin-left: 16px;
-  margin-right: 16px;
 
-}
+
 .like-comment-section{
   width: inherit;
-  margin-left: 16px;
-  margin-right: 16px;
-  height: 2.8em;
+  height: 2.4em;
+  border-top: 1px solid #e4e6e8ec;
   border-bottom: 1px solid #e4e6e8ec;
   display: flex;
   align-items: center;
   justify-content: space-around;
   user-select: none;
+  margin: 0 16px;
+  margin-top: 1px;
 }
 .click-like, .click-comment{
   display: flex;
   align-items: center;
   cursor: pointer;
-  line-height: 2em;
-  width: 161px;
+  line-height: 1.7em;
+  width: 100%;
   justify-content: center;
   border-radius: 5px;
+
 }
 .click-like:hover, .click-comment:hover{
   background-color: #e4e6e872;
 }
-.click-like:active, .click-comment:active{
+.click-like:active{
   -webkit-filter: brightness(90%);
   -webkit-transition: all ease;
   -moz-transition: all ease;
   -o-transition: all ease;
   -ms-transition: all ease;
   transition: all ease;
-
+  transform: scale(0.98);
 }
-.like-icon-text, .comment-icon-text{
+.click-comment:active{
+  -webkit-filter: brightness(90%);
+  -webkit-transition: all ease;
+  -moz-transition: all ease;
+  -o-transition: all ease;
+  -ms-transition: all ease;
+  transition: all ease;
+}
+.like-icon-text{
   padding-top: 2px;
   margin-left: 5px;
+  color: #606266;
+  font-weight: 500;
+  font-size: 13px;
 }
-.like-icon, .comment-icon{
-  /* color: #5B626A; */
-
+.comment-icon-text{
+  color: #606266;
+  font-weight: 500;
+  margin-left: 5px;
+  font-size: 13px;
 }

@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 import PostOptionsModal from '../../PostOptions'
 import Likes from '../../Likes/Likes';
 
+
 const OnePost = ({ post }) => {
   const current_user = useSelector(state => state.session.user)
   const history = useHistory();
@@ -39,7 +40,6 @@ const OnePost = ({ post }) => {
               <img className='single-post-image' src={post?.images[0]?.image_url} alt="" />
             </div>
             <Likes post={post} />
-            <div className="post-underline"></div>
     </>
   )
 }
