@@ -3,6 +3,7 @@ import moment from 'moment';
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import PostOptionsModal from '../../PostOptions'
+import Likes from '../../Likes/Likes';
 
 const OnePost = ({ post }) => {
   const current_user = useSelector(state => state.session.user)
@@ -37,6 +38,7 @@ const OnePost = ({ post }) => {
             <div className="post-images">
               <img className='single-post-image' src={post?.images[0]?.image_url} alt="" />
             </div>
+            <Likes post={post} />
             <div className="post-underline"></div>
     </>
   )

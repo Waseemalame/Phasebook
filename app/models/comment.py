@@ -11,7 +11,7 @@ class Comment(db.Model):
 
     post = db.relationship("Post", back_populates="comments")
     user = db.relationship("User", back_populates="comments")
-    # like_list = db.relationship("Like", back_populates="comment", cascade="all, delete-orphan")
+    like_list = db.relationship("Like", back_populates="comment", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -19,5 +19,5 @@ class Comment(db.Model):
             "comment_content": self.comment_content,
             "user": self.user.to_dict(),
             "post": self.post_id,
-            # "likes": self.likes
+            "like_list": self.like_list
         }

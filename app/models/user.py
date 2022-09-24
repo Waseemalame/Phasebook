@@ -39,6 +39,7 @@ class User(db.Model, UserMixin):
                             cascade='all, delete-orphan',
                             passive_deletes=True
                             )
+    like_list = db.relationship("Like", back_populates="user", cascade="all, delete-orphan")
 
 
     # msg_sender = db.relationship("Message",
@@ -84,5 +85,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'profile_image_url': self.profile_image_url,
             'profile_banner_url': self.profile_banner_url,
-            'images': [image.to_dict() for image in self.images]
+            'images': [image.to_dict() for image in self.images],
+            "like_list": [like.to_dict() for like in self.like_list],
         }
