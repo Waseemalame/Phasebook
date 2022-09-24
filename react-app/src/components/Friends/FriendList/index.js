@@ -54,7 +54,9 @@ const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setD
       <div className="profile-friends-info">
         <div className='friends-info-top'>
           <h3 className='friend-header'>Friends</h3>
-          <p className='see-all-friends'>{friends.length > 8 && 'See all friends'}</p>
+          {friends.length > 8 && (
+            <p className='see-all-friends'>{'See all friends'}</p>
+          )}
         </div>
         <span className='friends-amount'>{friends.length} {current_user.id !== userId ? (
           `(${mutualFriends.length} mutual)`

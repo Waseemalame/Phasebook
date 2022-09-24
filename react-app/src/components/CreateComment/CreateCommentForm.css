@@ -3,11 +3,12 @@
   align-items: center;
   margin-top: 5px;
   padding-bottom: 16px;
+  caret-color: transparent;
+  user-select: none;
 }
 .comment-form{
   /* width: 100%; */
   width: 100%;
-
 }
 .comment-form > input{
   border: none;
@@ -21,6 +22,7 @@
   width: 100%;
   padding-right: 100px;
   user-select: none;
+  caret-color: black;
 
 }
 .comment-user-image{

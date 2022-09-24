@@ -1,6 +1,7 @@
 .create-post-container{
   width: 500px;
   height: 440px;
+  user-select: none;
 }
 .create-post-header{
   font-weight: 700;
@@ -17,6 +18,7 @@
 }
 .post-user-image{
   margin-right: 5px;
+  user-select: none;
 }
 .post-firstname{
   font-weight: 700;
@@ -27,6 +29,8 @@
 }
 .user-first-last{
   font-weight: 700;
+  user-select: unset;
+
 }
 .create-post-form{
   display: flex;
@@ -193,6 +197,8 @@
 .create-post-section{
   display: flex;
   align-items: center;
+  user-select: none;
+
 }
 
 .create-post-click{
