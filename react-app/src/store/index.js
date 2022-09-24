@@ -5,6 +5,7 @@ import postsReducer from './post';
 import imagesReducer from './image';
 import requestsReducer from './request';
 import messagesReducer from './message';
+import likesReducer from './like';
 import session from './session'
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   comments: commentsReducer,
   friends: requestsReducer,
   images: imagesReducer,
-  messages: messagesReducer
+  messages: messagesReducer,
+  likes: likesReducer
 });
 
 
