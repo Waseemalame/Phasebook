@@ -13,7 +13,7 @@ import CreatePostModal from '../../CreatePost';
 import EditPostModal from '../../EditPost';
 import PostOptionsModal from '../../PostOptions';
 import CommentView from '../CommentView';
-
+import moment from 'moment';
 import './Posts.css'
 const Posts = () => {
 
@@ -51,7 +51,10 @@ const Posts = () => {
 
                 <img onClick={() => redirectProfile(post.user)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
         )}</div>
-              <span className='user-first-last'>{post.user?.first_name} {post.user?.last_name}</span>
+              <ul>
+                <li className='user-first-last'>{post.user?.first_name} {post.user?.last_name}</li>
+                <li className='post-createdat'>{moment(post.created_at).fromNow()}</li>
+              </ul>
             </div>
             {current_user.id === post.user.id ? (
                 <PostOptionsModal post={post} />
