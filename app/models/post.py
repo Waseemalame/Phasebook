@@ -15,7 +15,7 @@ class Post(db.Model):
     user = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="post", cascade="all, delete-orphan")
     images = db.relationship("Image", back_populates="post", cascade="all, delete-orphan")
-    # like_list = db.relationship("Like", back_populates="post", cascade="all, delete-orphan")
+    like_list = db.relationship("Like", back_populates="post", cascade="all, delete-orphan")
 
 
     def to_dict(self):
@@ -23,10 +23,9 @@ class Post(db.Model):
             "id": self.id,
             "content": self.content,
             "user": self.user.to_dict(),
-            # "likes": self.likes,
-            # "like_list": [like.to_dict() for like in self.like_list],
             "images": [image.to_dict() for image in self.images],
             "comments": [comment.to_dict() for comment in self.comments],
+            "like_list": [like.to_dict() for like in self.like_list],
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }

@@ -6,3 +6,4 @@ from .image_form import ImageForm
 from .friend_form import FriendForm
 from .message_form import MessageForm
 from .user_form import UserForm
+from .like_form import LikeForm
