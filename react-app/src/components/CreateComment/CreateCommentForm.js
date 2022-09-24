@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createComment, getComments } from '../../store/comment';
 import { getPostsThunk } from '../../store/post';
+
 import './CreateCommentForm.css';
 
 const CreateCommentForm = ({ post }) => {
@@ -12,7 +13,6 @@ const updateComment = (e) => setCommentContent(e.target.value);
 
 const dispatch = useDispatch()
 const userSession = useSelector(state => state.session.user)
-
 
 // let errors = [];
   useEffect(() => {
@@ -57,8 +57,10 @@ const userSession = useSelector(state => state.session.user)
         )}
       <form className="comment-form" onSubmit={commentSubmit}>
         <ul className='create-comment-errors'>{errorValidators.map(error =><li>{error}</li>)}</ul>
-          <input type="text"
-          className='comment-input'
+          <input
+             id={`${post.id}-comment-input`}
+             type="text"
+             className='comment-input'
              value={commentContent}
              onChange={updateComment}
              placeholder='Write a comment...'

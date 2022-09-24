@@ -13,7 +13,8 @@ import CreatePostModal from '../../CreatePost';
 import EditPostModal from '../../EditPost';
 import PostOptionsModal from '../../PostOptions';
 import CommentView from '../CommentView';
-import moment from 'moment';
+import LikeComment from './LikeComment';
+import OnePost from './OnePost';
 import './Posts.css'
 const Posts = () => {
 
@@ -41,32 +42,8 @@ const Posts = () => {
       <div className='feed-posts'>
         {posts && posts.reverse().map(post => (
           <div id={`feed${post.id}`} className="single-post">
-            <div className="post-user-info">
-              <div>{post.user.profile_image_url ? (
-                <img onClick={() => {
-                  redirectProfile(post.user)
-                }} className="post-user-image" src={current_user.id === post.user.id ? current_user.profile_image_url : post.user.profile_image_url} alt="" />
-
-                    ) : (
-
-                <img onClick={() => redirectProfile(post.user)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
-        )}</div>
-              <ul>
-                <li className='user-first-last'>{post.user?.first_name} {post.user?.last_name}</li>
-                <li className='post-createdat'>{moment(post.created_at).fromNow()}</li>
-              </ul>
-            </div>
-            {current_user.id === post.user.id ? (
-                <PostOptionsModal post={post} />
-
-              ) : (
-                ''
-              )}
-            <div className='post-content'>{post.content}</div>
-            <div className="post-images">
-              <img className='single-post-image' src={post?.images[0]?.image_url} alt="" />
-            </div>
-            <div className="post-underline"></div>
+            <OnePost post={post}/>
+            <LikeComment post={post} />
             <CommentView post={post} />
             <CreateCommentForm post={post} />
           </div>
