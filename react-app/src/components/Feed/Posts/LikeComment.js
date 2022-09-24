@@ -3,12 +3,7 @@ import { useEffect } from 'react'
 import { useMultiContext } from '../../context/multiContext'
 const LikeComment = ({ post }) => {
   const { commentBtnClicked, setCommentBtnClicked } = useMultiContext();
-  useEffect(() => {
-    console.log(commentBtnClicked)
-    console.log(post.id)
-  }, [post.id, commentBtnClicked])
   const cmtInput = document.getElementById(`${post.id}-comment-input`)
-  console.log(cmtInput)
   return (
     <div className='like-comment-section'>
       <div className="click-like">
