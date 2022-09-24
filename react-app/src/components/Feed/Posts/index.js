@@ -5,16 +5,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { getComments } from '../../../store/comment';
 import { getImagesThunk } from '../../../store/image';
+import { getLikesThunk } from '../../../store/like';
 import { getPostsThunk } from '../../../store/post';
 import { getAllFriendsThunk } from '../../../store/request';
 import { useMessageContext } from '../../context/messageContext';
 import CreateCommentForm from '../../CreateComment/CreateCommentForm';
 import CreatePostModal from '../../CreatePost';
 import EditPostModal from '../../EditPost';
+import Likes from '../../Likes/Likes';
 import PostOptionsModal from '../../PostOptions';
 import CommentView from '../CommentView';
 import LikeComment from './LikeComment';
 import OnePost from './OnePost';
+
 import './Posts.css'
 const Posts = () => {
 
@@ -28,6 +31,7 @@ const Posts = () => {
     dispatch(getComments())
     dispatch(getImagesThunk())
     dispatch(getAllFriendsThunk())
+    dispatch(getLikesThunk())
 
   }, [dispatch]);
 
