@@ -7,20 +7,23 @@ import configureStore from './store';
 import { ModalProvider } from './components/context/Modal';
 import MessageContextProvider from './components/context/messageContext';
 import ProfileContextProvider from './components/context/profileContext';
+import MultiContextProvider from './components/context/multiContext';
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ProfileContextProvider>
-        <MessageContextProvider>
-          <ModalProvider>
-            <App />
-          </ModalProvider>
-        </MessageContextProvider>
-      </ProfileContextProvider>
-      </Provider>
+      <MultiContextProvider>
+        <ProfileContextProvider>
+          <MessageContextProvider>
+            <ModalProvider>
+              <App />
+            </ModalProvider>
+          </MessageContextProvider>
+        </ProfileContextProvider>
+      </MultiContextProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
