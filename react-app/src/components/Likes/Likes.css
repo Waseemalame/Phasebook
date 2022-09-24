@@ -12,3 +12,8 @@
   margin-left: 5px;
   color: #7E676B;
 }
+.post-underline{
+  border-bottom: 1px solid #e4e6e8ec;
+  margin-left: 16px;
+  margin-right: 16px;
+}
