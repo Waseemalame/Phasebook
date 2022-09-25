@@ -11,6 +11,7 @@ const OnePost = ({ post }) => {
   const history = useHistory();
 
   const redirectProfile = (user) => {
+    window.scrollTo(0, 0)
     history.push(`/users/${user.id}`)
   }
   return (
