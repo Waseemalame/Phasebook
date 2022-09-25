@@ -2,8 +2,8 @@ import React from 'react'
 import moment from 'moment';
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import PostOptionsModal from '../../PostOptions'
-import Likes from '../../Likes/Likes';
+import PostOptionsModal from '../PostOptions';
+import Likes from '../Likes/Likes';
 
 
 const OnePost = ({ post }) => {

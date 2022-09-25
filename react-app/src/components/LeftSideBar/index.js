@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { useProfileContext } from '../../context/profileContext'
+import { useProfileContext } from '../context/profileContext'
 import './SideBar.css'
 const SideBar = () => {
   const { clickedFriends, setClickedFriends, setClickedPosts, setScrollToFriends } = useProfileContext()

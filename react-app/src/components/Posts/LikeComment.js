@@ -2,12 +2,11 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addLikeThunk, deleteLikeThunk } from '../../../store/like'
-import { useMultiContext } from '../../context/multiContext'
+import { addLikeThunk, deleteLikeThunk } from '../../store/like'
+// import { addLikeThunk, deleteLikeThunk } from '../../../store/like'
 
 const LikeComment = ({ post }) => {
   const current_user = useSelector(state => state.session.user)
-  const { commentBtnClicked, setCommentBtnClicked } = useMultiContext();
   const [liked, setLiked] = useState(false);
   const [likeId, setLikeId] = useState();
   const dispatch = useDispatch()
