@@ -1,10 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { getComments } from '../../../store/comment';
-import LastComment from '../LastComment';
-import SingleComment from '../SingleComment';
+import SingleComment from '../EditComment';
 import "./CommentView.css"
 const CommentView = ({ post }) => {
   const current_user = useSelector(state => state.session.user)

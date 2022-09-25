@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useRef } from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateComment } from '../../../store/comment'
+import { updateComment } from '../../store/comment'
 import "./CommentEditForm.css"
 const CommentEditForm = ({ comment, post, current_user, setEditClicked, editClicked }) => {
 const [commentContent, setCommentContent] = useState(comment?.comment_content);

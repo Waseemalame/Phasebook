@@ -3,18 +3,14 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
-import { getComments } from '../../../store/comment';
-import { getImagesThunk } from '../../../store/image';
-import { getLikesThunk } from '../../../store/like';
-import { getPostsThunk } from '../../../store/post';
-import { getAllFriendsThunk } from '../../../store/request';
-import { useMessageContext } from '../../context/messageContext';
-import CreateCommentForm from '../../CreateComment/CreateCommentForm';
-import CreatePostModal from '../../CreatePost';
-import EditPostModal from '../../EditPost';
-import Likes from '../../Likes/Likes';
-import PostOptionsModal from '../../PostOptions';
+import { getLikesThunk } from "../../store/like"
+import { getComments } from '../../store/comment';
+import { getImagesThunk } from '../../store/image';
+import { getPostsThunk } from '../../store/post';
+import { getAllFriendsThunk } from '../../store/request';
 import CommentView from '../CommentView';
+import CreateCommentForm from '../CreateComment/CreateCommentForm';
+import CreatePostModal from '../CreatePost';
 import LikeComment from './LikeComment';
 import OnePost from './OnePost';
 

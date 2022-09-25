@@ -6,10 +6,10 @@ import SignUpForm from './components/auth/SignUpForm/SignUpForm'
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import ProfilePage from './components/ProfilePage';
 import { authenticate } from './store/session';
-import SideBar from './components/Feed/SideBar';
+import SideBar from './components/LeftSideBar';
 import Navigation from './components/Navigation';
 import { useMessageContext } from './components/context/messageContext';
-import Posts from './components/Feed/Posts';
+import Posts from './components/Posts';
 import Contacts from './components/Contacts/Contacts';
 import MsgPopUp from './components/Message/MsgPopUp';
 

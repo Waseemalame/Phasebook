@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { Modal } from "../../context/Modal";
+import { Modal } from "../context/Modal";
 import CommentOptions from "./CommentOptions";
 // import EditCommentForm from "../../EditCommentForm";
 

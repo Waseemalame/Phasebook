@@ -8,7 +8,7 @@ import { useProfileContext } from '../context/profileContext';
 import CreateCommentForm from '../CreateComment/CreateCommentForm';
 import CreatePostModal from '../CreatePost';
 import CreatePostForm from '../CreatePost/CreatePostForm';
-import CommentView from '../Feed/CommentView';
+import CommentView from '../CommentView';
 import FriendsList from '../Friends/FriendList';
 import ShowFriends from '../Friends/ShowFriends';
 import PostOptionsModal from '../PostOptions';

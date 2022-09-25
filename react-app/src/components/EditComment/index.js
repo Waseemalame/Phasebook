@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import CommentOptionsModal from '../CommentOptions';
+import CommentOptions from '../CommentOptions/CommentOptions';
 import CommentEditForm from './CommentEditForm';
-
 const SingleComment = ({ comment, current_user, post }) => {
   const [showCommentOptions, setShowCommentOptions] = useState(false);
   const [editClicked, setEditClicked] = useState(false);
