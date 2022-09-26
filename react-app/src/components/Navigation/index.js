@@ -4,28 +4,25 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useProfileContext } from '../context/profileContext';
+import UsersList from './UsersList';
 import './Navigation.css'
-
-const Navigation = ({ searchList, setSearchList}) => {
+const Navigation = () => {
   const current_user = useSelector(state => state.session.user)
   const { setClickedFriends, setScrollToFriends, setClickedPosts } = useProfileContext()
   const [searchString, setSearchString] = useState('');
   const [profileDropDown, setProfileDropDown] = useState(false);
+  const [searchList, setSearchList] = useState(false);
   const history = useHistory()
 
-  const searchUsers = () => {
-
-  }
   const listRef = useRef()
   useEffect(() => {
 
     const closeSearchList = (e) => {
       if(searchList) return
       if(e.path[2] !== listRef.current){
-
         setSearchList(false)
+        setSearchString('')
       }
-
     }
     document.body.addEventListener("click", closeSearchList)
 
@@ -42,10 +39,14 @@ const Navigation = ({ searchList, setSearchList}) => {
 
     return () => document.removeEventListener("click", closeProfileDropDown);
   }, [profileDropDown]);
+  const navLeft = document.querySelector('.nav-left')
+  useEffect(() => {
+    if(navLeft){
+      console.log(navLeft)
+      navLeft.style.overflow = 'hidden'
+    }
 
-  const renderSearchList = () => {
-    setSearchList(true)
-  }
+  }, [navLeft]);
   const redirectHome = () => {
     setScrollToFriends(false)
     setClickedPosts(true)
@@ -55,44 +56,45 @@ const Navigation = ({ searchList, setSearchList}) => {
   const redirectProfile = () => {
     history.push(`/users/${current_user.id}`)
   }
-  const gitHubClick = () => {
 
+  const cancelSearchFunc = (e) => {
+    e.stopPropagation()
+    setSearchList(false)
   }
-  const redirectFriendsList = () => {
-    history.push(`/users/friends/${current_user.id}`)
-  }
-
   return (
     <div className="nav-container">
       <ul className='nav-list'>
         <li className='search-nav'>
           <img onClick={redirectHome} id="logo" className={searchList ? 'hide-icon' : 'phasebook-icon'} src="https://i.imgur.com/XwPiQNW.png" alt=""/>
-
-        </li>
-        {/* <li className='search-nav'>
           <div onClick={() => setSearchList(true)}  ref={listRef} className={searchList === false ? 'nav-left' : 'nav-left-clicked'}>
-            <img onClick={redirectHome} id="logo" className={searchList ? 'hide-icon' : ''} src="https://img.icons8.com/color/50/000000/facebook-new.png" alt=""/>
+            <div onClick={(e) => cancelSearchFunc(e)} className="cancel-search">
+              {searchList && (
+                <i class="fa-sharp fa-solid fa-arrow-left-long left-arrow-search"></i>
+
+              )}
+            </div>
             <div onClick={() => setSearchList(true)} className="search-bar">
-              <img src="https://img.icons8.com/fluency-systems-filled/15/000000/search.png" alt=""/>
+
+              <img className='search-icon' src="https://img.icons8.com/fluency-systems-filled/15/000000/search.png" alt=""/>
               <input
                       onClick={() => setSearchList(true)}
                       className='search-input'
                       type="search"
                       value={searchString}
                       onChange={(e) => setSearchString(e.target.value)}
+                      spellcheck="false"
                       placeholder='Search Facebook' />
             </div>
             {searchList && (
 
-              <UsersList setSearchList={setSearchList} searchString={searchString} />
+              <UsersList searchList={searchList} setSearchList={setSearchList} searchString={searchString} />
             )}
           </div>
-        </li> */}
+        </li>
         <li>
           <div className="nav-middle">
-            {/* <img src="https://img.icons8.com/material-outlined/20/000000/home--v4.png" alt=""/> */}
-            <a href="https://www.linkedin.com/in/waseemalame/"><img className='linkedin-icon' src="https://i.imgur.com/7rn4mNr.png" alt="linkedin"/></a>
-            <a href="https://github.com/Waseemalame/Phasebook"><img className='github-icon' src="https://i.imgur.com/0Bc87qz.png" alt="github-phasedbook"/></a>
+            <a href="https://www.linkedin.com/in/waseemalame/"><i class="fa-brands fa-linkedin linkedin-icon"></i></a>
+            <a href="https://github.com/Waseemalame/Phasebook"><i class="fa-brands fa-github github-icon"></i></a>
 
           </div>
         </li>

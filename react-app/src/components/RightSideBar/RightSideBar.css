@@ -42,7 +42,7 @@
   user-select: none;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1058px) {
   .contacts-container{
     display: none;
   }
