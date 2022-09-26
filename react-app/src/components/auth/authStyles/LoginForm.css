@@ -19,6 +19,7 @@ body{
   margin-top: 20px;
   margin-bottom: 20px;
   width: 200px;
+  caret-color: transparent;
 }
 .fb-header-div{
   width: 200px;

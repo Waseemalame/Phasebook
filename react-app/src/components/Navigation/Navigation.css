@@ -143,6 +143,9 @@
 .nav-middle > a{
   text-decoration: none;
 }
+.nav-middle > a:hover, .nav-middle > a:focus, .nav-middle > a:active, .nav-middle > a:visited, .nav-middle > a:link{
+  text-decoration: none;
+}
 
 .nav-right{
   display: flex;
@@ -216,7 +219,7 @@
   right: 40px;
   background-color: white;
   width: 120px;
-  z-index: 1000;
+  /* z-index: 2000; */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 5px;
 }

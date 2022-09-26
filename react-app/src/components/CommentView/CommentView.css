@@ -35,6 +35,7 @@
   width: 35px;
   height: 35px;
   cursor: pointer;
+  caret-color: transparent;
 }
 .edit-comment-ellipsis:hover{
   background-color: rgba(211, 211, 211, 0.212);
