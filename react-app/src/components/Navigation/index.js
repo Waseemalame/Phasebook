@@ -99,8 +99,8 @@ const Navigation = () => {
         </li>
         <li>
           <div className="nav-middle">
-            <a href="https://www.linkedin.com/in/waseemalame/"><i class="fa-brands fa-linkedin linkedin-icon"></i></a>
-            <a href="https://github.com/Waseemalame/Phasebook"><i class="fa-brands fa-github github-icon"></i></a>
+            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/waseemalame/"><i class="fa-brands fa-linkedin linkedin-icon"></i></a>
+            <a target="_blank" rel="noreferrer" href="https://github.com/Waseemalame/Phasebook"><i class="fa-brands fa-github github-icon"></i></a>
 
           </div>
         </li>
