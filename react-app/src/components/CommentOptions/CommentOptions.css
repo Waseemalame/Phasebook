@@ -42,4 +42,5 @@
 }
 .edit-comment-btn{
   cursor: pointer;
+  caret-color: transparent;
 }

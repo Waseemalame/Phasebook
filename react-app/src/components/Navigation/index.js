@@ -16,8 +16,19 @@ const Navigation = () => {
 
   const listRef = useRef()
   useEffect(() => {
+    if(!profileDropDown) return;
+    const closeProfileDropDown = () => {
+      setProfileDropDown(false);
+    }
+    document.body.addEventListener("click", closeProfileDropDown);
+
+    return () => document.body.removeEventListener("click", closeProfileDropDown);
+  }, [profileDropDown]);
+
+  useEffect(() => {
 
     const closeSearchList = (e) => {
+      e.stopPropagation()
       if(searchList) return
       if(e.path[2] !== listRef.current){
         setSearchList(false)
@@ -30,15 +41,8 @@ const Navigation = () => {
 
   }, []);
 
-  useEffect(() => {
-    if(!profileDropDown) return;
-    const closeProfileDropDown = () => {
-      setProfileDropDown(false);
-    }
-    document.addEventListener("click", closeProfileDropDown);
 
-    return () => document.removeEventListener("click", closeProfileDropDown);
-  }, [profileDropDown]);
+
   const navLeft = document.querySelector('.nav-left')
   useEffect(() => {
     if(navLeft){
@@ -47,6 +51,7 @@ const Navigation = () => {
     }
 
   }, [navLeft]);
+
   const redirectHome = () => {
     setScrollToFriends(false)
     setClickedPosts(true)
@@ -54,6 +59,7 @@ const Navigation = () => {
     history.push('/')
   }
   const redirectProfile = () => {
+    setProfileDropDown(false)
     history.push(`/users/${current_user.id}`)
   }
 

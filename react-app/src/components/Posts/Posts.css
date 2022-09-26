@@ -41,6 +41,7 @@
   align-items: center;
   justify-content: center;
   transition-delay: 80ms;
+  caret-color: transparent;
 }
 .edit-post-ellipsis:hover{
   background-color: rgba(211, 211, 211, 0.389);
