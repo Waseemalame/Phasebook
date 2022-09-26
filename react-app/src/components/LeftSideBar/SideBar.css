@@ -32,13 +32,42 @@
 .sidebar-to-friends{
   cursor: pointer;
   border-radius: 5px;
-
+}
+.tech-used{
+  border-top: 1px solid rgba(128, 128, 128, 0.348);
+  color: gray;
 }
 .sidebar-to-profile:hover{
   background-color: #E4E6E8;
 }
 .sidebar-to-friends:hover{
   background-color: #E4E6E8;
+}
+.react > *{
+  margin-right: 10px;
+}
+.aws > *{
+  margin-right: 8px;
+}
+.aws-icon{
+  font-size: 23px;
+  color: #9D80D0;
+}
+.python{
+  margin-left: 5px;
+}
+.python > *{
+  margin-right: 10px;
+}
+.psql{
+  margin-left: 2px;
+}
+.psql > *{
+  margin-right: 4px;
+}
+.python-icon{
+  font-size: 25px;
+  color: #9D80D0;
 }
 @media screen and (max-width: 1100px) {
   .sidebar-container{
