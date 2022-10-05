@@ -62,7 +62,7 @@ function App() {
         </ProtectedRoute>
       </Switch>
       {user && showMsgPopup && <MsgPopUp />}
-      <MessageCenter />
+      {user && <MessageCenter />}
     </BrowserRouter>
   );
 }

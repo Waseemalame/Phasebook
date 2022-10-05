@@ -23,7 +23,7 @@ const MessageCenter = () => {
     <div className="msg-center-container">
 
       <div onClick={handleMsgCenterClick} className='msg-center-tab'>
-        <div><img className='msg-center-user-img' src={current_user.profile_image_url || "https://i.imgur.com/hrQWTvu.png"} alt="" /></div>
+        <div><img className='msg-center-user-img' src={current_user.profile_image_url ? current_user.profile_image_url : "https://i.imgur.com/hrQWTvu.png"} alt="" /></div>
         <div className='msg-center-header'>Messaging</div>
         <div>
           {showMessenger ? (
