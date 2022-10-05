@@ -3,7 +3,7 @@ from app.models import db, Image
 from app.forms import ImageForm
 from flask_login import current_user, login_required
 from app.s3_helpers import (
-    upload_file_to_s3, allowed_file, get_unique_filename)
+    delete_from_s3, upload_file_to_s3, allowed_file, get_unique_filename)
 
 image_routes = Blueprint("images", __name__, url_prefix="/images")
 
@@ -19,7 +19,7 @@ def get_images():
     else:
         return "Unauthorized"
 
-@image_routes.route("/", methods=["POST"])
+@image_routes.route("", methods=["POST"])
 @login_required
 def upload_image():
     if "image" not in request.files:
@@ -58,8 +58,8 @@ def upload_image():
 def delete_image(image_id):
 
     image = Image.query.get(image_id)
-
     db.session.delete(image)
     db.session.commit()
 
+    delete_from_s3(image)
     return "Successfully Deleted"
