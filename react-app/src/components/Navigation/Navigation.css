@@ -4,6 +4,15 @@
   position: fixed;
   top: 0;
   z-index: 100;
+  /* max-width: 100em; */
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+
+
+}
+.nav-container > * > *{
+  /* border: 1px solid black; */
 }
 .nav-container > ul > * {
   width: 100%;
@@ -15,7 +24,8 @@
   align-items: center;
   position: relative;
   list-style: none;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  padding-left: 5em;
+  /* border: 1px solid black; */
 }
 .nav-list > li > div > img{
   background-color: white;
@@ -25,6 +35,13 @@
   display: flex;
   justify-content: space-between;
   background-color: white;
+}
+.nav-container > ul{
+  /* border: 1px solid black; */
+  margin-left: 5em;
+  margin-right: 5em;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 .nav-left{
   background-color: white;
@@ -67,6 +84,7 @@
 }
 
 #logo{
+  margin-left: 2em;
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -153,7 +171,7 @@
   align-self: flex-end;
   justify-content: flex-end;
   background-color: white;
-  margin-right: 15px;
+  margin-right: 8em;
 }
 .post-user-image:hover{
   -webkit-filter: brightness(90%);
