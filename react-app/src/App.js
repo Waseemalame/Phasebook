@@ -11,6 +11,7 @@ import Navigation from './components/Navigation';
 import { useMessageContext } from './components/context/messageContext';
 import Posts from './components/Posts';
 import Contacts from './components/Contacts/Contacts';
+import MessageCenter from './components/Message/MsgCenter';
 import MsgPopUp from './components/Message/MsgPopUp';
 
 import "./index.css"
@@ -57,7 +58,7 @@ function App() {
           <div className='home-display'>
             <SideBar />
             <Posts />
-            <Contacts />
+            <MessageCenter />
           </div>
         </ProtectedRoute>
       </Switch>

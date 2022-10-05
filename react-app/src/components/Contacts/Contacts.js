@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { getAllFriendsThunk, getAllRequestsThunk } from '../../store/request';
 import { useMessageContext } from '../context/messageContext';
-import "../RightSideBar/RightSideBar.css"
+// import "../RightSideBar/RightSideBar.css"
 function Contacts({ searchString, setSearchList }) {
   const [users, setUsers] = useState([]);
   const [mutualFriends, setMutualFriends] = useState([]);
@@ -82,7 +82,7 @@ useEffect(() => {
   return (
 
       <div className='contacts-container'>
-        <span className='contacts-header'>Contacts</span>
+        {/* <span className='contacts-header'>Contacts</span> */}
           {friends && friends.map(friend => (
                             <div onClick={() => messagePopup(friend)} className='contact'>
                               <div>
