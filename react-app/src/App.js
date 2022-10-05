@@ -60,11 +60,11 @@ function App() {
               <SideBar />
             </div>
             <Posts />
-            <MessageCenter />
           </div>
         </ProtectedRoute>
       </Switch>
       {user && showMsgPopup && <MsgPopUp />}
+      <MessageCenter />
     </BrowserRouter>
   );
 }

@@ -10,7 +10,7 @@ const MessageCenter = () => {
   useEffect(() => {
     const msgCenterTab = document.querySelector('.msg-center-tab')
     if(showMessenger){
-      msgCenterTab.style.bottom = '30em'
+      msgCenterTab.style.bottom = '20em'
     } else {
       msgCenterTab.style.bottom = '0em'
     }
@@ -25,7 +25,13 @@ const MessageCenter = () => {
       <div onClick={handleMsgCenterClick} className='msg-center-tab'>
         <div><img className='msg-center-user-img' src={current_user.profile_image_url || "https://i.imgur.com/hrQWTvu.png"} alt="" /></div>
         <div className='msg-center-header'>Messaging</div>
-        <div><i class="fa-solid fa-chevron-up up-caret"></i></div>
+        <div>
+          {showMessenger ? (
+            <i class="fa-solid fa-chevron-down up-caret"></i>
+          ) : (
+            <i class="fa-solid fa-chevron-up up-caret"></i>
+          )}
+          </div>
       </div>
       {showMessenger && (
         <div className="message-contacts">
