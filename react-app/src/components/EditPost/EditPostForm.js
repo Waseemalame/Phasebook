@@ -5,17 +5,16 @@ import { deleteImagesThunk, getImagesThunk } from '../../store/image';
 import { getPostsThunk, updatePostThunk } from '../../store/post';
 
 const EditPostForm = ({ post, setShowEditPostModal, setShowPostOptionsModal}) => {
-
+  const postId = post.id
   const user = useSelector(state => state.session.user);
-
-
+  const postImage = useSelector(state => Object.values(state.images).filter(image => image.post_id === post.id)[0])
   const dispatch = useDispatch()
   const history = useHistory()
 
   const [content, setContent] = useState(post.content);
   const [errorValidations, setErrorValidations] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [image, setImage] = useState(post.images[0]?.image_url ? post.images[0]?.image_url : null);
+  const [image, setImage] = useState(postImage ? postImage.image_url : null);
   const [newImage, setNewImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
   const [addImg, setAddImg] = useState(image ? true : false);
@@ -33,7 +32,7 @@ const EditPostForm = ({ post, setShowEditPostModal, setShowPostOptionsModal}) =>
     }
     if((newImage || !image) && post.images[0]){
 
-      dispatch(deleteImagesThunk(post.images[0]?.id))
+      dispatch(deleteImagesThunk(postImage.id))
     }
 
     dispatch(updatePostThunk(data, post.id))
@@ -53,15 +52,16 @@ const EditPostForm = ({ post, setShowEditPostModal, setShowPostOptionsModal}) =>
       setShowEditPostModal(false)
       setShowPostOptionsModal(false)
     } else {
+      if(newImage){
 
-      const res = await fetch('/api/images/', {
-        method: "POST",
-        body: formData,
-      });
-      if (res.ok) {
-        const new_image = await res.json();
-        post["image_url"] = new_image.image_url
-        setImageLoading(false);
+        const res = await fetch('/api/images', {
+          method: "POST",
+          body: formData,
+        });
+        if (res.ok) {
+          const new_image = await res.json();
+          post["image_url"] = new_image.image_url
+          setImageLoading(false);
       }
       else {
         setImageLoading(false);
@@ -69,6 +69,7 @@ const EditPostForm = ({ post, setShowEditPostModal, setShowPostOptionsModal}) =>
         // error handling
         console.log("error");
       }
+    }
     }
       setContent('')
       dispatch(getImagesThunk())
