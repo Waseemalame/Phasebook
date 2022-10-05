@@ -56,13 +56,15 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <div className='home-display'>
-            <SideBar />
+            <div className="left-container">
+              <SideBar />
+            </div>
             <Posts />
-            <MessageCenter />
           </div>
         </ProtectedRoute>
       </Switch>
       {user && showMsgPopup && <MsgPopUp />}
+      <MessageCenter />
     </BrowserRouter>
   );
 }

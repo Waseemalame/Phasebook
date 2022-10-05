@@ -29,7 +29,7 @@
 
   bottom: 0;
   width: 14em;
-  height: 10em;
+  height: 0em;
   z-index: 500;
 
 }
@@ -59,7 +59,7 @@
   /* height: 20em; */
   overflow: hidden;
   overflow-y: scroll;
-  max-height: 30em;
+  max-height: 20em;
 }
 .contact{
   display: flex;
@@ -114,4 +114,19 @@
 .contact-name{
   padding-left: 10px;
   user-select: none;
+}
+@media screen and (max-width: 1100px) {
+  .msg-center-tab{
+    /* bottom: 10em; */
+  }
+  .one-msg-popup{
+    background-color: orange;
+    /* margin-top: 200em; */
+    /* height: 10em; */
+  }
+  .msg-popup-container{
+
+    bottom: -10em;
+    /* height: 20em; */
+  }
 }
