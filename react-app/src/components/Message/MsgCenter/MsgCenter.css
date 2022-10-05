@@ -1,0 +1,117 @@
+.msg-center-tab{
+  background-color: #0084FF;
+  position: fixed;
+  /* right: 0; */
+  /* right: 40%; */
+  /* top: 93%; */
+  /* left: 70%; */
+  right: 0;
+  bottom: 0;
+  /* right: 40%; */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  width: 14em;
+  height: 3em;
+  /* bottom: 0; */
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  user-select: none;
+  padding-right: 20px;
+
+}
+.msg-center-container{
+  position: fixed;
+
+  right: 0;
+
+  bottom: 0;
+  width: 14em;
+  height: 10em;
+  z-index: 500;
+
+}
+.msg-center-cont > *{
+  /* margin-top: 5px; */
+  /* margin-left: 5px; */
+}
+.msg-center-user-img{
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+
+}
+.msg-center-header{
+  color: white;
+  cursor: pointer;
+}
+.up-caret{
+  color: white;
+  cursor: pointer;
+}
+
+.message-contacts{
+  /* border: 1px solid black; */
+  position: relative;
+  bottom: 20em;
+  /* height: 20em; */
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 30em;
+}
+.contact{
+  display: flex;
+  align-items: center;
+  color: #050505;
+  cursor: pointer;
+  /* border-radius: 5px; */
+  /* padding: 8px; */
+  user-select: none;
+  /* position: fixed; */
+  /* width: 14em; */
+  /* height: 4em; */
+  /* right: 0; */
+
+  /* bottom: 0; */
+  padding-bottom: .5em;
+  padding-top: .5em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.159);
+  background-color: white;
+}
+.contact > *{
+
+
+}
+.contact-image{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  object-fit: cover;
+  user-select: none;
+  margin-left: 10px;
+}
+.contacts-header{
+  color: #65676B;
+  font-weight: 600;
+  padding: 8px;
+  user-select: none;
+}
+
+.contacts-container{
+  /* width: 280px; */
+  /* margin-top: 5em; */
+  /* position: fixed; */
+  /* top: 0; */
+  /* bottom: 0;
+  right: 0; */
+  /* overflow-y: hidden; */
+  /* border: 1px solid black; */
+  /* max-height: 10em; */
+
+}
+.contact-name{
+  padding-left: 10px;
+  user-select: none;
+}
