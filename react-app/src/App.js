@@ -36,7 +36,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar /> */}
       {user && <Navigation searchList={searchList} setSearchList={setSearchList} />}
       <Switch>
         <Route path='/login' exact={true}>
@@ -46,7 +45,6 @@ function App() {
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
-          {/* <UsersList/> */}
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <ProfilePage />

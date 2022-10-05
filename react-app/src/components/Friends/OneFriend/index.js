@@ -35,9 +35,6 @@ const OneFriend = ({ friend }) => {
 
             <div className="friend-info">
               <div>{friend.first_name} {friend.last_name}</div>
-              {/* <div className='mutual-friend-click' onClick={async (e, friendId) =>{
-                                                    // setCurrentFriend(friend.first_name + ' ' + friend.last_name)
-                                                    }}>Mutual Friends</div> */}
             </div>
         </div>
     </div>

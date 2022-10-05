@@ -18,7 +18,6 @@ function DeleteCommentModal({ editClicked, setEditClicked, post, comment, setSho
 
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          {/* <EditCommentForm setShowModal={setShowModal} setEditClicked={setEditClicked} user={user} onClick={() => setShowModal(false)}/> */}
           <DeleteComment post={post} comment={comment} setShowModal={setShowModal} setShowOptionsModal={setShowOptionsModal}/>
         </Modal>
       )}

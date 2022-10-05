@@ -253,8 +253,6 @@ function ProfilePage() {
                 </div>
                 )}
               </div>
-              {/* <div ref = {scrollRef} className="profile-top-underline">
-            </div> */}
           </div>
         </div>
       </div>
@@ -290,7 +288,6 @@ function ProfilePage() {
                          />
           </div>
 
-            {/* <CreatePostModal /> */}
           <div className='feed-posts'>
           {usersPosts && usersPosts.reverse().map(post => (
             <div id={`profile${post.id}`} className="single-post">

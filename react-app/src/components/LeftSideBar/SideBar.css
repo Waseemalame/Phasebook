@@ -6,22 +6,11 @@
   object-fit: cover;
 }
 .sidebar-container{
-  /* width: 280px; */
-  /* margin-left: 4em; */
   position: sticky;
   top: 5em;
   bottom: 1em;
-  margin-right: ;
-  /* right: 4em; */
-  /* left: 3em; */
-  /* border: 1px solid black; */
-  /* left: 0; */
-  /* right: 70.5%; */
-  /* left: 0; */
 }
 .sidebar-container > * {
-  /* margin: 10px; */
-  /* margin-left: 10px; */
   margin-bottom: 5px;
   max-width: 280px;
   display: flex;

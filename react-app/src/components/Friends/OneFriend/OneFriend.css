@@ -10,11 +10,7 @@
   object-fit: cover;
 
 }
-.friend-image:hover{
-  /* background-color: rgba(0, 0, 0, 0.271);
-  background-blend-mode: darken; */
 
-}
 .friend-image:hover {
   -webkit-filter: brightness(90%);
   -webkit-transition: all 500ms ease;

@@ -7,7 +7,6 @@
   border-radius: 10px;
   margin-bottom: 50px;
   min-height: 40em;
-  /* height: 100%; */
 }
 .sf-upper{
   padding: 16px;
@@ -62,9 +61,7 @@
   border-radius: 10px;
   position: relative;
 }
-.show-friend-cards{
-  /* display: flex; */
-}
+
 .sf-body{
   display: flex;
   padding-left: 16px;

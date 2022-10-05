@@ -26,7 +26,6 @@ function CommentOptionsModal({ editClicked, setEditClicked, comment, post, setMo
 
       {showOptionsModal && (
         <Modal onClose={() => setShowOptionsModal(false)}>
-          {/* <EditCommentForm setShowOptionsModal={setShowOptionsModal} setEditClicked={setEditClicked} user={user} onClick={() => setShowOptionsModal(false)}/> */}
           <CommentOptions post={post} comment={comment} editClicked={editClicked} setShowOptionsModal={setShowOptionsModal} setEditClicked={setEditClicked} user={user} onClick={() => setShowOptionsModal(false)} />
         </Modal>
       )}

@@ -82,7 +82,6 @@ useEffect(() => {
   return (
 
       <div className='contacts-container'>
-        {/* <span className='contacts-header'>Contacts</span> */}
           {friends && friends.map(friend => (
                             <div onClick={() => messagePopup(friend)} className='contact'>
                               <div>
@@ -96,30 +95,8 @@ useEffect(() => {
                                 </div>
 
                               <div className='contact-name'>{friend.first_name} {friend.last_name}</div>
-
-                              {/* <div className='mutual-friend-click' onClick={async (e, friendId) =>{
-                                                                    findMutualFriends(e, friend.id)
-                                                                    setCurrentFriend(friend.first_name + ' ' + friend.last_name)
-                                                                    }}>Mutual Friends</div> */}
                             </div>
           ))}
-          {/* {mutualFriends.length > 0 && currentFriend && <div>Mutual Friends with {currentFriend}</div>}
-
-          {mutualFriends.length > 0 && mutualFriends.map(mutualFriend => (
-            <div className='mutual-friend-container'>
-            <div>
-                                {mutualFriend.profile_image_url ? (
-                                  <img onClick={() => redirectProfile(mutualFriend)} className="friend-image" src={mutualFriend.profile_image_url} alt="" />
-
-                                  ) : (
-
-                                  <img onClick={() => redirectProfile(mutualFriend)} className="friend-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
-                                )}
-                                </div>
-
-                              <div>{mutualFriend.first_name} {mutualFriend.last_name}</div>
-            </div>
-          ))} */}
       </div>
 
   );

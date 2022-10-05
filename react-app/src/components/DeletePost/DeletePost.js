@@ -11,9 +11,6 @@ const DeletePost = ({ post, setShowDeleteModal, setShowPostOptionsModal }) => {
   }
   return (
     <div>
-      {/* Are you sure you want to delete this post? */}
-      {/* <div onClick={handleDeletePost}>Yes</div>
-      <div onClick={() => setShowDeleteModal(false)}>No</div> */}
       <div className="confirm-del-container">
         <div className="del-header">
         <h3>Delete Post?</h3>

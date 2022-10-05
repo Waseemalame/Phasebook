@@ -4,16 +4,13 @@
   position: fixed;
   top: 0;
   z-index: 100;
-  /* max-width: 100em; */
   margin: 0 auto;
   background-color: white;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 
 
 }
-.nav-container > * > *{
-  /* border: 1px solid black; */
-}
+
 .nav-container > ul > * {
   width: 100%;
 }
@@ -25,7 +22,6 @@
   position: relative;
   list-style: none;
   padding-left: 5em;
-  /* border: 1px solid black; */
 }
 .nav-list > li > div > img{
   background-color: white;
@@ -37,7 +33,6 @@
   background-color: white;
 }
 .nav-container > ul{
-  /* border: 1px solid black; */
   margin-left: 5em;
   margin-right: 5em;
   max-width: 1300px;
@@ -237,7 +232,6 @@
   right: 40px;
   background-color: white;
   width: 120px;
-  /* z-index: 2000; */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 5px;
 }
