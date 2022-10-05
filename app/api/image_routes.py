@@ -19,7 +19,7 @@ def get_images():
     else:
         return "Unauthorized"
 
-@image_routes.route("/", methods=["POST"])
+@image_routes.route("", methods=["POST"])
 @login_required
 def upload_image():
     if "image" not in request.files:

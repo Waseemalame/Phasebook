@@ -31,12 +31,12 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
 
     const new_post = await dispatch(createPost(data))
     if(image){
-
+      console.log(image)
       const formData = new FormData();
       formData.append("image", image);
       formData.append("post_id", new_post.id)
 
-      const res = await fetch('/api/images/', {
+      const res = await fetch('/api/images', {
         method: "POST",
         body: formData,
       });
