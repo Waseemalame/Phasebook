@@ -1,14 +1,9 @@
-body{
-  /* background-color: rgba(196, 201, 208, 0.324); */
-}
+
 .login-form{
   width: 330px;
   height: 400px;
-  /* width: max-content; */
-  /* width: 100%; */
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   margin: 0 auto;
   background-color: white;
@@ -32,11 +27,8 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding: 14px 16px; */
 }
-.login-form > div{
 
-}
 .email-div{
   margin-top: 10px;
 }
@@ -79,6 +71,5 @@ body{
   word-wrap: break-word;
   width: 800px;
   margin: 20px auto;
-  /* padding: 0 auto; */
   border-top: 1px solid lightgray;
 }

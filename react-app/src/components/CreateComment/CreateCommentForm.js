@@ -47,7 +47,6 @@ const userSession = useSelector(state => state.session.user)
   return (
 
     <div className="create-comment-container">
-      {/* <img className='comment-user-image' src={userSession.profile_image_url} alt="" /> */}
       {userSession.profile_image_url ? (
           <img className="comment-user-image" src={userSession.profile_image_url} alt="" />
 

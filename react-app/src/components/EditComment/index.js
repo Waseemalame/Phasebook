@@ -19,8 +19,6 @@ const SingleComment = ({ comment, current_user, post }) => {
       <div className="one-comment"
                         onMouseEnter={() => setShowCommentOptions(true)}
                         onMouseLeave={!modalOpen ? () => setShowCommentOptions(false) : () => null}>
-      {/* <div className="one-comment"> */}
-      {/* <div><img className='comment-user-image' src={comment?.user.profile_image_url} alt="" /></div> */}
       {comment?.user.profile_image_url ? (
           <img onClick={() => redirectProfile(comment.user)} className="comment-user-image profile-icon-click" src={comment?.user.profile_image_url} alt="" />
 

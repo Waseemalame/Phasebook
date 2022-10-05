@@ -2,36 +2,22 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* font-family: Arial, Helvetica, sans-serif; */
   font-family: Helvetica, sans-serif;
-  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 
 }
-html{
-  /* overflow-x: hidden; */
-}
+
 body{
   background-color: #F0F2F5;
 }
 .home-display{
-  /* position: relative; */
   margin-top: 5em;
   display: flex;
   justify-content: flex-start;
-  /* margin-right: 15em; */
   max-width: 1300px;
-  /* margin: 0 auto; */
   margin-left: auto;
   margin-right: auto;
-  /* max-width: 100vw; */
-  /* margin: auto auto; */
-  /* margin-left: 12em; */
-  /* border: 1px solid black; */
-  /* overflow-x: hidden; */
-  /* margin-left: 20em; */
 }
 .left-container{
-  /* background-color: blue; */
   width: max-content;
   position: relative;
 }

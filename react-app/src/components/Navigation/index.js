@@ -106,7 +106,6 @@ const Navigation = () => {
         </li>
         <li>
           <div className="nav-right">
-            {/* <img onClick={() => setProfileDropDown(true)} className='post-user-image' src={current_user?.profile_image_url} alt=""/> */}
             {current_user.profile_image_url ? (
           <img onClick={() => setProfileDropDown(true)} className="post-user-image" src={current_user.profile_image_url} alt="" />
 
@@ -114,7 +113,6 @@ const Navigation = () => {
 
             <img onClick={() => setProfileDropDown(true)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
         )}
-            {/* <img onClick={redirectProfile} className='post-user-image' src={current_user?.profile_image_url} alt=""/> */}
           </div>
           {profileDropDown ? (
             <div className='profile-dropdown'>

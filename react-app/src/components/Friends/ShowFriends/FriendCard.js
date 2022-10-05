@@ -104,12 +104,7 @@ const FriendCard = ({ friend, user, setClickedPosts, setClickedFriends, deleted,
 
         <div className="sf-friend-info">
           <div className='sf-user-fullname' onClick={() => redirectProfile(friend)}>{friend.first_name} {friend.last_name}</div>
-          {/* <div className='mutual-friend-click' onClick={async (e, friendId) =>{
-                                                // setCurrentFriend(friend.first_name + ' ' + friend.last_name)
-                                                }}>Mutual Friends</div> */}
         </div>
-        {/* <div className="sf-options">
-          </div> */}
         {current_user.id !== friend.id && (
 
           <>

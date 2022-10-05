@@ -30,12 +30,6 @@
   user-select: none;
 }
 .edit-pro-img-container{
-  /* position: relative; */
-  /* background-color: blue;
-  border: 1px solid black; */
-  /* height: 36px;
-  width: 36px; */
-  /* position: relative; */
   user-select: none;
 }
 .profile-img-label{
@@ -98,7 +92,6 @@
   background-image: url("https://images.unsplash.com/photo-1496096265110-f83ad7f96608?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  /* background-repeat: no-repeat; */
   background-size: cover;
 }
 
@@ -152,7 +145,6 @@
   user-select: none;
 }
 .profile-post-header:hover, .profile-friends-header:hover{
-    /* background-color: #D8DADF; */
     color: #383a3e;
 
 }

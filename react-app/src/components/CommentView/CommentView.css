@@ -13,18 +13,13 @@
   padding: 10px;
   padding-top: 5px;
   font-size: smaller;
-  /* max-width: fit-content; */
   max-width: 385px;
-  /* border: 2px solid black; */
   position: relative;
 }
 .comment-text{
   margin-top: 5px;
   line-height: 18px;
   word-wrap: break-word;
-}
-.edit-comment-div{
-  /* display: flex; */
 }
 .edit-comment-ellipsis{
   display: flex;
@@ -39,7 +34,6 @@
 }
 .edit-comment-ellipsis:hover{
   background-color: rgba(211, 211, 211, 0.212);
-  /* padding: 10px; */
 
   border-radius: 100%;
 
