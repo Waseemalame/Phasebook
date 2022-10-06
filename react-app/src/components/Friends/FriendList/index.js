@@ -2,14 +2,16 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { getAllFriendsThunk } from '../../../store/request'
+import { useProfileContext } from '../../context/profileContext'
 import OneFriend from '../OneFriend'
 import "./FriendList.css"
 const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setDeleted }) => {
   const current_user = useSelector(state => state.session.user)
   const [friends, setFriends] = useState([]);
-
+  const { setClickedFriends, setClickedPosts, setScrollToFriends } = useProfileContext()
+  const history = useHistory()
   // const { userId }  = useParams();
   const userId = user.id
   const dispatch = useDispatch()
@@ -47,7 +49,13 @@ const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setD
         }
       }
   }, [friends, friendsList]);
+  const redirectToFriends = (user) => {
+    setClickedFriends(true)
+    setClickedPosts(false)
+    setScrollToFriends(true)
+    history.push(`/users/${user.id}`)
 
+  }
 
   return (
     <>
@@ -55,7 +63,7 @@ const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setD
         <div className='friends-info-top'>
           <h3 className='friend-header'>Friends</h3>
           {friends.length > 8 && (
-            <p className='see-all-friends'>{'See all friends'}</p>
+            <p onClick={redirectToFriends} className='see-all-friends'>{'See all friends'}</p>
           )}
         </div>
         <span className='friends-amount'>{friends.length} {current_user.id !== userId ? (
