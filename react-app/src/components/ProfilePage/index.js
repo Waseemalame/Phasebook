@@ -15,6 +15,8 @@ import PostOptionsModal from '../PostOptions';
 import EditProImg from './EditProImg';
 
 import "./ProfilePage.css"
+import OnePost from '../Posts/OnePost';
+import LikeComment from '../Posts/LikeComment';
 
 function ProfilePage() {
   const [user, setUser] = useState({});
@@ -287,32 +289,15 @@ function ProfilePage() {
                          setDeleted={setDeleted}
                          />
           </div>
-
-          <div className='feed-posts'>
+          <div>
           {usersPosts && usersPosts.reverse().map(post => (
-            <div id={`profile${post.id}`} className="single-post">
-              <div className="post-user-info">
-                <div>{post.user.profile_image_url ? (
-                  <img onClick={() => redirectProfile(post.user)} className="post-user-image" src={current_user.id === post.user.id ? current_user.profile_image_url : post.user.profile_image_url} alt="" />
-                      ) : (
-                        <img onClick={() => redirectProfile(post.user)} className="post-user-image" src="https://i.imgur.com/hrQWTvu.png" alt="" />
-                      )}
-                </div>
-                <span className='user-first-last'>{post.user?.first_name} {post.user?.last_name}</span>
-              </div>
-                {current_user.id === post.user.id ? (
-                  <PostOptionsModal post={post} />
-                  ) : (
-                    ''
-                )}
-              <div className='post-content'>{post.content}</div>
-              <div className="post-images">
-                <img className='single-post-image' src={post?.images[0]?.image_url} alt="" />
-              </div>
-              <CommentView post={post} />
-              <CreateCommentForm post={post} />
-            </div>
-          ))}
+          <div id={`feed${post.id}`} className="single-post">
+            <OnePost post={post}/>
+            <LikeComment post={post} />
+            <CommentView post={post} />
+            <CreateCommentForm post={post} />
+          </div>
+        ))}
         </div>
       </div>
           )}
