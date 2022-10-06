@@ -9,7 +9,7 @@ message_routes = Blueprint("messages", __name__, url_prefix="/messages")
 @message_routes.route('/<userId>', methods=["GET"])
 def get_messages(userId):
   user = User.query.get(userId)
-  all_messages = Message.query.join(User,
+  users_messages = Message.query.join(User,
     (User.id == Message.msg_recipient_id) | (User.id == Message.msg_sender_id)).filter(
       (Message.msg_recipient_id == current_user.id) | (Message.msg_sender_id == current_user.id)
     ).filter(
@@ -17,7 +17,15 @@ def get_messages(userId):
     ).all()
 
 
-  # all_messages = Message.query.all()
+  return {'messages': [message.to_dict() for message in users_messages]}
+
+@message_routes.route('')
+def get_all_messages():
+
+  all_messages = Message.query.join(User,
+    (User.id == Message.msg_recipient_id) | (User.id == Message.msg_sender_id)).filter(
+    (Message.msg_recipient_id == current_user.id) | (Message.msg_sender_id == current_user.id)
+    )
   return {'all_messages': [message.to_dict() for message in all_messages]}
 
 @message_routes.route('/', methods=["POST"])
