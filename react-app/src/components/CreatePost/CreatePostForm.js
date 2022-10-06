@@ -35,6 +35,7 @@ const CreatePostForm = ({ setShowModal, showModal, modalClosed }) => {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("post_id", new_post.id)
+      formData.append("user_id", user.id)
 
       const res = await fetch('/api/images', {
         method: "POST",
