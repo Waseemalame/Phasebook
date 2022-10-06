@@ -11,14 +11,12 @@ const createMessage = (message) => ({
   message
 })
 
-export const loadMessagesThunk = (recipient_id) => async (dispatch) => {
+export const loadMessagesThunk = () => async (dispatch) => {
 
-  const res = await fetch(`/api/messages/${recipient_id}`)
-  console.log(res)
+  const res = await fetch(`/api/messages`)
   if(res.ok){
     const messages = await res.json()
     dispatch(loadMessages(messages.all_messages))
-    return messages.all_messages
   }
 }
 

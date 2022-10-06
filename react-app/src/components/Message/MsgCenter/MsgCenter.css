@@ -14,12 +14,12 @@
   user-select: none;
   padding-right: 20px;
 
+
 }
 .msg-center-container{
   position: fixed;
 
   right: 0;
-
   bottom: 0;
   width: 14em;
   height: 0em;
@@ -28,9 +28,11 @@
 }
 
 .msg-center-user-img{
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
   border-radius: 100%;
+  object-fit: cover;
 
 }
 .msg-center-header{
@@ -41,13 +43,26 @@
   color: white;
   cursor: pointer;
 }
+.contacts-container{
+
+  background-color: white;
+  position: relative;
+  bottom: 0;
+  height: 20em;
+
+}
 
 .message-contacts{
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
   position: relative;
   bottom: 20em;
   overflow: hidden;
   overflow-y: scroll;
   max-height: 20em;
+}
+.contact-wrapper{
+  position: relative;
+
 }
 .contact{
   display: flex;
@@ -58,10 +73,12 @@
 
   padding-bottom: .5em;
   padding-top: .5em;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.159);
   background-color: white;
 }
 
+.contact-bottom{
+  position: relative;
+}
 .contact-image{
   width: 40px;
   height: 40px;
@@ -79,5 +96,36 @@
 
 .contact-name{
   padding-left: 10px;
+  margin-top: 5px;
   user-select: none;
+}
+.latest-message-container{
+color: gray;
+display: flex;
+font-size: 10px;
+padding-bottom: 15px;
+margin-left: 10px;
+position: relative;
+padding-top: 5px;
+}
+
+.last-message-placeholder{
+margin-top: 20px;
+}
+.latest-message-body{
+  max-width: 10em;
+  margin-left: 5px;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.contact-underline{
+  border: .1px solid rgba(120, 118, 118, 0.181) !important;
+  border-width: thin medium;
+  min-width: 100%;
+  position: absolute;
+  bottom: 0;
+  right: -100px;
+  left: 0;
 }

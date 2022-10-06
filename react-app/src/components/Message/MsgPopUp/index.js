@@ -9,13 +9,13 @@ import "./MsgPopUp.css"
 let socket;
 
 const MsgPopUp = () => {
-  const { showMsgPopup, setShowMsgPopup, msgUser, setMsgUser, messages, setMessages } = useMessageContext()
+  const { setShowMsgPopup, msgUser, setMsgUser,
+          messages, setMessages, setmessageSent, setMostRecentMessanger, setLastMessage,
+         } = useMessageContext()
   const current_user = useSelector(state => state.session.user)
-  const directMessages = useSelector(state => Object.values(state.messages))
   const [chatInput, setChatInput] = useState('')
   const dispatch = useDispatch()
   const [messageHistory, setMessageHistory] = useState([])
-
 
     const joinedId = [current_user?.id, msgUser?.id].sort();
     const roomId = `${joinedId[0]}-${joinedId[1]}`;
@@ -32,7 +32,7 @@ const MsgPopUp = () => {
                 const res = await fetch(`/api/messages/${msgUser.id}`)
                 if(res.ok){
                   const messages = await res.json()
-                  setMessageHistory(messages.all_messages)
+                  setMessageHistory(messages.messages)
                 }
               }
             })()
@@ -41,12 +41,7 @@ const MsgPopUp = () => {
 
 
     }, [current_user, msgUser, roomId]);
-    // useEffect(() => {
-    //   if(roomId === `${current_user.id}-${msgUser.id}` || roomId === `${msgUser.id}-${current_user.id}`){
-    //     dispatch(loadMessagesThunk(msgUser.id))
 
-    //   }
-    // }, []);
 
 
     useEffect(() => {
@@ -58,6 +53,8 @@ const MsgPopUp = () => {
 
           // when we recieve a chat, add it into our messages array in state
           setMessages(messages => [...messages, chat])
+
+
         })
 
         // when component unmounts, disconnect
@@ -67,6 +64,10 @@ const MsgPopUp = () => {
             setMessages([]);
         })
     }, [])
+    useEffect(() => {
+      setLastMessage(messages[messages.length - 1])
+
+    }, [messages, setLastMessage]);
 
     // additional code to be added
     let msgContainer = document.querySelector(".message-container")
@@ -78,7 +79,7 @@ const MsgPopUp = () => {
 
 
 
-  const sendChat = (e) => {
+  const sendChat = async (e) => {
     e.preventDefault()
     const data = {
       msg_body: chatInput,
@@ -86,14 +87,15 @@ const MsgPopUp = () => {
       msg_recipient_id: msgUser.id
     }
 
-    dispatch(createMessageThunk(data))
-
+    await dispatch(createMessageThunk(data))
+    setmessageSent(true)
     // emit a message
     socket.emit("chat", { currUserId: current_user.id, otherId: msgUser.id, user_img: current_user.profile_image_url, msg: chatInput, room: roomId });
+    setMostRecentMessanger(msgUser.id)
 
     // clear the input field after the message is sent
     setChatInput('')
-
+    setmessageSent(false)
   }
   useEffect(() => {
   }, []);
