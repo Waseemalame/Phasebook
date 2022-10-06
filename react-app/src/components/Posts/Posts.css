@@ -142,8 +142,32 @@
   font-weight: 500;
   font-size: 13px;
 }
+
+.liked-icon-container, .unliked-icon-container{
+  height: 1.2em;
+}
+.liked-icon-container > *{
+  color: #056BE1;
+  font-size: small;
+}
+.unliked-icon-container > *{
+  /* border: 1px solid black; */
+  border: none;
+  color: #00000096;
+
+  border-width: thin;
+
+  /* color: transparent; */
+  /* font-weight: 0; */
+}
+.liked-icon{
+  /* border: 1px solid black; */
+}
+.like-icon{
+  /* border: 1px solid black; */
+}
 .liked{
-  color: blue;
+  color: #056BE1;
   padding-top: 2px;
   margin-left: 5px;
   font-weight: 500;

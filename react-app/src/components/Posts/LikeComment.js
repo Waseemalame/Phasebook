@@ -4,7 +4,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addLikeThunk, deleteLikeThunk } from '../../store/like'
 // import { addLikeThunk, deleteLikeThunk } from '../../../store/like'
-
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 const LikeComment = ({ post }) => {
   const current_user = useSelector(state => state.session.user)
   const [liked, setLiked] = useState(false);
@@ -61,17 +62,28 @@ const LikeComment = ({ post }) => {
   return (
     <div className='like-comment-section'>
       <div onClick={liked ? deleteLike : createLike} className="click-like">
-        <img className={liked ? 'like-icon' : 'liked'}
-         src={liked ?
-          'https://i.imgur.com/Ye98nw2.png'
-          : "https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/18/000000/external-like-feedback-kmg-design-detailed-outline-kmg-design.png"
 
-        } alt=""/>
+        <div className={liked ? 'like-icon' : 'liked-icon'}>{liked ? (
+          <div className="liked-icon-container">
+            <ThumbUpAltRoundedIcon sx={{ stroke: "white", strokeWidth: 1 }} fontSize="small"/>
+          </div>
+          ) : (
+            <div className="unliked-icon-container">
+              <ThumbUpOffAltIcon sx={{ stroke: "#ffffff", strokeWidth: .7 }} fontSize='small' />
+              {/* Alternate Like Icon-img */}
+              {/* <img className={liked ? 'like-icon' : 'liked'}
+                src={"https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/18/000000/external-like-feedback-kmg-design-detailed-outline-kmg-design.png"
+                  } alt=""/> */}
+            </div>
+
+        )}</div>
         <span className={liked ? 'liked' : 'like-icon-text'}>Like</span>
+
         </div>
       <div className="click-comment" onClick={() => cmtInput.focus()}>
         <img className='comment-icon' src="https://img.icons8.com/ios/18/000000/comments.png" alt=""/>
         <span className="comment-icon-text">Comment</span>
+
         </div>
     </div>
   )
