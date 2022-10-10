@@ -23,9 +23,10 @@ function Contacts({ searchString, setSearchList }) {
   }, []);
 
   useEffect(() => {
+    if(mostRecentMessager > 0){
 
-    let index;
-    for (let i = 0; i < friends.length; i++) {
+      let index;
+      for (let i = 0; i < friends.length; i++) {
       const friend = friends[i];
       if(friend.id === mostRecentMessager){
         index = i
@@ -36,6 +37,9 @@ function Contacts({ searchString, setSearchList }) {
     friends.splice(index, 1)
     friends.unshift(friendAtIndex)
     setSortedFriends(friends)
+  } else {
+    setSortedFriends(friends)
+  }
   }, [mostRecentMessager]);
 
   useEffect(() => {
