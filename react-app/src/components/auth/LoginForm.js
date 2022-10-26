@@ -50,7 +50,7 @@ const LoginForm = () => {
     <div className='login-page-container'>
       <div className="login-page-top">
         <div className="left-login-page">
-          <div className="fb-header-div"><img className='fb-header-img' src="https://i.imgur.com/HwGVt4u.png" alt="" /></div>
+          <div className="fb-header-div"><img className='fb-header-img' src="https://i.imgur.com/dtmcGeY.png" alt="" /></div>
           <p className="sub-header-text">Connect with friends and the world around you on Phasedbook</p>
         </div>
         <form className='login-form' onSubmit={onLogin}>
