@@ -46,7 +46,6 @@ const Navigation = () => {
   const navLeft = document.querySelector('.nav-left')
   useEffect(() => {
     if(navLeft){
-      console.log(navLeft)
       navLeft.style.overflow = 'hidden'
     }
 

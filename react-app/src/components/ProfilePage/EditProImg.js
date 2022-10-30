@@ -29,7 +29,6 @@ const EditProImg = ({ user }) => {
   const updateImage = (e) => {
     e.preventDefault()
     const file = e.target.files[0];
-    console.log(file)
     setImage(file);
 
     setProfileImgPreview(URL.createObjectURL(file))
@@ -38,7 +37,6 @@ const EditProImg = ({ user }) => {
     setProfileImgPreview('')
   }
   const acceptProfileImgEdit = async () => {
-    // console.log(image)
     if(image){
       const formData = new FormData();
       formData.append("image", image);
