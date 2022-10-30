@@ -27,9 +27,6 @@ const LikeComment = ({ post }) => {
 
   }, []);
 
-  useEffect(() => {
-    console.log(liked)
-  }, [liked]);
 
   const createLike = async () => {
     if(!liked){
@@ -39,9 +36,6 @@ const LikeComment = ({ post }) => {
         user_id: current_user.id
       }
       const like = await dispatch(addLikeThunk(data))
-      console.log(like)
-      console.log(like)
-      console.log(like)
       if(like){
         setLiked(true)
         setLikeId(like.id)

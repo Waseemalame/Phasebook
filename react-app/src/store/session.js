@@ -16,7 +16,6 @@ const updateUser = (user) => ({
   user
 })
 export const updateUserThunk = (data) => async (dispatch) => {
-  console.log(data)
   const { id, profile_image_url } = data
   const formData = new FormData()
   formData.append('profile_image_url', profile_image_url)
