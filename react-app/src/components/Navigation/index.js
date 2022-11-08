@@ -70,7 +70,7 @@ const Navigation = () => {
     <div className="nav-container">
       <ul className='nav-list'>
         <li className='search-nav'>
-          <img onClick={redirectHome} id="logo" className={searchList ? 'hide-icon' : 'phasebook-icon'} src="https://i.imgur.com/XwPiQNW.png" alt=""/>
+          <img onClick={redirectHome} id="logo" className={searchList ? 'hide-icon' : 'phasebook-icon'} src="https://i.imgur.com/Be7XbH8.png" alt=""/>
           <div onClick={() => setSearchList(true)}  ref={listRef} className={searchList === false ? 'nav-left' : 'nav-left-clicked'}>
             <div onClick={(e) => cancelSearchFunc(e)} className="cancel-search">
               {searchList && (
@@ -88,7 +88,7 @@ const Navigation = () => {
                       value={searchString}
                       onChange={(e) => setSearchString(e.target.value)}
                       spellcheck="false"
-                      placeholder='Search Facebook' />
+                      placeholder='Search Phasedbook' />
             </div>
             {searchList && (
 
