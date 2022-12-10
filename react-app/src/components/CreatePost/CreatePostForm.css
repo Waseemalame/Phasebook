@@ -30,7 +30,7 @@
 .user-first-last{
   font-weight: 700;
   user-select: unset;
-
+  list-style: none;
 }
 .create-post-form{
   display: flex;
