@@ -9,8 +9,8 @@ class FriendRequest(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   status = db.Column("status", db.String, nullable=False)
-  sender_id = db.Column("sender_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
-  recipient_id = db.Column("recipient_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
+  sender_id = db.Column("sender_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+  recipient_id = db.Column("recipient_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
   req_sender = db.relationship("User",
                           foreign_keys=[sender_id],

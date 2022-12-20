@@ -38,12 +38,12 @@ def seed():
         # Add a truncate command here for every table that will be seeded.
         db.session.commit()
     seed_images()
+    seed_friends()
     if environment == 'production':
         # Before seeding, truncate all tables prefixed with schema name
         db.session.execute(f"TRUNCATE table {SCHEMA}.friendRequests RESTART IDENTITY CASCADE;")
         # Add a truncate command here for every table that will be seeded.
         db.session.commit()
-    seed_friends()
     if environment == 'production':
         # Before seeding, truncate all tables prefixed with schema name
         db.session.execute(f"TRUNCATE table {SCHEMA}.likes RESTART IDENTITY CASCADE;")
