@@ -1,14 +1,16 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
 
 class FriendRequest(db.Model):
   __tablename__ = "friendRequests"
+  if environment == "production":
+      __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
   status = db.Column("status", db.String, nullable=False)
-  sender_id = db.Column("sender_id", db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
-  recipient_id = db.Column("recipient_id", db.Integer, db.ForeignKey("users.id", ondelete='CASCADE'), nullable=False)
+  sender_id = db.Column("sender_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
+  recipient_id = db.Column("recipient_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
 
   req_sender = db.relationship("User",
                           foreign_keys=[sender_id],
