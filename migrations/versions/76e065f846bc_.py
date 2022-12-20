@@ -44,8 +44,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-    # if environment == "production":
-    #     op.execute(f"ALTER TABLE friendRequests SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE friendRequests SET SCHEMA {SCHEMA};")
     op.create_table('messages',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('msg_sender_id', sa.Integer(), nullable=False),
