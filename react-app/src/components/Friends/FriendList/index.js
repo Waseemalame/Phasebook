@@ -67,7 +67,7 @@ const FriendsList = ({ user, mutualFriends, accepted, deleted, setAccepted, setD
           )}
         </div>
         <span className='friends-amount'>{friends.length} {current_user.id !== userId ? (
-          `(${mutualFriends.length} mutual)`
+          `(${mutualFriends?.length} mutual)`
         ) : 'friend(s)'} </span>
       </div>
       <div className='friends-list'>
