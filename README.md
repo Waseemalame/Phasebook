@@ -16,9 +16,9 @@ Phasedbook is a website built for users to socialize and connect from all around
 ### Hosting
 * Docker
 * Heroku
+* Now hosted on Render through git branch render-deployment
 
-## Heroku Live Link
-https://phasedbook.herokuapp.com/
+[Live Link](https://phasedbook.onrender.com/)
 
 ## Features
 * Read, create, update, and delete Posts
