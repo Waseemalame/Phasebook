@@ -87,11 +87,7 @@ Phasedbook is a website built for users to socialize and connect from all around
 <br>
 
 ## To-do List
- * Friends functionality
- * Upload Profile Image
  * Google Maps API
- * Search Bar
- * Likes
 
 
 
