@@ -20,6 +20,13 @@ jobs:
       # CI=false allows the build to ignore any warnings when building
       run: npm install && CI=false npm run build
 
+    - name: Publish to Azure Static Web Apps
+      uses: Azure/static-web-apps-deploy@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        app_location: "react-app/build"
+        output_location: "/"
+
     # https://github.com/actions/setup-python
     # If a student sees this, they could speed up their builds
     # by moving install from docker to cached GH action runner
