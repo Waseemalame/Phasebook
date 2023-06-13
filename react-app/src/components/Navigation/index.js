@@ -30,9 +30,12 @@ const Navigation = () => {
     const closeSearchList = (e) => {
       e.stopPropagation()
       if(searchList) return
-      if(e.path[2] !== listRef.current){
-        setSearchList(false)
-        setSearchString('')
+      if(e.path){
+
+        if(e.path[2] !== listRef.current){
+          setSearchList(false)
+          setSearchString('')
+        }
       }
     }
     document.body.addEventListener("click", closeSearchList)
