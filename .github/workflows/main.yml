@@ -21,34 +21,34 @@ jobs:
       run: npm install && CI=false npm run build
 
     # https://github.com/actions/setup-python
-    # If a student sees this, they could speed up their builds 
+    # If a student sees this, they could speed up their builds
     # by moving install from docker to cached GH action runner
-    # Have fun (after you have a passing project!) :) 
-    - uses: actions/setup-python@v3
-      with:
-        python-version: '3.9'
-        cache: 'pip'
-    - run: pip install pipenv
+    # Have fun (after you have a passing project!) :)
+    # - uses: actions/setup-python@v3
+    #   with:
+    #     python-version: '3.9'
+    #     cache: 'pip'
+    # - run: pip install pipenv
 
-    - name: Update requirements.txt for container install
-      run: pipenv requirements > requirements.txt
+    # - name: Update requirements.txt for container install
+    #   run: pipenv requirements > requirements.txt
 
-    - name: Login to Heroku Container registry
-      env: 
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:login 
+    # - name: Login to  Container registry
+    #   env:
+    #     _API_KEY: ${{ secrets._API_KEY }}
+    #   run:  container:login
 
-    - name: Build Container and push
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web 
+    # - name: Build Container and push
+    #   env:
+    #     _API_KEY: ${{ secrets._API_KEY }}
+    #   run:  container:push -a ${{ secrets._APP_NAME }} web
 
-    - name: Release
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web 
+    # - name: Release
+    #   env:
+    #     _API_KEY: ${{ secrets._API_KEY }}
+    #   run:  container:release -a ${{ secrets._APP_NAME }} web
 
-    - name: Run DB Migration
-      env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku run -a ${{ secrets.HEROKU_APP_NAME }} flask db upgrade
+    # - name: Run DB Migration
+    #   env:
+    #       _API_KEY: ${{ secrets._API_KEY }}
+    #   run:  run -a ${{ secrets._APP_NAME }} flask db upgrade
