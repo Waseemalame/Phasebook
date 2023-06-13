@@ -1,61 +1,36 @@
-name: Deploy
+name: Build and deploy Python app to Azure Web App
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  BuildAndDeploy:
-    runs-on: ubuntu-20.04
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3
-    # https://github.com/actions/setup-node
-    - uses: actions/setup-node@v3
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@master
+
+    - name: Set up Python version
+      uses: actions/setup-python@v1
       with:
-        node-version: '16'
-        cache: 'npm'
-        cache-dependency-path: react-app/package-lock.json
-    - name: Build React App
-      working-directory: react-app
-      # CI=false allows the build to ignore any warnings when building
-      run: npm install && CI=false npm run build
+        python-version: '3.9'
 
-    - name: Publish to Azure Static Web Apps
-      uses: Azure/static-web-apps-deploy@v1
+    - name: 'Install requirements'
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        app_location: "react-app/build"
-        output_location: "/"
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    # https://github.com/actions/setup-python
-    # If a student sees this, they could speed up their builds
-    # by moving install from docker to cached GH action runner
-    # Have fun (after you have a passing project!) :)
-    # - uses: actions/setup-python@v3
-    #   with:
-    #     python-version: '3.9'
-    #     cache: 'pip'
-    # - run: pip install pipenv
-
-    # - name: Update requirements.txt for container install
-    #   run: pipenv requirements > requirements.txt
-
-    # - name: Login to  Container registry
-    #   env:
-    #     _API_KEY: ${{ secrets._API_KEY }}
-    #   run:  container:login
-
-    # - name: Build Container and push
-    #   env:
-    #     _API_KEY: ${{ secrets._API_KEY }}
-    #   run:  container:push -a ${{ secrets._APP_NAME }} web
-
-    # - name: Release
-    #   env:
-    #     _API_KEY: ${{ secrets._API_KEY }}
-    #   run:  container:release -a ${{ secrets._APP_NAME }} web
-
-    # - name: Run DB Migration
-    #   env:
-    #       _API_KEY: ${{ secrets._API_KEY }}
-    #   run:  run -a ${{ secrets._APP_NAME }} flask db upgrade
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'Your-Web-App-Name'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: .
